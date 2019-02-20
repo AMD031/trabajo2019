@@ -12,9 +12,9 @@ public class Client{
 	private String name;
 	private String subName;
 	private String Natinality;
-	GregorianCalendar birthDate;
+	private GregorianCalendar birthDate;
 
-	Client(String dni, String name,String subName,
+	public Client(String dni, String name,String subName,
 	GregorianCalendar birthDate, String Natinality)throws Exception{
 		setDni(dni);
 		this.name = new String(name);
@@ -121,8 +121,9 @@ public class Client{
 		return this.birthDate;
 	}
 
-
-
-
+	public String toString(){
+		return "Name: "+this.name+"\n Subname: "+this.subName+" Dni: "+this.dni+
+		" Natinality: "+this.Natinality+" Birth date: "+this.birthDate.toString();
+	}
 
 }
