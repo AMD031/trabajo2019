@@ -72,6 +72,8 @@ public class Client{
 
 	//setter
 	/**
+		Cambia el valor del dni en la variable del objeto si el dni es valido
+		@exception Exception si el dni no es valido.
 		
 	*/
 	public void setDni(String dni)throws Exception{
