@@ -34,7 +34,7 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 }	 
 
 	 private String generateCode(){
-	 		char charCode[] =aircompany.getCharcode();
+	 		
 			String comp = aircompany.getName();
 			String letters = comp.substring(0,2);
 			StringBuilder tmpcode = new StringBuilder();
@@ -42,7 +42,8 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 			tmpcode.append(letters);
 			tmpcode.append(dateAndTime.HOUR);
 			tmpcode.append(dateAndTime.MINUTE);
-			tmpcode.append(charCode); 
+			tmpcode.append("SVQ");//destinationAirport.getAcronym();
+			 
 		 return tmpcode.toString();
 	 }
 
