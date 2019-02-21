@@ -1,8 +1,13 @@
 package classes;
+
 import java.util.GregorianCalendar;
 /**
   Flight.class
-  permite instaciar objetos de tipo vuelo.
+  permite instaciar objetos de tipo Flight.
+  contiene informacion sobre: la compañia, aeropuerto destino y origen,
+  fecha del vuelo en un objeto del tipo GregorianCalendar, tiempo estimado del vuelo,
+  avion y codiogo del vuelo.
+
   @author Antonio Martinez Diaz
 */
 public class Flight{
@@ -29,7 +34,20 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 }	 
 
 	 private String generateCode(){
-	 	return "";
+	 		char charCode[] =aircompany.getCharcode();
+			String comp = aircompany.getName();
+			String letters = comp.substring(0,2);
+			StringBuilder tmpcode = new StringBuilder();
+	
+			tmpcode.append(letters);
+			tmpcode.append(dateAndTime.HOUR);
+			tmpcode.append(dateAndTime.MINUTE);
+			tmpcode.append(charCode); 
+		 return tmpcode.toString();
+	 }
+
+	 public String getCode(){
+	 	return this.code;
 	 }
 
 

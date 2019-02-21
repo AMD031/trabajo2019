@@ -92,8 +92,8 @@ public class Client{
 		this.subName = new String(subName);
 	}
 
-	public void setBirthDate(GregorianCalendar birthDate){
-		this.birthDate = birthDate;
+	public void setBirthDate(int year, int month, int dayOfMonth){
+		this.birthDate = new GregorianCalendar(year,month,dayOfMonth) ;
 	}
 
 	public void setNatinality(String Natinality){

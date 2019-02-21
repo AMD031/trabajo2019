@@ -10,14 +10,23 @@ package classes;
 public class Ticket{
 	private Client client;
 	private Seat seat;
-	private static int id;
+	private String id;
 	private Flight flight;
 
 	public Ticket(Client client, Seat seat, Flight flight){
 		this.client = client;
 		this.seat = seat;
-		Ticket.id++;
+		this.id = generatorId();
 		this.flight = flight;
 	}
+
+	 private String generatorId(){
+	 	StringBuilder code = new StringBuilder();
+	 	code.append(flight.getCode());
+	 	//to do
+
+
+	 	return code.toString();
+	 }
 
 }
