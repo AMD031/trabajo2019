@@ -9,14 +9,14 @@ import java.util.regex.Pattern;
 */
 
 public class Plane{
-	private String idPlane;
-	private GregorianCalendar acquisitionDate;
-	private Double price;
+	public static int planeCounter=0;
+	protected String idPlane;
+	protected GregorianCalendar acquisitionDate;
+	protected Seat[][] seats;
 
-	public Plane(String idPlane, GregorianCalendar acquisitionDate, Double price){
+	public Plane(String idPlane, GregorianCalendar acquisitionDate){
 		setIDPlane(idPlane);
 		this.acquisitionDate=acquisitionDate;
-		this.price=price;
 	}
 
 	/**
@@ -25,8 +25,8 @@ public class Plane{
 		@param String idPlane: es la matricula del avion.
 		@return true si, y solo si, la secuencia completa coincide con el patrón.
 	*/
-	public boolean checkIDPlane(String idPlane){
-		String patternIDPlane="^\\d{4}[ -]?[[B-Z]&&[^QEIOU]]{3}$";
+	private boolean checkIDPlane(String idPlane){
+		String patternIDPlane="^\\[0-9]{4}[A-Z]{3}$";
 		return patternIDPlane.matches(idPlane);
 	}
 
@@ -34,9 +34,11 @@ public class Plane{
 	//Setters
 
 	//Cambia el valor de la matricula si la matricula del avion es valida
-	public void setIDPlane(String idPlane){
+	public void setIDPlane(String idPlane)throws Exception{
 		if(checkIDPlane(idPlane)){
 			this.idPlane=new String(idPlane);
+		}else{
+			throw new Exception("Matricula no valida");
 		}
 	}
 
@@ -44,9 +46,6 @@ public class Plane{
 		this.acquisitionDate=acquisitionDate;
 	}
 
-	public void setPrice(Double price){
-		this.price=price;
-	}
 
 	//Getters
 	public String getIDPlane(){
@@ -56,9 +55,4 @@ public class Plane{
 	public GregorianCalendar getAcquisitionDate(){
 		return this.acquisitionDate;
 	}
-
-	public Double getPrice(){
-		return this.price;
-	}
-
 }
