@@ -14,7 +14,7 @@ public class Plane{
 	protected GregorianCalendar acquisitionDate;
 	protected Seat[][] seats;
 
-	public Plane(String idPlane, GregorianCalendar acquisitionDate){
+	public Plane(String idPlane, GregorianCalendar acquisitionDate)throws Exception{
 		setIDPlane(idPlane);
 		this.acquisitionDate=acquisitionDate;
 	}
@@ -54,5 +54,13 @@ public class Plane{
 
 	public GregorianCalendar getAcquisitionDate(){
 		return this.acquisitionDate;
+	}
+
+	public static int incrementPlane(){
+		return Plane.planeCounter++;
+	}
+
+	public static int decrementPlanea(){
+		return Plane.planeCounter--;
 	}
 }
