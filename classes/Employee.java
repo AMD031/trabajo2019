@@ -28,14 +28,18 @@ abstract public class Employee{
 	protected String Nationaly;
 	protected String[] Lenguages;
 	protected int Quantity;
+	protected int year;
+	protected int month;
+	protected int dayOfMonth;
 
 	/*public Employee(){
-		this(DNI_DEF,NEmployee_DEF,NAME_DEF,SUBNAME_DEF,BIRTHDATE_DEF,
-		NATIONALY_DEF);
+		this(DNI_DEF,NEmployee_DEF,NAME_DEF,SUBNAME_DEF,NATIONALY_DEF);
 	}*/
 
 	public Employee(String DNI, int NEmployee, String Name, String Subname,
-	 GregorianCalendar Birthdate, String Nationaly,int quantity,String[] Lenguages){
+	 GregorianCalendar Birthdate,
+	 String Nationaly,int quantity,String[] Lenguages){
+
 		 this.DNI=DNI;
 		 this.NEmployee=NEmployee;
 		 this.Name=Name;
@@ -44,6 +48,7 @@ abstract public class Employee{
 		 this.Nationaly=Nationaly;
 		 this.Lenguages=new String[quantity];
 		 setLenguages(Lenguages);
+
 
 	 }
 
@@ -56,7 +61,9 @@ abstract public class Employee{
 		}
 	 }
 
-	  public double calculateSalary(){
-		 return 1;
+	 public void setBirthdate(int year, int month, int dayOfMonth){
+		 this.Birthdate.set(dayOfMonth, month, year);
 	 }
+
+	  abstract public double calculateSalary();
 }
