@@ -1,12 +1,17 @@
 package classes;
-//import interfaces.IAirCompany;
+import java.util.ArrayList;
+import interfaces.IAirCompany;
 import java.util.GregorianCalendar;
-public class AirCompany{
+import classes.*;
+public class AirCompany implements IAirCompany{
 	private String name;
 	private char charcode[];
 	private String ceo;
 	private GregorianCalendar foundationDate;
-
+	private ArrayList<Client>clients;
+	private ArrayList<Ticket>tickets;
+	private ArrayList<Employee>employees;
+	private ArrayList<Plane>planes;
 
 	public AirCompany(String name, char[] charcode, 
 					  String ceo, GregorianCalendar foundationDate){
@@ -32,7 +37,6 @@ public class AirCompany{
 
 	public void setName(String name){
 		this.name = name;
-		
 	}
 
 	public void setFoundationDate(int year, int month, int dayOfMonth){
@@ -53,6 +57,112 @@ public class AirCompany{
 	public GregorianCalendar getFoundationDate(){
 		return foundationDate;
 	}
+
+
+
+	//metodos de la interfaz
+	public boolean hireEmployee(Employee e){
+		boolean found = false;
+
+		return found;
+	}
+	public boolean fireEmployee(String dni, String NEmployee){
+		boolean found = false;
+
+		return found;
+	}
+
+	public void listEmployee(){
+
+	}
+	public boolean searchEMployee(String name,String dni, String NEmployee){
+		boolean found = false;
+
+		return found;
+	}
+	public double totalSalary(){
+		return 0;
+	}
+	public boolean addPlane(Plane p){
+		boolean found = false;
+
+		return found;
+	}
+	public void listPlane(){
+
+	}
+	public boolean removePlane(String idPlane){
+		boolean found = false;
+
+		return found;
+	}
+	public boolean searchPlane(String idPlane){
+		boolean found = false;
+
+		return found;
+	}
+	public boolean addFlight(Flight f){
+		boolean found = false;
+
+		return found;
+	}
+	public boolean listFlight(){
+		boolean found = false;
+
+		return found;
+	}
+	public boolean serachFlight(String destinationAirpor
+	, String originAirport){
+		boolean found = false;
+
+		return found;
+	}
+	public boolean removeFlight(String code){
+		boolean found = false;
+
+		return found;
+	}
+	public boolean buyTicket(String codeFlight){
+		boolean found = false;
+
+		return found;
+
+	}
+	public boolean removeTicket(){
+		boolean found = false;
+
+		return found;
+
+	}
+	public boolean searchTiket(String dni, String id){
+		boolean found = false;
+
+		return found;
+	}
+	public boolean addClient(Client client){
+		boolean found = false;
+
+		return found;
+	}
+	public void listClient(){
+
+	}
+	public boolean searchClient(String dni){
+		boolean found = false;
+
+		return found;
+
+	}
+	public boolean removeClient(String dni){
+		boolean found = false;
+
+		return found;
+
+	}
+
+	
+
+	
 
 }
 
