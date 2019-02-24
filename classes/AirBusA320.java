@@ -13,24 +13,12 @@ public class AirBusA320 extends Plane{
 	private static final int CAPACITY=80;
 	private static final int CONSUMTIOM=140;
 	private static final int PRICE=80000000;
-	public static final int ROWS=20;
-	public static final String[] COLUMNS={"A", "B", "C", "D"};
-
-	
+	private static final int ROWS=20;
+	private static final int COLUMNS=4;
+	private static final int AMOUNTVIP=5;
 
 	public AirBusA320(String idPlane, GregorianCalendar acquisitionDate)throws Exception{
-		super(idPlane, acquisitionDate);
+		super(idPlane, acquisitionDate,AMOUNTVIP,ROWS,COLUMNS);
 		Plane.incrementPlane();
 	}
-
-
-	//Metodo para inicializar la matriz de asientos
-	/*public void initializeSeats(){
-		for(int i=0;i<ROWS;i++){
-			for(int j=0;i<COLUMNS.length;j++){
-				this.seats[i][j]=new Seat();
-			}
-		}
-	}
-	*/
 }

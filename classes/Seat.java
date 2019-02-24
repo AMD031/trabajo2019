@@ -6,20 +6,27 @@ package classes;
 	*@author Samuel Hermosilla Aguilera.
 */
 public class Seat{
-	public boolean vip;
-	public boolean reserved=false;
+	private boolean vip;
+	private boolean reserved;
 	//Esta compuesto por un numero y una letra que establece la posicion del asiento.
-	public String codeSeat;
-	public int row;
-	public char column;
+	private String codeSeat;
+	private int row;
+	private char column;
 
-	
-	public Seat(String codeSeat, boolean vip, int row, char column){
-		this.codeSeat=codeSeat;
+
+
+	public Seat(boolean vip, int row, char column, boolean reserved){
 		this.vip=vip;
 		this.row=row;
 		this.column=column;
+		this.reserved = reserved;
+		
 	}
+
+	public Seat(boolean vip, int row, char column){
+		this(vip,row,column,false);
+	}
+
 
 	//Getters
 	public boolean getVip(){
@@ -41,6 +48,7 @@ public class Seat{
 	public char getColumn(){
 		return this.column;
 	}
+
 
 	//Setters
 	public void setVip(boolean vip){
@@ -64,10 +72,10 @@ public class Seat{
 	}
 
 
-
-	/*Metodo para comprobar que el asiento esta reservado.
-	public boolean reservedSeat(){
-
+	@Override
+	public String toString(){
+		return " vip: "+this.vip+" fila: "+this.row+" columna: "
+		+this.column+" reservado: "+this.reserved;
 	}
-	*/
+
 }

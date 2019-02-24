@@ -12,14 +12,16 @@ public class Boing787 extends Plane{
 	private static final int CAPACITY=300;
 	private static final int CONSUMTIOM=160;
 	private static final int PRICE=280000000;
-	public static final int ROWS=50;
-	public static final String[] COLUMNS={"A", "B", "C", "D", "E", "F", "G"};
+	private static final int ROWS=50;
+	private static final int COLUMNS =7;
+	private static final int AMOUNTVIP=10;
 
 	public Boing787(String idPlane, GregorianCalendar acquisitionDate)throws Exception{
-		super(idPlane, acquisitionDate);
-		Plane.incrementPlane();	
+
+		/*Plane(String idPlane, GregorianCalendar acquisitionDate,int Nvip, 
+		int rows, int columns )*/
+
+		super(idPlane, acquisitionDate,AMOUNTVIP,ROWS,COLUMNS);
+		Plane.incrementPlane();
 	}
-
-
-	
 }

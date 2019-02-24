@@ -9,14 +9,22 @@ import java.util.regex.Pattern;
 */
 
 public class Plane{
-	public static int planeCounter=0;
+	protected static int planeCounter=0;
 	protected String idPlane;
 	protected GregorianCalendar acquisitionDate;
-	protected Seat[][] seats;
+	protected int Nvip;
+	protected int rows;
+	protected int columns;
 
-	public Plane(String idPlane, GregorianCalendar acquisitionDate)throws Exception{
+
+	protected Plane(String idPlane, GregorianCalendar acquisitionDate,int Nvip, 
+		int rows, int columns )throws Exception{
+		
 		setIDPlane(idPlane);
+		this.Nvip = Nvip;
 		this.acquisitionDate=acquisitionDate;
+		this.rows = rows;
+		this.columns = columns;
 	}
 
 	/**
@@ -26,14 +34,14 @@ public class Plane{
 		@return true si, y solo si, la secuencia completa coincide con el patrón.
 	*/
 	private boolean checkIDPlane(String idPlane){
-		String patternIDPlane="^\\[0-9]{4}[A-Z]{3}$";
-		return patternIDPlane.matches(idPlane);
+		 String patternIDPlane="^[0-9]{4}[A-Z]{3}$";
+         return Pattern.matches(patternIDPlane,idPlane);
 	}
 
 	
 	//Setters
 
-	//Cambia el valor de la matricula si la matricula del avion es valida
+	/**Cambia el valor de la matricula si la matricula del avion es valida*/
 	public void setIDPlane(String idPlane)throws Exception{
 		if(checkIDPlane(idPlane)){
 			this.idPlane=new String(idPlane);
@@ -46,8 +54,19 @@ public class Plane{
 		this.acquisitionDate=acquisitionDate;
 	}
 
-
 	//Getters
+	public int getRows (){
+		return this.rows;
+	}
+
+	public int getColums (){
+		return this.columns;
+	}
+
+	public int getNvip(){
+		return this.Nvip;
+	}
+
 	public String getIDPlane(){
 		return this.idPlane;
 	}
@@ -63,4 +82,5 @@ public class Plane{
 	public static int decrementPlanea(){
 		return Plane.planeCounter--;
 	}
+
 }
