@@ -102,7 +102,7 @@ public class AirCompany implements IAirCompany{
 	 *@author Samuel Hermosilla Aguilera.
 	*/
 	public void listPlane(){
-		for (Plane plane : planes) {
+		for (Plane plane : planes){
 			System.out.println(plane);
 		}
 
@@ -112,11 +112,20 @@ public class AirCompany implements IAirCompany{
 
 		return found;
 	}
-	public boolean searchPlane(String idPlane){
-		boolean found = false;
+
+	/**
+	 *Metodo para buscar aviones.
+	 *@author Samuel Hermosilla Aguilera.
+	*/
+	public Plane searchPlane(String idPlane){
+
+		for (Plane plane : planes){
+			plane.getIDPlane().equals(idPlane);
+		}
 
 		return found;
 	}
+
 	public boolean addFlight(Flight f){
 		boolean found = false;
 
