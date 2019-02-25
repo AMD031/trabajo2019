@@ -12,16 +12,16 @@ public class Plane{
 	protected static int planeCounter=0;
 	protected String idPlane;
 	protected GregorianCalendar acquisitionDate;
-	protected int Nvip;
+	protected int nVip;
 	protected int rows;
 	protected int columns;
 
 
-	protected Plane(String idPlane, GregorianCalendar acquisitionDate,int Nvip, 
+	protected Plane(String idPlane, GregorianCalendar acquisitionDate, int nVip, 
 		int rows, int columns )throws Exception{
 		
 		setIDPlane(idPlane);
-		this.Nvip = Nvip;
+		this.nVip = nVip;
 		this.acquisitionDate=acquisitionDate;
 		this.rows = rows;
 		this.columns = columns;
@@ -59,12 +59,12 @@ public class Plane{
 		return this.rows;
 	}
 
-	public int getColums (){
+	public int getColumns (){
 		return this.columns;
 	}
 
-	public int getNvip(){
-		return this.Nvip;
+	public int getNVip(){
+		return this.nVip;
 	}
 
 	public String getIDPlane(){
@@ -75,11 +75,14 @@ public class Plane{
 		return this.acquisitionDate;
 	}
 
+
+
+
 	public static int incrementPlane(){
 		return Plane.planeCounter++;
 	}
 
-	public static int decrementPlanea(){
+	public static int decrementPlane(){
 		return Plane.planeCounter--;
 	}
 
