@@ -83,12 +83,28 @@ public class AirCompany implements IAirCompany{
 	public double totalSalary(){
 		return 0;
 	}
+
+	/**
+	 *Metodo agregar aviones.
+	 *@author Samuel Hermosilla Aguilera.
+	*/
 	public boolean addPlane(Plane p){
 		boolean found = false;
 
+		planes.add(p);
+
 		return found;
 	}
+
+	
+	/**
+	 *Metodo para listar aviones.
+	 *@author Samuel Hermosilla Aguilera.
+	*/
 	public void listPlane(){
+		for (Plane plane : planes) {
+			System.out.println(plane);
+		}
 
 	}
 	public boolean removePlane(String idPlane){

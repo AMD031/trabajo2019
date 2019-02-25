@@ -1,22 +1,24 @@
 package classes;
+import java.util.ArrayList;
 /**
 	*Airport.class
-	*Clase aeropuerto.
+	*Clase aeropuerto, de la cual parten los diferentes aviones.
+	 Cada aeropuerto ofrece diferentes servicios.
 	*@author Samuel Hermosilla Aguilera
 */
 public class Airport{
-	public String acronym;
-	public String name;
-	public String cityName;
-	public String country;
-	public String[] services={"reting car", "coffeshop", "restaurant", "lost objects"};
+	private String acronym;
+	private String name;
+	private String cityName;
+	private String country;
+	private ArrayList<String> services;
 
-	public Airport(String acronym, String name, String cityName, String country, String[] services){
+	public Airport(String acronym, String name, String cityName, String country, ArrayList<String> services){
 		this.acronym=acronym;
 		this.name=name;
 		this.cityName=cityName;
 		this.country=country;
-		//array
+		setServices(services);
 	}
 
 	//Getters
@@ -36,6 +38,10 @@ public class Airport{
 		return this.country;
 	}
 
+	public ArrayList<String> getServices(){
+		return this.services;
+	}
+
 	//Setters
 
 	public void setAcronym(String acronym){
@@ -52,6 +58,12 @@ public class Airport{
 
 	public void setCountry(String country){
 		this.country=country;
+	}
+
+	public void setServices(ArrayList<String> services){
+		for(int i=0; i<services.size(); i++){
+			this.services.add(services.get(i));
+		}
 	}
 	
 }

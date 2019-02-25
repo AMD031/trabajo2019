@@ -86,4 +86,9 @@ public class Plane{
 		return Plane.planeCounter--;
 	}
 
+
+	public String toString(){
+		return "Avion con matricula: "+this.idPlane+", adquirido en "+this.acquisitionDate.getTime();
+	}
+
 }

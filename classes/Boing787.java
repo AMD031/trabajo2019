@@ -24,4 +24,27 @@ public class Boing787 extends Plane{
 		super(idPlane, acquisitionDate,AMOUNTVIP,ROWS,COLUMNS);
 		Plane.incrementPlane();
 	}
+
+	@Override
+	public String toString(){
+		return "Boing787, avion con"+this.AUTONOMY+"km de autonomia, capacidad de "+this.CAPACITY+" pasajeros"+
+		" con un consumo de "+this.CONSUMTIOM+" L/min y un precio de "+this.PRICE;
+	}
+
+	@Override
+	public boolean equals(Object obj){
+		boolean igual=false;
+		if(obj instanceof Boing787){
+			Boing787 tmp=(Boing787) obj;
+			if(super.equals(obj)&& 
+			   this.AUTONOMY==AUTONOMY&&
+			   this.CAPACITY==CAPACITY&&
+			   this.CONSUMTIOM==CONSUMTIOM&&
+			   this.PRICE==PRICE){
+					igual=true;
+			}
+		}
+		return igual;
+	}
+	
 }

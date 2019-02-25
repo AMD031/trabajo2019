@@ -21,4 +21,27 @@ public class AirBusA320 extends Plane{
 		super(idPlane, acquisitionDate,AMOUNTVIP,ROWS,COLUMNS);
 		Plane.incrementPlane();
 	}
+
+	@Override
+	public String toString(){
+		return "AirBusA320, avion con"+this.AUTONOMY+"km de autonomia, capacidad de "+this.CAPACITY+" pasajeros"+
+		" con un consumo de "+this.CONSUMTIOM+" L/min y un precio de "+this.PRICE;
+	}
+
+	@Override
+	public boolean equals(Object obj){
+		boolean igual=false;
+		if(obj instanceof AirBusA320){
+			AirBusA320 tmp=(AirBusA320) obj;
+			if(super.equals(obj)&& 
+			   this.AUTONOMY==AUTONOMY&&
+			   this.CAPACITY==CAPACITY&&
+			   this.CONSUMTIOM==CONSUMTIOM&&
+			   this.PRICE==PRICE){
+					igual=true;
+			}
+		}
+		return igual;
+	}
+	
 }
