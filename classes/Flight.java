@@ -27,15 +27,14 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 			this.aircompany = aircompany;
 			this.destinationAirport = destinationAirport;
 			this.originAirport = originAirport;
-			//fecha y hora del vuelo
-			this.dateAndTime = dateAndTime;
+			this.dateAndTime = dateAndTime;//fecha y hora del vuelo
 			this.estimatedDuration = estimatedDuration;
 			this.plane = plane;
 			this.code = generateCode();
 			this.initializeSeats(plane);
-			/*for (Seat a : SeatsFlight ) {
+			for (Seat a : SeatsFlight ) {
 				System.out.println(a);
-			}*/
+			}
 
 }	 
 
@@ -49,10 +48,7 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 			tmpcode.append(dateAndTime.HOUR);
 			tmpcode.append(dateAndTime.MINUTE);
 			tmpcode.append("SVQ");//destinationAirport.getAcronym();
-
-
-			 
-		 return tmpcode.toString();
+ 		 return tmpcode.toString();
 	 }
 
 
@@ -67,8 +63,8 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 
 	 public void setPlane(Plane p)throws Exception{
 	 	if(p!=null){
-	 		int oldPlaneTam = plane.getRows()*plane.getColums();
-	 		int newPlaneTam = p.getRows()*p.getColums();
+	 		int oldPlaneTam = plane.getRows()*plane.getColumns();
+	 		int newPlaneTam = p.getRows()*p.getColumns();
 	 		if(oldPlaneTam == newPlaneTam ){
 	 			 this.plane = p;
 	 		}else{
@@ -79,19 +75,19 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 
 	 private void initializeSeats(Plane plane)throws NullPointerException{
 		 	SeatsFlight = new ArrayList<Seat>();
-		 	int Nvip = plane.getNvip();//numero de filas vip
+		 	int Nvip = plane.getNVip();//numero de filas vip
 		 	boolean vip = false;
 		 	boolean re = true;
 		 	char CharC = 'A';//letra de la columna
 		 	int Nrow = 0;
-		 	for (int i =0;i<plane.getRows()*plane.getColums();i++ ) {
+		 	for (int i =0;i<plane.getRows()*plane.getColumns();i++ ) {
 	 			Nrow++;
 	 			if(Nrow>plane.getRows()){
 	 				Nrow=1;
 	 				CharC = (char)((int)CharC+1);
 	 			}
 	 		   if(Nrow<Nvip){
-	 				vip = true;
+	 			  vip = true;
 	 		   }
 			   SeatsFlight.add(new Seat(vip,Nrow,CharC));
 	 		vip = false;

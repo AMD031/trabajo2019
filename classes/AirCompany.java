@@ -2,7 +2,14 @@ package classes;
 import java.util.ArrayList;
 import interfaces.IAirCompany;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import classes.*;
+/**
+AirCompany.class
+clase que representa una empresa de vuelos su fucion
+es gestionar los empleado, clientes, aviones y vuelos.
+@author Antonio Martinez Diaz 
+*/
 public class AirCompany implements IAirCompany{
 	private String name;
 	private char charcode[];
@@ -11,6 +18,7 @@ public class AirCompany implements IAirCompany{
 	private ArrayList<Client>clients;
 	private ArrayList<Ticket>tickets;
 	private ArrayList<Employee>employees;
+	private ArrayList<Flight>Flights;
 	private ArrayList<Plane>planes;
 
 	public AirCompany(String name, char[] charcode, 
@@ -61,25 +69,37 @@ public class AirCompany implements IAirCompany{
 
 
 	//metodos de la interfaz
+
+	@Override
 	public boolean hireEmployee(Employee e){
 		boolean found = false;
+		
+		employees.add(e);
 
 		return found;
 	}
+
+	@Override
 	public boolean fireEmployee(String dni, String NEmployee){
 		boolean found = false;
 
+
 		return found;
 	}
 
-	public void listEmployee(){
-
+	@Override
+	public ArrayList<Employee>listEmployee(){
+		return employees;
 	}
+
+	@Override
 	public boolean searchEMployee(String name,String dni, String NEmployee){
 		boolean found = false;
 
 		return found;
 	}
+
+	@Override
 	public double totalSalary(){
 		return 0;
 	}
@@ -88,11 +108,12 @@ public class AirCompany implements IAirCompany{
 	 *Metodo agregar aviones.
 	 *@author Samuel Hermosilla Aguilera.
 	*/
+	@Override
 	public boolean addPlane(Plane p){
 		boolean found = false;
-
-		planes.add(p);
-
+		if(planes.add(p)){
+			found = true;
+		}
 		return found;
 	}
 
@@ -101,12 +122,12 @@ public class AirCompany implements IAirCompany{
 	 *Metodo para listar aviones.
 	 *@author Samuel Hermosilla Aguilera.
 	*/
-	public void listPlane(){
-		for (Plane plane : planes){
-			System.out.println(plane);
-		}
-
+	@Override
+	public ArrayList<Plane> listPlane(){
+		return planes;
 	}
+
+	@Override
 	public boolean removePlane(String idPlane){
 		boolean found = false;
 
@@ -117,77 +138,118 @@ public class AirCompany implements IAirCompany{
 	 *Metodo para buscar aviones.
 	 *@author Samuel Hermosilla Aguilera.
 	*/
+	@Override
 	public Plane searchPlane(String idPlane){
+		boolean found = false;
+		Plane p =null;
+		for(int i = 0; i<planes.size() && !found; i++){
+			if(planes.get(i).getIDPlane().equals(idPlane)){
+				found=true;
+				p=planes.get(i);
+			}
+		}
+		return p;
+	}
 
-		for (Plane plane : planes){
-			plane.getIDPlane().equals(idPlane);
+	@Override
+	public boolean addFlight(Flight f){
+		boolean found = false;
+		if(addFlight(f)){
+		  found = true;
 		}
 
 		return found;
 	}
 
-	public boolean addFlight(Flight f){
-		boolean found = false;
-
-		return found;
+	@Override
+	public ArrayList<Flight> listFlight(){
+		return Flights;
 	}
-	public boolean listFlight(){
-		boolean found = false;
 
-		return found;
-	}
+	@Override
 	public boolean serachFlight(String destinationAirpor
 	, String originAirport){
 		boolean found = false;
 
 		return found;
 	}
+
+	@Override
 	public boolean removeFlight(String code){
 		boolean found = false;
 
 		return found;
 	}
+
+	@Override
 	public boolean buyTicket(String codeFlight){
 		boolean found = false;
 
 		return found;
 
 	}
+
+	@Override
 	public boolean removeTicket(){
 		boolean found = false;
 
 		return found;
 
 	}
+	@Override
 	public boolean searchTiket(String dni, String id){
 		boolean found = false;
-
-		return found;
+		//to do 
+		return c;
 	}
+
+	/**
+		Agrega un cliente a la lista de clientes de la empresa.
+		@author Antonio Martinez Diaz
+	*/
+	@Override
 	public boolean addClient(Client client){
+		boolean correct = false;
+		if(clients.add(client)){
+			correct = true;
+		}
+		return correct;
+	}
+
+	@Override
+	public ArrayList<Client> listClient(){
+		return clients;
+	}
+
+	@Override
+	public Client searchClient(String dni){
 		boolean found = false;
-
-		return found;
+		Client c = null;
+		for(int i = 0; i<clients.size() && !found; i++){
+			if(clients.get(i).getDni().equals(dni)){
+				found=true;
+				c=clients.get(i);
+			}
+		}
+		return c;
 	}
-	public void listClient(){
 
-	}
-	public boolean searchClient(String dni){
-		boolean found = false;
-
-		return found;
-
-	}
+	@Override
 	public boolean removeClient(String dni){
 		boolean found = false;
-
+		for(int i = 0; i<clients.size() && !found; i++){
+			if(clients.get(i).getDni().equals(dni)){
+				clients.remove(i);
+				found = true;
+			}
+		}
 		return found;
-
 	}
 
 	
 
-	
+
+
 
 }
 
