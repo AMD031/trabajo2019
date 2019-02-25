@@ -50,7 +50,19 @@ abstract public class Employee extends Person{
 				 for(int i=0;i<LenguagesCompany.size();i++){
 					 this.LenguagesCompany.add(LenguagesCompany.get(i));
 				 }
-			}	 
+			}
+	 }
+
+	 public ArrayList<String> getLenguages(){
+		 return this.Lenguages;
+	 }
+
+	 public int getNEmployee(){
+		 return this.NEmployee;
+	 }
+
+	 public ArrayList<String> getLenguagesCompany(){
+		 return this.LenguagesCompany;
 	 }
 
 
