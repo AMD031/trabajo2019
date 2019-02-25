@@ -83,9 +83,7 @@ public class Person{
 		return valid;
 
 	}
-
-   
-
+	
 	/**
 		Metodo que comprueba si es mayor de la edad indicada.
 		@param date fecha de nacimiento de la persona
@@ -156,9 +154,22 @@ public class Person{
 		return this.birthDate;
 	}
 
+	@Override
 	public String toString(){
 		return "Name: "+this.name+"\n Subname: "+this.subName+" Dni: "+this.dni+
 		" Natinality: "+this.Natinality+" Birth date: "+this.getBirthDate();
+	}
+
+	@Override
+	public boolean equals(Object obj){
+		boolean match = false;
+		if(obj instanceof Person){	
+			Person tmp = (Person)obj;
+			if(this.getDni().equals(tmp.getDni())){
+			   match =true;
+			}
+		}
+		return match;
 	}
 
 
