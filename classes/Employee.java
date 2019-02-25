@@ -25,12 +25,13 @@ abstract public class Employee extends Person{
 		this.Quantity=QUANTITY_DEF;
 	}
 
-	public Employee (String DNI, int NEmployee, String Name, String Subname,
+	public Employee (String DNI,String Name, String Subname,
 	 GregorianCalendar Birthdate,
 	 String Nationaly,int quantity,ArrayList<String> Lenguages)throws Exception{
 		 super(DNI,Name,Subname,Birthdate,Nationaly);
 		 setNEmployee();
 		 setLenguages(Lenguages);
+		 chekBirthDate(Birthdate);
 	 }
 
 	 public void setLenguages(ArrayList<String> Lenguages){
@@ -39,6 +40,12 @@ abstract public class Employee extends Person{
 			 		this.Lenguages.add(Lenguages.get(i));
 		 		}
 			}
+	 }
+
+	 public void chekBirthDate(GregorianCalendar Birthdate)throws Exception{
+		 if(!checkAge(Birthdate, 18)){
+			 throw new Exception("Eres menor de edad");
+		 }
 	 }
 
 	 public static void setNEmployee(){
