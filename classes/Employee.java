@@ -16,18 +16,17 @@ abstract public class Employee extends Person{
 
 
 	protected static int NEmployee;
-	protected int Quantity;
+
 
 
 	public Employee() throws Exception{
 		super();
 		setNEmployee();
-		this.Quantity=QUANTITY_DEF;
 	}
 
 	public Employee (String DNI,String Name, String Subname,
 	 GregorianCalendar Birthdate,
-	 String Nationaly,int quantity,ArrayList<String> Lenguages)throws Exception{
+	 String Nationaly,ArrayList<String> Lenguages)throws Exception{
 		 super(DNI,Name,Subname,Birthdate,Nationaly);
 		 setNEmployee();
 		 setLenguages(Lenguages);
