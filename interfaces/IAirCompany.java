@@ -19,7 +19,7 @@ public interface IAirCompany{
 	public boolean removeFlight(String code);
 	public boolean buyTicket(String codeFlight);
 	public boolean removeTicket();
-	public boolean searchTiket(String dni, String id);
+	public Ticket searchTicket(String dni, String id);
 	public boolean addClient(Client client);
 	public ArrayList<Client> listClient();
 	public Client searchClient(String dni);
