@@ -61,9 +61,11 @@ public class Airport{
 	}
 
 	public void setServices(ArrayList<String> services){
-		for(int i=0; i<services.size(); i++){
-			this.services.add(services.get(i));
-		}
+		if(services!=null){
+			for(int i=0; i<services.size(); i++){
+				this.services.add(services.get(i));
+			}
+		}	
 	}
 	
 }
