@@ -9,16 +9,19 @@ import java.util.ArrayList;
 */
 
 public class CEO extends Employee{
-  public int bonus;
+  private int bonus;
+  private int salary;
 
   public CEO(String DNI,String Name, String Subname,
 	 GregorianCalendar Birthdate,
-	 String Nationaly,ArrayList<String> Lenguages, int bonus)throws Exception{
+	 String Nationaly,ArrayList<String> Lenguages, int bonus ,int salary)throws Exception{
      super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages);
      this.bonus=bonus;
+     this.salary=salary;
    }
 
    public double calculateSalary(){
-     return 1;
+     this.salary=this.salary + this.bonus;
+     return this.salary;
    }
 }
