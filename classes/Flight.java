@@ -45,9 +45,13 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 			StringBuilder tmpcode = new StringBuilder();
 	
 			tmpcode.append(letters);
-			tmpcode.append(dateAndTime.HOUR);
+			 int hour = Integer.toString(int);
+			 if(hour.length()<1){
+			 	tmpcode(0);
+			 }
+			tmpcode.append(hour);
 			tmpcode.append(dateAndTime.MINUTE);
-			tmpcode.append("SVQ");//destinationAirport.getAcronym();
+			tmpcode.append(destinationAirport.getAcronym());
  		 return tmpcode.toString();
 	 }
 

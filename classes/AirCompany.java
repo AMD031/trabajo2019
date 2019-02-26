@@ -197,10 +197,23 @@ public class AirCompany implements IAirCompany{
 
 	}
 	@Override
-	public boolean searchTiket(String dni, String id){
+ 	public Ticket searchTicket(String dni, String id){
 		boolean found = false;
-		//to do 
-		return c;
+		Ticket t = null;
+
+		for (int i =0;i<tickets.size() && !found; i++ ) {
+
+			if(tickets.get(i).getDni().equals(dni)){
+				found=true;
+				c=clients.get(i);
+			}
+			
+		}
+
+
+		
+
+		return c
 	}
 
 	/**
