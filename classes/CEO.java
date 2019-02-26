@@ -3,14 +3,15 @@ import java.util.GregorianCalendar;
 import java.util.ArrayList;
 /**
 	* nombre: CEO.class
-	* Descripcion:
+  * Descripcion: Clase CEO que hereda los metodos de la clase Employee y tiene
+  * metodos propios y utiliza el constructor abstracto de la clase padre.
 	* @author: Antonio Adamuz
 	* @version: 0.0.1
 */
 
 public class CEO extends Employee{
-  private int bonus;
-  private int salary;
+  private double bonus;
+  private double salary;
 
   public CEO(String DNI,String Name, String Subname,
 	 GregorianCalendar Birthdate,
@@ -24,6 +25,24 @@ public class CEO extends Employee{
      double total;
      total=this.salary + this.bonus;
      return total;
+   }
+
+   //setter
+   public void setBonus(double b){
+     this.bonus=b;
+   }
+
+   public void setSalary(double s){
+     this.salary=s;
+   }
+
+   //getter
+   public double getBonus(){
+     return this.bonus;
+   }
+
+   public double getSalary(){
+     return this.salary;
    }
 
    @Override
