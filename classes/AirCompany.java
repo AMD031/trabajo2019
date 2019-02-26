@@ -72,11 +72,11 @@ public class AirCompany implements IAirCompany{
 
 	@Override
 	public boolean hireEmployee(Employee e){
-		boolean found = false;
-		
-		employees.add(e);
-
-		return found;
+		boolean correct= false;
+		if(employees.add(e)){
+			correct = true;
+		}
+		return correct;
 	}
 
 	@Override
@@ -93,10 +93,21 @@ public class AirCompany implements IAirCompany{
 	}
 
 	@Override
-	public boolean searchEMployee(String name,String dni, String NEmployee){
-		boolean found = false;
+	public Employee searchEMployee(String name,String dni, String NEmployee){
+		Employee e = null;
 
+		for(int i; i<employees.size(); i++){
+			if((employees.get(i).getDni().equals(dni)&&    
+				 employees.get(i).getName().equals(name))||
+				 (employees.get(i).getNEmployee().equals(NEmployee)&&    
+				 employees.get(i).getName().equals(name))){
+					e.employees.get(i);
+				}
+			}
+
+		
 		return found;
+		
 	}
 
 	@Override
@@ -157,7 +168,6 @@ public class AirCompany implements IAirCompany{
 		if(addFlight(f)){
 		  found = true;
 		}
-
 		return found;
 	}
 
@@ -198,22 +208,17 @@ public class AirCompany implements IAirCompany{
 	}
 	@Override
  	public Ticket searchTicket(String dni, String id){
-		boolean found = false;
 		Ticket t = null;
-
 		for (int i =0;i<tickets.size() && !found; i++ ) {
+			if(tickets.get(i).getDni().equals(dni) &&
+			   	
 
-			if(tickets.get(i).getDni().equals(dni)){
-				found=true;
-				c=clients.get(i);
+				){
+			  found=true;
+			  t=tickets.get(i);
 			}
-			
 		}
-
-
-		
-
-		return c
+		return t
 	}
 
 	/**

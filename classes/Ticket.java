@@ -20,13 +20,44 @@ public class Ticket{
 		this.flight = flight;
 	}
 
+	/**
+	Genera un codigo a partir del codigo de vuelo y la posicion del asiento.
+	@return devuelve un String con un id.
+	*/	
 	 private String generatorId(){
 	 	StringBuilder code = new StringBuilder();
 	 	code.append(flight.getCode());
-	 	//to do
-
-
+	 	code.append(" ");
+	 	code.append(seat.getRow());
+	 	code.append(" ");
+	 	code.append(seat.getColumn());
 	 	return code.toString();
+	 }
+	 //getters
+	 public Client getClient(){
+	 	return this.client;
+	 }
+
+	 public Seat getSeat(){
+	 	return this.Seat;
+	 }
+
+	 public Seat getId(){
+	 	return this.id;
+	 }
+
+	 public Flight getFlight(){
+	 	return this.flight;
+	 }
+	 //setters
+
+	 public void setSeat(Seat seat){
+	 	this.seat = seat;
+	 }
+
+	 @Override
+	 public String toString(){
+	 	return this.id+" "+client.getDni();
 	 }
 
 
