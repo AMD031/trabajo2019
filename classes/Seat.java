@@ -6,24 +6,27 @@ package classes;
 	*@author Samuel Hermosilla Aguilera.
 */
 public class Seat{
+	private final static int PRICE_DEF=50;
 	private boolean vip;
 	private boolean reserved;
 	private String codeSeat;
 	private int row;
 	private char column;
+	private int price;
 
 
 
-	public Seat(boolean vip, int row, char column, boolean reserved){
+	public Seat(boolean vip, int row, char column, boolean reserved, int price){
 		this.vip=vip;
 		this.row=row;
 		this.column=column;
-		this.reserved = reserved;
+		this.reserved=reserved;
+		setPrice(price);
 		
 	}
 
 	public Seat(boolean vip, int row, char column){
-		this(vip,row,column,false);
+		this(vip,row,column,false,PRICE_DEF);
 	}
 
 
@@ -48,6 +51,9 @@ public class Seat{
 		return this.column;
 	}
 
+	public int getPrice(){
+		return this.price;
+	}
 
 	//Setters
 	public void setVip(boolean vip){
@@ -68,6 +74,14 @@ public class Seat{
 
 	public void setColumn(char column){
 		this.column=column;
+	}
+
+	public void setPrice(int price){
+		if(this.vip=true){
+			this.price=(price*1.2);
+		}else{
+			this.price=price;
+		}
 	}
 
 
