@@ -1,16 +1,24 @@
 package classes;
+import java.util.GregorianCalendar;
+import java.util.ArrayList;
 /**
-* Pilot.class
+* Crew.class
 * @author: Antonio Adamuz
 * @version: 0.0.1
 */
 public class Crew extends Employee{
 	private int Amount;
 	private double Salary;
-	//String DNI, int NEmployee, String Name, String Subname,
- //GregorianCalendar Birthdate, String Nationaly,int quantity,String[] Lenguages
-	public Crew(int amount, int flytime, double salary){
-		this.Amount=amount;
-		this.Salary=salary;
+
+	public Crew(String DNI,String Name, String Subname,
+	 GregorianCalendar Birthdate,
+	 String Nationaly,ArrayList<String> Lenguages, int Amount, double Salary)throws Exception{
+		super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages);
+		this.Amount=Amount;
+		this.Salary=Salary;
+	}
+
+	public double calculateSalary(){
+		return this.Salary;
 	}
 }
