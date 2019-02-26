@@ -3,6 +3,8 @@ import java.util.GregorianCalendar;
 import java.util.ArrayList;
 /**
 * Crew.class
+* Descripcion: Clase Crew que hereda los metodos de la clase Employee y tiene
+* metodos propios y utiliza el constructor abstracto de la clase padre.
 * @author: Antonio Adamuz
 * @version: 0.0.1
 */
@@ -22,6 +24,16 @@ public class Crew extends Employee{
 		total = this.plus * this.assignedFlight;
 		total=total + this.Salary;
 		return total;
+	}
+
+	//Setters
+	public void setAssignedFlight(int flight){
+		this.assignedFlight=flight;
+	}
+
+	//getter
+	public int getAssignedFlight(){
+		return this.assignedFlight;
 	}
 
 	@Override
