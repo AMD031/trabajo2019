@@ -21,7 +21,14 @@ public class CEO extends Employee{
    }
 
    public double calculateSalary(){
-     this.salary=this.salary + this.bonus;
-     return this.salary;
+     double total;
+     total=this.salary + this.bonus;
+     return total;
    }
+
+   @Override
+  	 public String toString(){
+  		 return super.toString()+" Total Salary: "+calculateSalary()+"\n Bonus: "
+  		 +this.bonus;
+  	 }
 }
