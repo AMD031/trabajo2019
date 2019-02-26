@@ -77,11 +77,16 @@ public class Plane{
 
 
 
-
+	/**
+	* Metodo que cada vez que se instancia un avion, la variable planeCounter aumenta en 1.
+	*/
 	public static int incrementPlane(){
 		return Plane.planeCounter++;
 	}
 
+	/**
+	* Metodo que cada vez que se elimina un objeto avion, la variable planeCounter decrementa en 1.
+	*/
 	public static int decrementPlane(){
 		return Plane.planeCounter--;
 	}

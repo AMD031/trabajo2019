@@ -8,7 +8,6 @@ package classes;
 public class Seat{
 	private boolean vip;
 	private boolean reserved;
-	//Esta compuesto por un numero y una letra que establece la posicion del asiento.
 	private String codeSeat;
 	private int row;
 	private char column;
