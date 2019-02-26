@@ -73,4 +73,10 @@ abstract public class Employee extends Person{
 
 
 	  abstract public double calculateSalary();
+
+		@Override
+			public String toString(){
+				return super.toString()+" Number Employee: "+this.NEmployee+"\n Lenguages: "
+				+this.Lenguages;
+			}
 }
