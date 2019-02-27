@@ -145,10 +145,6 @@ public class AirCompany implements IAirCompany{
 	}
 
 	
-	/**
-	 *Metodo para listar aviones.
-	 *@author Samuel Hermosilla Aguilera.
-	*/
 	@Override
 	public ArrayList<Plane> listPlane(){
 		return planes;
