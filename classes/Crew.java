@@ -15,8 +15,8 @@ public class Crew extends Employee{
 
 	public Crew(String DNI,String Name, String Subname,
 	 GregorianCalendar Birthdate,
-	 String Nationaly,ArrayList<String> Lenguages)throws Exception{
-		super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages);
+	 String Nationaly,ArrayList<String> Lenguages,ArrayList<String> LenguagesCompany)throws Exception{
+		super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages,LenguagesCompany);
 	}
 
 	public double calculateSalary(){

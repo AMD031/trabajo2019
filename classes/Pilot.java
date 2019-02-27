@@ -17,8 +17,9 @@ public class Pilot extends Employee{
 
 	public Pilot(String DNI,String Name, String Subname,
 	GregorianCalendar Birthdate, String Nationaly,
-	ArrayList<String> Lenguages, int flytime)throws Exception{
-		super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages);
+	ArrayList<String> Lenguages,ArrayList<String> LenguagesCompany, 
+	int flytime)throws Exception{
+		super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages,LenguagesCompany);
 		this.Flytime=flytime;
 	}
  public double calculateSalary(){
