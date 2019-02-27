@@ -17,7 +17,7 @@ public class Pilot extends Employee{
 
 	public Pilot(String DNI,String Name, String Subname,
 	GregorianCalendar Birthdate, String Nationaly,
-	ArrayList<String> Lenguages,ArrayList<String> LenguagesCompany, 
+	ArrayList<String> Lenguages,ArrayList<String> LenguagesCompany,
 	int flytime)throws Exception{
 		super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages,LenguagesCompany);
 		this.Flytime=flytime;
@@ -49,7 +49,7 @@ public class Pilot extends Employee{
 
  @Override
 	 public String toString(){
-		 return super.toString()+" Total Salary: "+calculateSalary()+"\n Assigned Flight: "
+		 return super.toString()+"\n Total Salary: "+calculateSalary()+"\n Assigned Flight: "
 		 +this.assignedFlight+"\n Fly time: "+this.Flytime;
 	 }
 

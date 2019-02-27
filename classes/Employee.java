@@ -11,8 +11,8 @@ import java.util.ArrayList;
 */
 
 abstract public class Employee extends Person{
-	private ArrayList<String> LenguagesCompany;
-	private ArrayList<String> Lenguages;
+	private ArrayList<String> LenguagesCompany=new ArrayList<String>();
+	private ArrayList<String> Lenguages=new ArrayList<String>();
 
 	protected static int NEmployee;
 
@@ -56,7 +56,7 @@ abstract public class Employee extends Person{
 	 */
 	 public void chekBirthDate(GregorianCalendar Birthdate)throws Exception{
 		 if(!checkAge(Birthdate, 18)){
-			 throw new Exception("Eres menor de edad");
+			 throw new Exception("No puedes ser contratado eres menor de edad");
 		 }
 	 }
 
@@ -102,7 +102,7 @@ abstract public class Employee extends Person{
 				for(int i=0;i<this.Lenguages.size();i++){
 					LG.append(" "+Lenguages.get(i)+" ");
 				}
-				return super.toString()+" Number Employee: "+this.NEmployee+"\n Lenguages: "
+				return super.toString()+"\n Number Employee: "+this.NEmployee+"\n Lenguages: "
 				+LG.toString();
 			}
 }
