@@ -15,8 +15,9 @@ public class Crew extends Employee{
 
 	public Crew(String DNI,String Name, String Subname,
 	 GregorianCalendar Birthdate,
-	 String Nationaly,ArrayList<String> Lenguages,ArrayList<String> LenguagesCompany)throws Exception{
+	 String Nationaly,ArrayList<String> Lenguages,ArrayList<String> LenguagesCompany, int assignedFlight)throws Exception{
 		super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages,LenguagesCompany);
+		setAssignedFlight(assignedFlight);
 	}
 
 	public double calculateSalary(){
@@ -27,8 +28,8 @@ public class Crew extends Employee{
 	}
 
 	//Setters
-	public void setAssignedFlight(int flight){
-		this.assignedFlight=flight;
+	public void setAssignedFlight(int assignedFlight){
+		this.assignedFlight=assignedFlight;
 	}
 
 	//getter

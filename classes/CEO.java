@@ -17,9 +17,9 @@ public class CEO extends Employee{
 	 GregorianCalendar Birthdate,
 	 String Nationaly,ArrayList<String> Lenguages, ArrayList<String> LenguagesCompany, int bonus ,int salary)throws Exception{
      super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages,LenguagesCompany);
-     this.bonus=bonus;
-     this.salary=salary;
-   }
+     setBonus(bonus);
+     setSalary(salary);
+      }
 
    public double calculateSalary(){
      double total;
@@ -28,12 +28,12 @@ public class CEO extends Employee{
    }
 
    //setter
-   public void setBonus(double b){
-     this.bonus=b;
+   public void setBonus(double bonus){
+     this.bonus=bonus;
    }
 
-   public void setSalary(double s){
-     this.salary=s;
+   public void setSalary(double salary){
+     this.salary=salary;
    }
 
    //getter

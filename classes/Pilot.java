@@ -18,9 +18,10 @@ public class Pilot extends Employee{
 	public Pilot(String DNI,String Name, String Subname,
 	GregorianCalendar Birthdate, String Nationaly,
 	ArrayList<String> Lenguages,ArrayList<String> LenguagesCompany,
-	int flytime)throws Exception{
+	int flytime,int assignedFlight)throws Exception{
 		super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages,LenguagesCompany);
-		this.Flytime=flytime;
+		setFlytime(flytime);
+		setAssignedFlight(assignedFlight);
 	}
  public double calculateSalary(){
 	 double total;
@@ -30,12 +31,12 @@ public class Pilot extends Employee{
  }
 
  //setter
- public void setAssignedFlight(int flight){
-	 this.assignedFlight=flight;
+ public void setAssignedFlight(int assignedFlight){
+	 this.assignedFlight=assignedFlight;
  }
 
- public void setFlytime(int time){
-	 this.Flytime=time;
+ public void setFlytime(int flytime){
+	 this.Flytime=flytime;
  }
 
  //getter
@@ -50,7 +51,7 @@ public class Pilot extends Employee{
  @Override
 	 public String toString(){
 		 return super.toString()+"\n Total Salary: "+calculateSalary()+"\n Assigned Flight: "
-		 +this.assignedFlight+"\n Fly time: "+this.Flytime;
+		 +this.assignedFlight+"\n Fly time: "+this.Flytime+" min";
 	 }
 
 }

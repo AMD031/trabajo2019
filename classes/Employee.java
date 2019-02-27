@@ -14,13 +14,14 @@ abstract public class Employee extends Person{
 	private ArrayList<String> LenguagesCompany=new ArrayList<String>();
 	private ArrayList<String> Lenguages=new ArrayList<String>();
 
-	protected static int NEmployee;
+	protected static int NEmployee=0;
+	private int id;
+
 
 
 /*Constructor por defecto en caso de que no pasen ningun parametro*/
 	public Employee() throws Exception{
 		super();
-		setNEmployee();
 	}
 /**
 *Conctructor con todos los parametros para crear un empleado y llama a
@@ -32,7 +33,7 @@ abstract public class Employee extends Person{
 	 String Nationaly,ArrayList<String> Lenguages,
 	  ArrayList<String> LenguagesCompany)throws Exception{
 		 super(DNI,Name,Subname,Birthdate,Nationaly);
-		 setNEmployee();
+		 this.id=setNEmployee();
 		 setLenguages(Lenguages);
 		 chekBirthDate(Birthdate);
 		 setLenguagesCompany(LenguagesCompany);
@@ -64,8 +65,9 @@ abstract public class Employee extends Person{
 	 *Setter que hace contar el numero de empleados y sumar uno a uno cuando se
 	 *crea un empleado.
 	 */
-	 public static void setNEmployee(){
-		 Employee.NEmployee++;
+	 public static int setNEmployee(){
+		 return Employee.NEmployee++;
+
 	 }
 
 	 /**
@@ -102,7 +104,7 @@ abstract public class Employee extends Person{
 				for(int i=0;i<this.Lenguages.size();i++){
 					LG.append(" "+Lenguages.get(i)+" ");
 				}
-				return super.toString()+"\n Number Employee: "+this.NEmployee+"\n Lenguages: "
+				return super.toString()+"\n Number Employee: "+this.id+"\n Lenguages: "
 				+LG.toString();
 			}
 }
