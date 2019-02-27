@@ -16,18 +16,24 @@ public class AirCompany implements IAirCompany{
 	private char charcode[];
 	private CEO ceo;
 	private GregorianCalendar foundationDate;
-	private ArrayList<Client>clients;
-	private ArrayList<Ticket>tickets;
-	private ArrayList<Employee>employees;
-	private ArrayList<Flight>Flights;
-	private ArrayList<Plane>planes;
+	private ArrayList<Client>clients=new ArrayList<Client>();
+	private ArrayList<Ticket>tickets=new ArrayList<Ticket>();
+	private ArrayList<Employee>employees=new ArrayList <Employee>();
+	private ArrayList<Flight>Flights=new ArrayList <Flight>();
+	private ArrayList<Plane>planes=new ArrayList <Plane>();
 
 	public AirCompany(String name, char[] charcode, 
-					 CEO ceo, GregorianCalendar foundationDate){
+					 CEO ceo, GregorianCalendar foundationDate, ArrayList<Client> clients, ArrayList<Ticket>tickets,
+					 ArrayList<Employee>employees, ArrayList<Flight>flights, ArrayList<Plane>planes){
 		this.name = name;
 		this.charcode = charcode;
 		this.ceo = ceo;
 		this.foundationDate = foundationDate;
+		setClients(clients);
+		setTickets(tickets);
+		setEmployees(employees);
+		setFlights(flights);
+		setPlanes(planes);
 	}
 
 
@@ -50,6 +56,46 @@ public class AirCompany implements IAirCompany{
 
 	public void setFoundationDate(int year, int month, int dayOfMonth){
 		this.foundationDate.set(year,month,dayOfMonth);
+	}
+
+	public void setClients(ArrayList<String> clients){
+		if(clients!=null){
+			for(int i=0; i<clients.size(); i++){
+				this.clients.add(clients.get(i));
+			}
+		}	
+	}
+
+	public void setTickets(ArrayList<String> tickets){
+		if(tickets!=null){
+			for(int i=0; i<tickets.size(); i++){
+				this.tickets.add(tickets.get(i));
+			}
+		}	
+	}
+
+	public void setEmployees(ArrayList<String> employees){
+		if(employees!=null){
+			for(int i=0; i<employees.size(); i++){
+				this.employees.add(employees.get(i));
+			}
+		}	
+	}
+
+	public void setFlights(ArrayList<String> flights){
+		if(flights!=null){
+			for(int i=0; i<flights.size(); i++){
+				this.flights.add(flights.get(i));
+			}
+		}	
+	}
+
+	public void setPlanes(ArrayList<String> planes){
+		if(planes!=null){
+			for(int i=0; i<planes.size(); i++){
+				this.planes.add(planes.get(i));
+			}
+		}	
 	}
 
 	//getters
@@ -144,7 +190,10 @@ public class AirCompany implements IAirCompany{
 		return correct;
 	}
 
-	
+	/**
+	  *Metodo para listar aviones
+	  *@author Samuel Hermosilla Aguilera
+	*/
 	@Override
 	public ArrayList<Plane> listPlane(){
 		return planes;
