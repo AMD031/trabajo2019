@@ -7,13 +7,14 @@ import classes.*;
 /**
 AirCompany.class
 clase que representa una empresa de vuelos su fucion
-es gestionar los empleado, clientes, aviones y vuelos.
+es gestionar los empleado, clientes, aviones,vuelos y aeropuertos en los que
+trabaja.
 @author Antonio Martinez Diaz 
 */
 public class AirCompany implements IAirCompany{
 	private String name;
 	private char charcode[];
-	private String ceo;
+	private CEO ceo;
 	private GregorianCalendar foundationDate;
 	private ArrayList<Client>clients;
 	private ArrayList<Ticket>tickets;
@@ -22,7 +23,7 @@ public class AirCompany implements IAirCompany{
 	private ArrayList<Plane>planes;
 
 	public AirCompany(String name, char[] charcode, 
-					  String ceo, GregorianCalendar foundationDate){
+					 CEO ceo, GregorianCalendar foundationDate){
 		this.name = name;
 		this.charcode = charcode;
 		this.ceo = ceo;
@@ -31,7 +32,7 @@ public class AirCompany implements IAirCompany{
 
 
 	//setters
-	public void setCeo(String ceo){
+	public void setCeo(CEO ceo){
 		this.ceo = ceo;
 	}
 
@@ -52,7 +53,7 @@ public class AirCompany implements IAirCompany{
 	}
 
 	//getters
-	public String getCeo(){
+	public CEO getCeo(){
 		return this.ceo;
 	}
 	public String getName(){
@@ -69,10 +70,18 @@ public class AirCompany implements IAirCompany{
 
 
 	//metodos de la interfaz
+	/**
+		
 
+	*/
 	@Override
-	public boolean hireEmployee(Employee e){
+	public boolean hireEmployee(Employee e)throws Exception{
 		boolean correct= false;
+		for (Employee employee : employees) {
+			if( employee.getDni().equals(e.getDni()) ){
+			   throw new Exception("Empleado duplicado no se puede introducir");
+			}
+		}
 		if(employees.add(e)){
 			correct = true;
 		}
@@ -93,39 +102,46 @@ public class AirCompany implements IAirCompany{
 	}
 
 	@Override
-	public Employee searchEMployee(String name,String dni, String NEmployee){
+	public Employee searchEMployee(String name,String dni, int NEmployee){
 		Employee e = null;
+		boolean found = false;
 
-		for(int i; i<employees.size(); i++){
-			if((employees.get(i).getDni().equals(dni)&&    
+
+		for(int i=0; i<employees.size() && !found; i++){
+			System.out.println(employees.get(i).getNEmployee());
+			if( (employees.get(i).getDni().equals(dni)&&    
 				 employees.get(i).getName().equals(name))||
-				 (employees.get(i).getNEmployee().equals(NEmployee)&&    
-				 employees.get(i).getName().equals(name))){
-					e.employees.get(i);
+				 (employees.get(i).getDni().equals(dni)&&
+				 employees.get(i).getNEmployee()==NEmployee)||
+				 employees.get(i).getDni().equals(dni)){
+					e = employees.get(i);
+					found = true;
 				}
 			}
-
-		
-		return found;
-		
+		return e;
 	}
 
 	@Override
 	public double totalSalary(){
-		return 0;
+		double totalSalary = 0;	
+		for(Employee e: employees){
+			totalSalary+=e.calculateSalary();
+		}
+		return totalSalary;
 	}
 
-	/**
-	 *Metodo agregar aviones.
-	 *@author Samuel Hermosilla Aguilera.
-	*/
 	@Override
-	public boolean addPlane(Plane p){
-		boolean found = false;
-		if(planes.add(p)){
-			found = true;
+	public boolean addPlane(Plane p)throws Exception{
+		boolean correct = false;
+		for (Plane plane : planes) {
+			if(plane.getIDPlane().equals(p.getIDPlane())){
+				throw new Exception("Avion duplicado no se pude introducir");
+			}
 		}
-		return found;
+		if(planes.add(p)){
+			correct = true;
+		}
+		return correct;
 	}
 
 	
@@ -145,10 +161,6 @@ public class AirCompany implements IAirCompany{
 		return found;
 	}
 
-	/**
-	 *Metodo para buscar aviones.
-	 *@author Samuel Hermosilla Aguilera.
-	*/
 	@Override
 	public Plane searchPlane(String idPlane){
 		boolean found = false;
@@ -200,8 +212,16 @@ public class AirCompany implements IAirCompany{
 	}
 
 	@Override
-	public boolean removeTicket(){
+	public boolean removeTicket(String dni, String id ){
+  	 /**private Client client;
+		private Seat seat;
+		private String id;
+		private Flight flight;*/
 		boolean found = false;
+
+
+
+
 
 		return found;
 
@@ -209,16 +229,14 @@ public class AirCompany implements IAirCompany{
 	@Override
  	public Ticket searchTicket(String dni, String id){
 		Ticket t = null;
-		for (int i =0;i<tickets.size() && !found; i++ ) {
-			if(tickets.get(i).getDni().equals(dni) &&
-			   	
-
-				){
-			  found=true;
-			  t=tickets.get(i);
+		boolean found = false;
+		for (int i =0;i<tickets.size() && !found; i++ ){
+			if(tickets.get(i).getClient().getDni().equals(dni)&&
+			   tickets.get(i).getId().equals(id)){
+			   t = tickets.get(i);
 			}
 		}
-		return t
+		return t;
 	}
 
 	/**
@@ -226,9 +244,14 @@ public class AirCompany implements IAirCompany{
 		@author Antonio Martinez Diaz
 	*/
 	@Override
-	public boolean addClient(Client client){
+	public boolean addClient(Client c)throws Exception{
+		for (Client client : clients) {
+			if( client.getDni().equals(c.getDni()) ){
+			   throw new Exception("Cliente duplicado no se puede introducir");
+			}
+		}
 		boolean correct = false;
-		if(clients.add(client)){
+		if(clients.add(c)){
 			correct = true;
 		}
 		return correct;
@@ -254,14 +277,12 @@ public class AirCompany implements IAirCompany{
 
 	@Override
 	public boolean removeClient(String dni){
-		boolean found = false;
-		for(int i = 0; i<clients.size() && !found; i++){
-			if(clients.get(i).getDni().equals(dni)){
-				clients.remove(i);
-				found = true;
-			}
-		}
-		return found;
+		boolean correct = false;
+		
+
+
+
+		return correct;
 	}
 
 	

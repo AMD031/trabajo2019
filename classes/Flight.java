@@ -45,9 +45,9 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 			StringBuilder tmpcode = new StringBuilder();
 	
 			tmpcode.append(letters);
-			 int hour = Integer.toString(int);
+			String hour = Integer.toString(dateAndTime.HOUR);
 			 if(hour.length()<1){
-			 	tmpcode(0);
+			 	tmpcode.append("0");
 			 }
 			tmpcode.append(hour);
 			tmpcode.append(dateAndTime.MINUTE);
@@ -56,7 +56,7 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 }
 
 
-
+	 //getter
 	 public String getCode(){
 	 	return this.code;
 	 }

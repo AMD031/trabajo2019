@@ -92,7 +92,7 @@ public class Person{
 	*/	
 	public boolean checkAge(GregorianCalendar date,int age){
 		GregorianCalendar rightNow = new GregorianCalendar();
-		rightNow.add(Calendar.YEAR,age);
+		rightNow.add(Calendar.YEAR,-age);
 		return date.before(rightNow);
 	}	
  	//setter
