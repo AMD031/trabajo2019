@@ -29,11 +29,13 @@ abstract public class Employee extends Person{
 */
 	public Employee (String DNI,String Name, String Subname,
 	 GregorianCalendar Birthdate,
-	 String Nationaly,ArrayList<String> Lenguages)throws Exception{
+	 String Nationaly,ArrayList<String> Lenguages,
+	  ArrayList<String> LenguagesCompany)throws Exception{
 		 super(DNI,Name,Subname,Birthdate,Nationaly);
 		 setNEmployee();
 		 setLenguages(Lenguages);
 		 chekBirthDate(Birthdate);
+		 setLenguagesCompany(LenguagesCompany);
 	 }
 
 
@@ -96,7 +98,11 @@ abstract public class Employee extends Person{
 
 		@Override
 			public String toString(){
+				StringBuilder LG=new StringBuilder();
+				for(int i=0;i<this.Lenguages.size();i++){
+					LG.append(" "+Lenguages.get(i)+" ");
+				}
 				return super.toString()+" Number Employee: "+this.NEmployee+"\n Lenguages: "
-				+this.Lenguages;
+				+LG.toString();
 			}
 }
