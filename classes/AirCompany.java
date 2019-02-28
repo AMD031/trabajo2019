@@ -11,31 +11,36 @@ es gestionar los empleado, clientes, aviones,vuelos y aeropuertos en los que
 trabaja.
 @author Antonio Martinez Diaz 
 */
-public class AirCompany implements IAirCompany{
+public class AirCompany implements IAirCompany {
 	private String name;
 	private char charcode[];
 	private CEO ceo;
 	private GregorianCalendar foundationDate;
-	private ArrayList<Client>clients=new ArrayList<Client>();
-	private ArrayList<Ticket>tickets=new ArrayList<Ticket>();
-	private ArrayList<Employee>employees=new ArrayList <Employee>();
-	private ArrayList<Flight>Flights=new ArrayList <Flight>();
-	private ArrayList<Plane>planes=new ArrayList <Plane>();
+	private ArrayList<Client>clients;
+	private ArrayList<Ticket>tickets;
+	private ArrayList<Employee>employees;
+	private ArrayList<Flight>flights;
+	private ArrayList<Plane>planes;
+
 
 	public AirCompany(String name, char[] charcode, 
 					 CEO ceo, GregorianCalendar foundationDate, ArrayList<Client> clients, ArrayList<Ticket>tickets,
-					 ArrayList<Employee>employees, ArrayList<Flight>flights, ArrayList<Plane>planes){
+					 ArrayList<Employee>employees, ArrayList<Flight>flights, ArrayList<Plane>planes)throws Exception{
 		this.name = name;
 		this.charcode = charcode;
 		this.ceo = ceo;
 		this.foundationDate = foundationDate;
-		setClients(clients);
-		setTickets(tickets);
-		setEmployees(employees);
-		setFlights(flights);
-		setPlanes(planes);
+		this.clients = new ArrayList<Client>();
+		this.setClients(clients);
+		this.tickets = new ArrayList<Ticket>();
+		this.setTickets(tickets);
+		this.employees =  new ArrayList<Employee>();
+		this.setEmployees(employees);
+		this.flights = new ArrayList<Flight>();
+		this.setFlights(flights);
+		this.planes = new ArrayList<Plane>();
+		this.setPlanes(planes);
 	}
-
 
 	//setters
 	public void setCeo(CEO ceo){
@@ -58,42 +63,42 @@ public class AirCompany implements IAirCompany{
 		this.foundationDate.set(year,month,dayOfMonth);
 	}
 
-	public void setClients(ArrayList<String> clients){
-		if(clients!=null){
+	public void setClients(ArrayList<Client> clients)throws Exception{
+		if(clients.size()>0){
 			for(int i=0; i<clients.size(); i++){
-				this.clients.add(clients.get(i));
+				this.addClient(clients.get(i));
 			}
 		}	
 	}
 
-	public void setTickets(ArrayList<String> tickets){
-		if(tickets!=null){
+	public void setTickets(ArrayList<Ticket> tickets){
+		if(tickets.size()>0){
 			for(int i=0; i<tickets.size(); i++){
 				this.tickets.add(tickets.get(i));
 			}
 		}	
 	}
 
-	public void setEmployees(ArrayList<String> employees){
-		if(employees!=null){
+	public void setEmployees(ArrayList<Employee> employees)throws Exception{
+		if(employees.size()>0){
 			for(int i=0; i<employees.size(); i++){
-				this.employees.add(employees.get(i));
+				this.hireEmployee(employees.get(i));
 			}
 		}	
 	}
 
-	public void setFlights(ArrayList<String> flights){
-		if(flights!=null){
+	public void setFlights(ArrayList<Flight> flights)throws Exception{
+		if(flights.size()>0){
 			for(int i=0; i<flights.size(); i++){
-				this.flights.add(flights.get(i));
+				this.addFlight(flights.get(i));
 			}
 		}	
 	}
 
-	public void setPlanes(ArrayList<String> planes){
-		if(planes!=null){
+	public void setPlanes(ArrayList<Plane> planes)throws Exception{
+		if(planes.size()>0){
 			for(int i=0; i<planes.size(); i++){
-				this.planes.add(planes.get(i));
+				this.addPlane(planes.get(i));
 			}
 		}	
 	}
@@ -113,13 +118,14 @@ public class AirCompany implements IAirCompany{
 		return foundationDate;
 	}
 
+	public String getFoundationDateString(){
+		return "YEAR: "+foundationDate.YEAR+" MONTH "+foundationDate.MONTH+" DATE "+foundationDate.DATE;
+	}
+
+
 
 
 	//metodos de la interfaz
-	/**
-		
-
-	*/
 	@Override
 	public boolean hireEmployee(Employee e)throws Exception{
 		boolean correct= false;
@@ -137,13 +143,13 @@ public class AirCompany implements IAirCompany{
 	@Override
 	public boolean fireEmployee(String dni, String NEmployee){
 		boolean found = false;
-
+	
 
 		return found;
 	}
 
 	@Override
-	public ArrayList<Employee>listEmployee(){
+	public ArrayList<Employee>listEmployees(){
 		return employees;
 	}
 
@@ -179,23 +185,29 @@ public class AirCompany implements IAirCompany{
 	@Override
 	public boolean addPlane(Plane p)throws Exception{
 		boolean correct = false;
+		boolean duplicated = false;
+		
 		for (Plane plane : planes) {
 			if(plane.getIDPlane().equals(p.getIDPlane())){
-				throw new Exception("Avion duplicado no se pude introducir");
+				duplicated= true;		
 			}
 		}
-		if(planes.add(p)){
-			correct = true;
-		}
+			if(duplicated){	
+				throw new Exception("Avion con matricula duplicada. No se pude introducir");
+			}else{
+				if(planes.add(p)){
+					correct = true;
+				}
+
+			}
+
 		return correct;
+
+
 	}
 
-	/**
-	  *Metodo para listar aviones
-	  *@author Samuel Hermosilla Aguilera
-	*/
 	@Override
-	public ArrayList<Plane> listPlane(){
+	public ArrayList<Plane> listPlanes(){
 		return planes;
 	}
 
@@ -230,39 +242,56 @@ public class AirCompany implements IAirCompany{
 
 	@Override
 	public ArrayList<Flight> listFlight(){
-		return Flights;
+		return flights;
 	}
 
 	@Override
-	public boolean serachFlight(String destinationAirpor
+	public Flight serachFlight(String destinationAirpor
 	, String originAirport){
-		boolean found = false;
+		Flight f = null;
+			
 
-		return found;
+
+
+		return f;
 	}
 
 	@Override
 	public boolean removeFlight(String code){
 		boolean found = false;
+		/*AirCompany aircompany, Airport destinationAirport, 
+		  Airport originAirport, GregorianCalendar dateAndTime,
+		  double estimatedDuration, Plane plane,Pilot[] pilots, Crew[] crews,double price*/
+
 
 		return found;
 	}
 
 	@Override
-	public boolean buyTicket(String codeFlight){
-		boolean found = false;
-
-		return found;
-
+	public boolean buyTicket(Ticket t){
+		boolean correct = false;
+		if(t!=null && tickets.add(t)){
+			correct = true;
+		}
+		return correct;
 	}
 
 	@Override
 	public boolean removeTicket(String dni, String id ){
-  	 /**private Client client;
-		private Seat seat;
-		private String id;
-		private Flight flight;*/
 		boolean found = false;
+		searchTicket(dni, id).setClient(null);
+		searchTicket(dni, id).setSeat(null);
+		searchTicket(dni, id).setId("");
+		searchTicket(dni, id).setClient(null);
+		for (int i =0;i<tickets.size();i++) {
+			
+			if( tickets.get(i).getClient().getDni().equals(dni)&&
+			    tickets.get(i).getId().equals(id)  ){
+				tickets.remove(i);
+				found=true;
+			}
+
+		}
 
 
 
@@ -303,7 +332,7 @@ public class AirCompany implements IAirCompany{
 	}
 
 	@Override
-	public ArrayList<Client> listClient(){
+	public ArrayList<Client> listClients(){
 		return clients;
 	}
 
@@ -322,12 +351,13 @@ public class AirCompany implements IAirCompany{
 
 	@Override
 	public boolean removeClient(String dni){
-		boolean correct = false;
-		
-
-
-
-		return correct;
+		boolean found = false;
+		for(int i = 0; i<clients.size();i++){
+			if(clients.get(i).getDni().equals(dni)){
+				clients.remove(i);
+			}
+		}
+		return found;
 	}
 
 	

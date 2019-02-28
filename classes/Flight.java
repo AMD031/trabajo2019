@@ -16,30 +16,38 @@ private AirCompany aircompany;
 private Airport destinationAirport;
 private Airport originAirport;
 private GregorianCalendar dateAndTime;
-private int estimatedDuration;
+private double estimatedDuration;
 private Plane plane;
 private String code;
 private ArrayList<Seat> SeatsFlight;
+private Pilot[] pilotSeats;
+private Crew[] CrewSeats;
+private double price;
 
 public Flight(AirCompany aircompany, Airport destinationAirport, 
 			  Airport originAirport, GregorianCalendar dateAndTime,
-			  int estimatedDuration, Plane plane)throws Exception{
+			  double estimatedDuration, Plane plane,Pilot[] pilots, Crew[] crews,double price)throws Exception{
 			this.aircompany = aircompany;
 			this.destinationAirport = destinationAirport;
 			this.originAirport = originAirport;
 			this.dateAndTime = dateAndTime;//fecha y hora del vuelo
 			this.estimatedDuration = estimatedDuration;
 			this.plane = plane;
+			this.price = price;
 			this.code = generateCode();
 			this.initializeSeats(plane);
-			for (Seat a : SeatsFlight ) {
-				System.out.println(a);
-			}
+			this.CrewSeats = new Crew[(int)(Math.ceil( (plane.getRows()*plane.getColumns())*0.02))];
+			this.pilotSeats = new Pilot[2];
+
+
 
 }	 
-
+	/**
+		genera un codigo apartir des nombre de la empresa de vuelos,
+		la hora y el acronimo del aeropuerto destino.
+		@return devuelve un codigo que identifica a un vuelo
+	*/
 	 private String generateCode(){
-	 		
 			String comp = aircompany.getName();
 			String letters = comp.substring(0,2);
 			StringBuilder tmpcode = new StringBuilder();
@@ -55,15 +63,127 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
  		 return tmpcode.toString();
 	 }
 
+	 public int freeSeats(){
+	 	int amount =0;
+	 	for (int i =0;i<this.SeatsFlight.size();i++) {
+	 		if(this.SeatsFlight.get(i).getReserved()==false){
+	 			amount++;
+	 		}
+	 	}
+	 	return amount ;
+	 }
+
+
+
+
+	 /**
+	 	busca un objeto de tipo piloto por id y nombre
+	 	y si lo encuentra lo pone null en el array pilotSeats.
+		@param dni objeto de tipo String que contine un dni a buscar. 
+		@param id numero de id del objeto de tipo piloto que se quiere borrar.
+		@return devuelve true si ha encontrado y puesto a null al piloto indicado
+	 */
+	 public boolean removePilot(String dni, int id){
+	 	boolean found = false;
+	 	for (int i =0;i<this.pilotSeats.length && !found;i++) {	
+	 		if(this.pilotSeats[i].getDni().equals(dni) && 
+	 		   this.pilotSeats[i].getNEmployee()== id){
+	 		   this.pilotSeats[i] = null;
+	 		   found = true;
+	 		}
+
+	 	}
+	 	return found;
+	 }
+
+
+		/**
+	 	busca un objeto de tipo crew por id y nombre
+	 	y si lo encuentra lo pone null en el array CrewSeats.
+		@param dni objeto de tipo String que contine un dni a buscar. 
+		@param id numero de id.
+		@return devuelve true si ha encontrado y puesto a null al crew indicado.
+		 */
+
+	  public boolean removeCrew(String dni, int id){
+	 	boolean found = false;
+	 	for (int i =0;i<this.CrewSeats.length && !found;i++) {	
+	 		if(this.CrewSeats[i].getDni().equals(dni) && 
+	 		   this.CrewSeats[i].getNEmployee()== id){
+	 		   this.CrewSeats[i] = null;
+	 		   found = true;
+	 		}
+
+	 	}
+	 	return found;
+	 }
+
+
 
 	 //getter
 	 public String getCode(){
 	 	return this.code;
 	 }
 
+	 public double getPrice(){
+	 	return this.price;
+	 }
+
 	 public Plane getPlane(){
 	 	return this.plane;
 	 } 
+
+	 public Pilot[] getPilotSeats(){
+	 	return this.pilotSeats;
+	 }
+
+	 public Crew[] getCrewSeats(){
+	 	return this.CrewSeats;
+	 }
+
+	 //setters
+
+	  public void setPilots(Pilot[] pilots){
+	 	for(int i =0; i< this.pilotSeats.length;i++){	
+	 		this.setPilot(pilots[i]);
+	 	}
+	 }
+
+
+	   public void setPilot(Pilot pilot){
+	   	boolean stop = false;
+	 	for(int i =0; i<this.pilotSeats.length && !stop;i++){
+	 		if(this.pilotSeats[i]==null){
+	 			stop=true;
+	 			this.pilotSeats[i]=pilot;
+	 			this.pilotSeats[i].incrementAssignedFlight();
+	 		}
+	 	}
+	 }
+
+	 public void setCrew(Crew crew){
+	 	boolean stop = false;
+	 	for(int i =0; i<this.CrewSeats.length && !stop;i++){
+	 		if(this.CrewSeats[i]==null){
+	 			stop = true;
+	 			this.CrewSeats[i]=crew;
+	 			this.CrewSeats[i].incrementAssignedFlight();
+	 		}
+	 	}
+	 }
+
+	  public void setCrews(Crew[] crews){
+	 	for(int i =0; i<this.CrewSeats.length;i++){
+	 		this.setCrew(crews[i]);
+	 	}
+	 }
+
+
+	
+
+	 public double setPrice( double price){
+	 	return this.price = price;
+	 }
 
 	 public void setPlane(Plane p)throws Exception{
 	 	if(p!=null){
@@ -71,17 +191,26 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 		int newPlaneTam = p.getRows()*p.getColumns();
 	 		if(oldPlaneTam == newPlaneTam ){
 	 			 this.plane = p;
+	 		}else if(p==null){
+	 			this.plane =null;
 	 		}else{
-	 			throw new Exception("No se puede transferir todas las reservas al nuevo avion.");
+	 			throw new Exception("Los aviones no son del mismo tamaño no se puede transferir las plazas.");
 	 		}
+
+
 	 	}
 	 }
 
+
+	 /**
+	 	metodo que rellena las posiones de un ArrayList con 
+		@param plane objeto de tipo plane del que se obtiene la cantidad de asientos.
+	 */
 	 private void initializeSeats(Plane plane)throws NullPointerException{
 		 	SeatsFlight = new ArrayList<Seat>();
 		 	int Nvip = plane.getNVip();//numero de filas vip
 		 	boolean vip = false;
-		 	boolean re = true;
+		 	//boolean re = true;
 		 	char CharC = 'A';//letra de la columna
 		 	int Nrow = 0;
 		 	for (int i =0;i<plane.getRows()*plane.getColumns();i++ ) {
@@ -97,4 +226,9 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 		vip = false;
  		}
 	 }
+	 @Override
+	 public String toString(){
+	 	return "Flight: "+this.code;
+	 }
+
 }

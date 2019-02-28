@@ -12,16 +12,15 @@ public class Pilot extends Employee{
 	private final static double plus=5000;
 	private final static double Salary=100000;
 	private int assignedFlight;
-	private int Flytime;
+	private double Flytime;
 
 
 	public Pilot(String DNI,String Name, String Subname,
 	GregorianCalendar Birthdate, String Nationaly,
-	ArrayList<String> Lenguages,ArrayList<String> LenguagesCompany,
-	int flytime,int assignedFlight)throws Exception{
-		super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages,LenguagesCompany);
-		setFlytime(flytime);
-		setAssignedFlight(assignedFlight);
+	ArrayList<String> Lenguages,double flytime)throws Exception{
+		super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages);
+		this.setFlytime(flytime);
+		this.assignedFlight=0;
 	}
  public double calculateSalary(){
 	 double total;
@@ -31,11 +30,14 @@ public class Pilot extends Employee{
  }
 
  //setter
- public void setAssignedFlight(int assignedFlight){
-	 this.assignedFlight=assignedFlight;
+ public void incrementAssignedFlight(){
+	 this.assignedFlight++;
+ }
+  public void decrementAssignedFlight(){
+	 this.assignedFlight--;
  }
 
- public void setFlytime(int flytime){
+ public void setFlytime(double flytime){
 	 this.Flytime=flytime;
  }
 

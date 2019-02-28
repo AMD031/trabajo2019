@@ -106,7 +106,7 @@ public class Person{
 		if(checkDni(dni)){
 			this.dni = new String(dni);
 		}else{
-			throw new Exception("Dni no valido");
+			throw new Exception("Dni no valido: "+dni);
 		}
 	}
 

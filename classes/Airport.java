@@ -67,5 +67,22 @@ public class Airport{
 			}
 		}	
 	}
+
+	/*this.acronym=acronym;
+		this.name=name;
+		this.cityName=cityName;
+		this.country=country;*/
 	
+	public String toString(){
+		StringBuilder services = new StringBuilder();
+		for (int i =0;i<this.services.size();i++ ) {
+			services.append(" "+this.services.get(i));
+		}
+
+
+		return "\n Acronimo: "+this.acronym+"\n nombre: "+this.name+"\n ciudad: "+this.cityName+
+		"\n pais "+this.country+"\n servicios: "+services.toString();
+	}
+
+
 }

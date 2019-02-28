@@ -13,10 +13,15 @@ public class CEO extends Employee{
   private double bonus;
   private double salary;
 
+  /*(String DNI,String Name, String Subname,
+   GregorianCalendar Birthdate,
+   String Nationaly,ArrayList<String> Lenguages)*/
+
+
   public CEO(String DNI,String Name, String Subname,
 	 GregorianCalendar Birthdate,
-	 String Nationaly,ArrayList<String> Lenguages, ArrayList<String> LenguagesCompany, int bonus ,int salary)throws Exception{
-     super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages,LenguagesCompany);
+	 String Nationaly,ArrayList<String> Lenguages,int bonus ,int salary)throws Exception{
+     super(DNI,Name,Subname,Birthdate,Nationaly,Lenguages);
      setBonus(bonus);
      setSalary(salary);
       }

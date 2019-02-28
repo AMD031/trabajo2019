@@ -11,7 +11,7 @@ import java.util.ArrayList;
 */
 
 abstract public class Employee extends Person{
-	private ArrayList<String> LenguagesCompany=new ArrayList<String>();
+	private static ArrayList<String> LenguagesCompany=new ArrayList<String>();
 	private ArrayList<String> Lenguages=new ArrayList<String>();
 
 	protected static int NEmployee=0;
@@ -19,10 +19,7 @@ abstract public class Employee extends Person{
 
 
 
-/*Constructor por defecto en caso de que no pasen ningun parametro*/
-	public Employee() throws Exception{
-		super();
-	}
+
 /**
 *Conctructor con todos los parametros para crear un empleado y llama a
 *constructores para asignar un numero de empleado, los lenguages y que compruebe
@@ -30,27 +27,45 @@ abstract public class Employee extends Person{
 */
 	public Employee (String DNI,String Name, String Subname,
 	 GregorianCalendar Birthdate,
-	 String Nationaly,ArrayList<String> Lenguages,
-	  ArrayList<String> LenguagesCompany)throws Exception{
+	 String Nationaly,ArrayList<String> Lenguages)throws Exception{
 		 super(DNI,Name,Subname,Birthdate,Nationaly);
 		 this.id=setNEmployee();
 		 setLenguages(Lenguages);
 		 chekBirthDate(Birthdate);
-		 setLenguagesCompany(LenguagesCompany);
 	 }
 
 
 	 //setter
 	 /**
 	 *Setter de lenguajes que recibe un ArrayList de lenguajes
+	 
 	 */
-	 public void setLenguages(ArrayList<String> Lenguages){
-		 if(Lenguages.size()>0){
-		 	for(int i=0;i<Lenguages.size();i++){
-			 		this.Lenguages.add(Lenguages.get(i));
-		 		}
+	 public void setLenguages(ArrayList<String> lenguages){
+		  if(lenguages.size()>0){ 
+			for(int i = 0; i<lenguages.size();i++){
+				if(!checkLenguages(this.Lenguages,lenguages.get(i))
+					&& checkLenguages(this.LenguagesCompany,lenguages.get(i))){
+					this.Lenguages.add(lenguages.get(i));
+				}
 			}
+		}
 	 }
+
+	 /**
+	 metodo que comprueba si un idioma esta en un ArraList de idomas
+	 @return devuelve true si lo encuentra.
+	 */
+	  private static boolean checkLenguages(ArrayList<String>lenguages, String l){
+	 	boolean found = false;
+	 	if(lenguages.size()>0){
+	 		for(int i = 0;i<lenguages.size() && !found;i++){
+	 			if(lenguages.get(i).equals(l)){
+	 				found = true;
+	 			}
+	 		}
+	 	}
+	 	return found;
+	  }
 
 	 /**
 	 *Metodo que comprueba si el empleado es mayor o menor de edad.
@@ -74,10 +89,13 @@ abstract public class Employee extends Person{
 	 *setter que recibe el ArrayList de los lenguajes de la compañia minimos que
 	 *un empleado debe tener.
 	 */
-	 public void setLenguagesCompany(ArrayList<String> LenguagesCompany){
+	 public static void setLenguagesCompany(ArrayList<String> LenguagesCompany){
 		 if(LenguagesCompany.size()>0){
+
 				 for(int i=0;i<LenguagesCompany.size();i++){
-					 this.LenguagesCompany.add(LenguagesCompany.get(i));
+				 	if(!checkLenguages(Employee.LenguagesCompany,LenguagesCompany.get(i))){
+					 Employee.LenguagesCompany.add(LenguagesCompany.get(i));
+				 	}
 				 }
 			}
 	 }
