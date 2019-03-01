@@ -21,11 +21,11 @@ public class AirCompany implements IAirCompany {
 	private ArrayList<Employee>employees;
 	private ArrayList<Flight>flights;
 	private ArrayList<Plane>planes;
-
-
+	public  ArrayList<Airport>airports;
+	
 	public AirCompany(String name, char[] charcode, 
 					 CEO ceo, GregorianCalendar foundationDate, ArrayList<Client> clients, ArrayList<Ticket>tickets,
-					 ArrayList<Employee>employees, ArrayList<Flight>flights, ArrayList<Plane>planes)throws Exception{
+					 ArrayList<Employee>employees, ArrayList<Flight>flights, ArrayList<Plane>planes,ArrayList<Airport> airports)throws Exception{
 		this.name = name;
 		this.charcode = charcode;
 		this.ceo = ceo;
@@ -40,7 +40,40 @@ public class AirCompany implements IAirCompany {
 		this.setFlights(flights);
 		this.planes = new ArrayList<Plane>();
 		this.setPlanes(planes);
+		this.airports = new ArrayList<Airport>();
+		this.setAirports(airports);
+		}
+
+		public AirCompany(String name, char[] charcode, 
+					 CEO ceo, GregorianCalendar foundationDate)throws Exception{
+		this.name = name;
+		this.charcode = charcode;
+		this.ceo = ceo;
+		this.foundationDate = foundationDate;
+		this.clients = new ArrayList<Client>();
+        this.tickets = new ArrayList<Ticket>();
+	    this.employees =  new ArrayList<Employee>();
+		this.flights = new ArrayList<Flight>();
+		this.planes = new ArrayList<Plane>();
+		this.airports = new ArrayList<Airport>();
+		}
+
+
+
+
+
+	public boolean checkAirport(Airport a){
+		boolean found = false;
+		for(int i =0;i<airports.size() && !found;i++){
+			if(airports.get(i).equals(a)){
+				found = true;
+			}
+		}
+		return found;
 	}
+	
+
+
 
 	//setters
 	public void setCeo(CEO ceo){
@@ -63,26 +96,44 @@ public class AirCompany implements IAirCompany {
 		this.foundationDate.set(year,month,dayOfMonth);
 	}
 
-	public void setClients(ArrayList<Client> clients)throws Exception{
-		if(clients.size()>0){
-			for(int i=0; i<clients.size(); i++){
-				this.addClient(clients.get(i));
+	public void setAirports(ArrayList<Airport> airports)throws Exception{
+			if(airports.size()>0){
+				for(int i=0; i<airports.size(); i++){
+				 	if(airports.get(i)!=null  && !this.checkAirport(airports.get(i))){
+				 		this.addAirport(airports.get(i));	
+				 	}
+				}
 			}
-		}	
 	}
 
-	public void setTickets(ArrayList<Ticket> tickets){
+
+	public void setClients(ArrayList<Client> clients)throws Exception{
+			if(clients.size()>0){
+				for(int i=0; i<clients.size(); i++){
+				  if(clients.get(i)!=null){
+					this.addClient(clients.get(i));
+				   }
+				}
+			}
+	}
+
+	public void setTickets(ArrayList<Ticket> tickets){	
 		if(tickets.size()>0){
 			for(int i=0; i<tickets.size(); i++){
+			  if(tickets.get(i)!=null){
 				this.tickets.add(tickets.get(i));
+			  }
 			}
 		}	
+	
 	}
 
 	public void setEmployees(ArrayList<Employee> employees)throws Exception{
 		if(employees.size()>0){
 			for(int i=0; i<employees.size(); i++){
-				this.hireEmployee(employees.get(i));
+			  if(employees.get(i)!=null){
+					this.hireEmployee(employees.get(i));
+				}
 			}
 		}	
 	}
@@ -90,15 +141,21 @@ public class AirCompany implements IAirCompany {
 	public void setFlights(ArrayList<Flight> flights)throws Exception{
 		if(flights.size()>0){
 			for(int i=0; i<flights.size(); i++){
-				this.addFlight(flights.get(i));
+			   if(flights.get(i)!=null){		
+					this.addFlight(flights.get(i));
+				}
 			}
-		}	
+		}
+
+
 	}
 
 	public void setPlanes(ArrayList<Plane> planes)throws Exception{
 		if(planes.size()>0){
 			for(int i=0; i<planes.size(); i++){
-				this.addPlane(planes.get(i));
+			   	if(planes.get(i)!=null){	
+					this.addPlane(planes.get(i));
+				}
 			}
 		}	
 	}
@@ -131,10 +188,10 @@ public class AirCompany implements IAirCompany {
 		boolean correct= false;
 		for (Employee employee : employees) {
 			if( employee.getDni().equals(e.getDni()) ){
-			   throw new Exception("Empleado duplicado no se puede introducir");
+			   throw new Exception("Empleado duplicado no se puede contratar");
 			}
 		}
-		if(employees.add(e)){
+		if(this.employees.add(e)){
 			correct = true;
 		}
 		return correct;
@@ -150,7 +207,7 @@ public class AirCompany implements IAirCompany {
 
 	@Override
 	public ArrayList<Employee>listEmployees(){
-		return employees;
+		return this.employees;
 	}
 
 	@Override
@@ -195,20 +252,18 @@ public class AirCompany implements IAirCompany {
 			if(duplicated){	
 				throw new Exception("Avion con matricula duplicada. No se pude introducir");
 			}else{
-				if(planes.add(p)){
+				if(this.planes.add(p)){
 					correct = true;
 				}
 
 			}
 
 		return correct;
-
-
 	}
 
 	@Override
 	public ArrayList<Plane> listPlanes(){
-		return planes;
+		return this.planes;
 	}
 
 	@Override
@@ -233,24 +288,31 @@ public class AirCompany implements IAirCompany {
 
 	@Override
 	public boolean addFlight(Flight f){
-		boolean found = false;
-		if(addFlight(f)){
-		  found = true;
+		boolean correct = false;
+		if(this.flights.add(f)){
+		  correct = true;
 		}
-		return found;
+		return correct;
 	}
 
 	@Override
 	public ArrayList<Flight> listFlight(){
-		return flights;
+		return this.flights;
 	}
 
 	@Override
-	public Flight serachFlight(String destinationAirpor
+	public Flight serachFlight(String destinationAirport
 	, String originAirport){
-		Flight f = null;
-			
-
+		Flight f =null;
+		boolean stop =false;
+		this.flights.get(0).getOriginAirport().equals(destinationAirport);
+		for(int i = 0;i<this.flights.size() && !stop;i++){
+			if(this.flights.get(i).getDestinationAirport().equals(destinationAirport)&&
+			   this.flights.get(i).getOriginAirport().equals(originAirport)){
+			    f =this.flights.get(i);
+				stop = true;
+			}
+		}
 
 
 		return f;
@@ -259,9 +321,7 @@ public class AirCompany implements IAirCompany {
 	@Override
 	public boolean removeFlight(String code){
 		boolean found = false;
-		/*AirCompany aircompany, Airport destinationAirport, 
-		  Airport originAirport, GregorianCalendar dateAndTime,
-		  double estimatedDuration, Plane plane,Pilot[] pilots, Crew[] crews,double price*/
+	
 
 
 		return found;
@@ -270,7 +330,7 @@ public class AirCompany implements IAirCompany {
 	@Override
 	public boolean buyTicket(Ticket t){
 		boolean correct = false;
-		if(t!=null && tickets.add(t)){
+		if(t!=null && this.tickets.add(t)){
 			correct = true;
 		}
 		return correct;
@@ -283,22 +343,14 @@ public class AirCompany implements IAirCompany {
 		searchTicket(dni, id).setSeat(null);
 		searchTicket(dni, id).setId("");
 		searchTicket(dni, id).setClient(null);
-		for (int i =0;i<tickets.size();i++) {
-			
+		for (int i =0;i<tickets.size();i++) {	
 			if( tickets.get(i).getClient().getDni().equals(dni)&&
 			    tickets.get(i).getId().equals(id)  ){
 				tickets.remove(i);
 				found=true;
 			}
-
 		}
-
-
-
-
-
 		return found;
-
 	}
 	@Override
  	public Ticket searchTicket(String dni, String id){
@@ -325,15 +377,18 @@ public class AirCompany implements IAirCompany {
 			}
 		}
 		boolean correct = false;
-		if(clients.add(c)){
+		if(this.clients.add(c)){
 			correct = true;
 		}
 		return correct;
 	}
 
+
+
+
 	@Override
 	public ArrayList<Client> listClients(){
-		return clients;
+		return this.clients;
 	}
 
 	@Override
@@ -360,7 +415,19 @@ public class AirCompany implements IAirCompany {
 		return found;
 	}
 
-	
+
+	public boolean addAirport(Airport a){
+		boolean correct = false;
+		if(this.airports.add(a)){
+			correct = true;	
+		}
+		return correct;
+	}
+
+	public ArrayList<Airport>listAirports(){
+		return this.airports;
+	}
+
 
 
 

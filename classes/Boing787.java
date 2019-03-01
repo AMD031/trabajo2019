@@ -27,8 +27,8 @@ public class Boing787 extends Plane{
 
 	@Override
 	public String toString(){
-		return "Boing787, avion con"+this.AUTONOMY+"km de autonomia, capacidad de "+this.CAPACITY+" pasajeros"+
-		" con un consumo de "+this.CONSUMTIOM+" L/min y un precio de "+this.PRICE;
+		return " Matricula "+this.idPlane+" \n Boing787, avion con "+this.AUTONOMY+" \n km de autonomia, capacidad de "+this.CAPACITY+" \n pasajeros "+
+		" \n con un consumo de "+this.CONSUMTIOM+" \n L/min y un precio de "+this.PRICE;
 	}
 
 	@Override

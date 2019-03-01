@@ -1,4 +1,5 @@
 package classes;
+import java.util.GregorianCalendar;
 	/**
 		Ticket.class
 		Permite crear objetos de tipo Ticket que guarda informacion del 
@@ -12,12 +13,17 @@ public class Ticket{
 	private Seat seat;
 	private String id;
 	private Flight flight;
+	private GregorianCalendar dateBuy; 
+
+
 
 	public Ticket(Client client, Seat seat, Flight flight){
 		this.client = client;
 		this.seat = seat;
 		this.id = generatorId();
 		this.flight = flight;
+		this.dateBuy = new GregorianCalendar();
+	
 	}
 	
 	/**
@@ -29,6 +35,15 @@ public class Ticket{
 	 	code.append(flight.getCode());
 	 	code.append(seat.getRow());
 	 	code.append(seat.getColumn());
+	 	code.append(dateBuy.YEAR);
+	 	code.append(dateBuy.MONTH);
+	 	code.append(dateBuy.DATE);
+	 	code.append(dateBuy.DATE);
+	 	code.append(dateBuy.HOUR);
+	 	code.append(dateBuy.MINUTE);
+
+
+
 	 	return code.toString();
 	 }
 	 //getters

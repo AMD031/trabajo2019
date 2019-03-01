@@ -2,6 +2,7 @@ package classes;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.Calendar;
 /**
   Flight.class
   permite instaciar objetos de tipo Flight.
@@ -25,8 +26,8 @@ private Crew[] CrewSeats;
 private double price;
 
 public Flight(AirCompany aircompany, Airport destinationAirport, 
-			  Airport originAirport, GregorianCalendar dateAndTime,
-			  double estimatedDuration, Plane plane,Pilot[] pilots, Crew[] crews,double price)throws Exception{
+			  Airport originAirport,Plane plane, GregorianCalendar dateAndTime,
+			  double estimatedDuration, double price)throws Exception{
 			this.aircompany = aircompany;
 			this.destinationAirport = destinationAirport;
 			this.originAirport = originAirport;
@@ -38,9 +39,6 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 			this.initializeSeats(plane);
 			this.CrewSeats = new Crew[(int)(Math.ceil( (plane.getRows()*plane.getColumns())*0.02))];
 			this.pilotSeats = new Pilot[2];
-
-
-
 }	 
 	/**
 		genera un codigo apartir des nombre de la empresa de vuelos,
@@ -51,14 +49,17 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 			String comp = aircompany.getName();
 			String letters = comp.substring(0,2);
 			StringBuilder tmpcode = new StringBuilder();
-	
 			tmpcode.append(letters);
-			String hour = Integer.toString(dateAndTime.HOUR);
-			 if(hour.length()<1){
+			String hour = Integer.toString(dateAndTime.get(Calendar.HOUR));
+			 if(hour.length()<2){
+			 	tmpcode.append("0");
+			 }	 
+			tmpcode.append(hour);
+			String minute = Integer.toString(dateAndTime.get(Calendar.MINUTE));
+			 if(minute.length()<2){
 			 	tmpcode.append("0");
 			 }
-			tmpcode.append(hour);
-			tmpcode.append(dateAndTime.MINUTE);
+			tmpcode.append(minute);
 			tmpcode.append(destinationAirport.getAcronym());
  		 return tmpcode.toString();
 	 }
@@ -78,7 +79,8 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 
 	 /**
 	 	busca un objeto de tipo piloto por id y nombre
-	 	y si lo encuentra lo pone null en el array pilotSeats.
+	 	y si lo encuentra lo pone null en el array pilotSeats y decrementa en uno
+	 	la cantidad de vuelos asignados.
 		@param dni objeto de tipo String que contine un dni a buscar. 
 		@param id numero de id del objeto de tipo piloto que se quiere borrar.
 		@return devuelve true si ha encontrado y puesto a null al piloto indicado
@@ -88,6 +90,7 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 	for (int i =0;i<this.pilotSeats.length && !found;i++) {	
 	 		if(this.pilotSeats[i].getDni().equals(dni) && 
 	 		   this.pilotSeats[i].getNEmployee()== id){
+	 		   this.pilotSeats[i].decrementAssignedFlight();	
 	 		   this.pilotSeats[i] = null;
 	 		   found = true;
 	 		}
@@ -99,7 +102,8 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 
 		/**
 	 	busca un objeto de tipo crew por id y nombre
-	 	y si lo encuentra lo pone null en el array CrewSeats.
+	 	y si lo encuentra lo pone null en el array CrewSeats y decrementa en uno la cantidad de vuelos
+	 	asignado.
 		@param dni objeto de tipo String que contine un dni a buscar. 
 		@param id numero de id.
 		@return devuelve true si ha encontrado y puesto a null al crew indicado.
@@ -110,10 +114,10 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 	for (int i =0;i<this.CrewSeats.length && !found;i++) {	
 	 		if(this.CrewSeats[i].getDni().equals(dni) && 
 	 		   this.CrewSeats[i].getNEmployee()== id){
+	 		   this.CrewSeats[i].decrementAssignedFlight();	
 	 		   this.CrewSeats[i] = null;
 	 		   found = true;
 	 		}
-
 	 	}
 	 	return found;
 	 }
@@ -121,6 +125,13 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 
 
 	 //getter
+	 public String getDestinationAirport(){
+	 	return this.destinationAirport.getName();
+	 }
+	  public String getOriginAirport(){
+	 	return this.originAirport.getName();
+	 }
+
 	 public String getCode(){
 	 	return this.code;
 	 }
@@ -154,9 +165,11 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	   	boolean stop = false;
 	 	for(int i =0; i<this.pilotSeats.length && !stop;i++){
 	 		if(this.pilotSeats[i]==null){
-	 			stop=true;
 	 			this.pilotSeats[i]=pilot;
+	 			double newtimeFly =  this.pilotSeats[i].getFlytime()+this.estimatedDuration;
+	 			this.pilotSeats[i].setFlytime(newtimeFly);
 	 			this.pilotSeats[i].incrementAssignedFlight();
+	 			stop=true;
 	 		}
 	 	}
 	 }
@@ -165,9 +178,10 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 	boolean stop = false;
 	 	for(int i =0; i<this.CrewSeats.length && !stop;i++){
 	 		if(this.CrewSeats[i]==null){
-	 			stop = true;
 	 			this.CrewSeats[i]=crew;
+
 	 			this.CrewSeats[i].incrementAssignedFlight();
+	 			stop = true;
 	 		}
 	 	}
 	 }

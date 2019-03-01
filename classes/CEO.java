@@ -13,9 +13,6 @@ public class CEO extends Employee{
   private double bonus;
   private double salary;
 
-  /*(String DNI,String Name, String Subname,
-   GregorianCalendar Birthdate,
-   String Nationaly,ArrayList<String> Lenguages)*/
 
 
   public CEO(String DNI,String Name, String Subname,

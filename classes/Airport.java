@@ -18,6 +18,7 @@ public class Airport{
 		this.name=name;
 		this.cityName=cityName;
 		this.country=country;
+		this.services = new ArrayList<String>();
 		setServices(services);
 	}
 
@@ -61,27 +62,35 @@ public class Airport{
 	}
 
 	public void setServices(ArrayList<String> services){
-		if(services!=null){
+		if(services.size()>0){
 			for(int i=0; i<services.size(); i++){
 				this.services.add(services.get(i));
 			}
 		}	
 	}
 
-	/*this.acronym=acronym;
-		this.name=name;
-		this.cityName=cityName;
-		this.country=country;*/
-	
+	public boolean equals(Object obj){
+		boolean match = false;
+		if(obj instanceof Airport){
+			Airport tmp = (Airport) obj;
+		if(this.acronym.equals(tmp.acronym)&&
+		   this.name.equals(tmp.name)&&
+		   this.cityName.equals(tmp.cityName)&&
+		   this.country.equals(tmp.country)
+		  ){match = true;}
+		}
+		return match;
+	}
 	public String toString(){
 		StringBuilder services = new StringBuilder();
-		for (int i =0;i<this.services.size();i++ ) {
-			services.append(" "+this.services.get(i));
-		}
-
-
+		if(this.services.size()>0){
+			for (int i =0;i<this.services.size();i++ ) {
+				services.append(" "+this.services.get(i));
+			}
+			String Services = services.toString();
+		}	
 		return "\n Acronimo: "+this.acronym+"\n nombre: "+this.name+"\n ciudad: "+this.cityName+
-		"\n pais "+this.country+"\n servicios: "+services.toString();
+		"\n pais "+this.country+"\n servicios: "+services;
 	}
 
 
