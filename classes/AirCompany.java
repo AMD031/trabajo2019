@@ -22,7 +22,7 @@ public class AirCompany implements IAirCompany {
 	private ArrayList<Flight>flights;
 	private ArrayList<Plane>planes;
 	public  ArrayList<Airport>airports;
-	
+
 	public AirCompany(String name, char[] charcode, 
 					 CEO ceo, GregorianCalendar foundationDate, ArrayList<Client> clients, ArrayList<Ticket>tickets,
 					 ArrayList<Employee>employees, ArrayList<Flight>flights, ArrayList<Plane>planes,ArrayList<Airport> airports)throws Exception{
@@ -111,7 +111,7 @@ public class AirCompany implements IAirCompany {
 			if(clients.size()>0){
 				for(int i=0; i<clients.size(); i++){
 				  if(clients.get(i)!=null){
-					this.addClient(clients.get(i));
+				  	 this.clients.add(clients.get(i));
 				   }
 				}
 			}
@@ -214,10 +214,8 @@ public class AirCompany implements IAirCompany {
 	public Employee searchEMployee(String name,String dni, int NEmployee){
 		Employee e = null;
 		boolean found = false;
-
-
 		for(int i=0; i<employees.size() && !found; i++){
-			System.out.println(employees.get(i).getNEmployee());
+		
 			if( (employees.get(i).getDni().equals(dni)&&    
 				 employees.get(i).getName().equals(name))||
 				 (employees.get(i).getDni().equals(dni)&&
@@ -301,21 +299,16 @@ public class AirCompany implements IAirCompany {
 	}
 
 	@Override
-	public Flight serachFlight(String destinationAirport
+	public ArrayList<Flight> serachFlight(String destinationAirport
 	, String originAirport){
-		Flight f =null;
-		boolean stop =false;
-		this.flights.get(0).getOriginAirport().equals(destinationAirport);
-		for(int i = 0;i<this.flights.size() && !stop;i++){
+		ArrayList<Flight>tmp = new ArrayList<Flight>();
+		for(int i = 0;i<this.flights.size();i++){
 			if(this.flights.get(i).getDestinationAirport().equals(destinationAirport)&&
 			   this.flights.get(i).getOriginAirport().equals(originAirport)){
-			    f =this.flights.get(i);
-				stop = true;
+			     tmp.add(this.flights.get(i));
 			}
 		}
-
-
-		return f;
+		return tmp;
 	}
 
 	@Override
@@ -330,8 +323,12 @@ public class AirCompany implements IAirCompany {
 	@Override
 	public boolean buyTicket(Ticket t){
 		boolean correct = false;
-		if(t!=null && this.tickets.add(t)){
-			correct = true;
+			if(!t.getSeat().getReserved()){
+			 t.getSeat().setReserved(true);
+			if(t!=null && this.tickets.add(t)){
+				System.out.println("Comprado");
+				correct = true;
+			}
 		}
 		return correct;
 	}
@@ -345,7 +342,7 @@ public class AirCompany implements IAirCompany {
 		searchTicket(dni, id).setClient(null);
 		for (int i =0;i<tickets.size();i++) {	
 			if( tickets.get(i).getClient().getDni().equals(dni)&&
-			    tickets.get(i).getId().equals(id)  ){
+			    tickets.get(i).getId().equals(id)){
 				tickets.remove(i);
 				found=true;
 			}
@@ -397,8 +394,9 @@ public class AirCompany implements IAirCompany {
 		Client c = null;
 		for(int i = 0; i<clients.size() && !found; i++){
 			if(clients.get(i).getDni().equals(dni)){
+				c = clients.get(i);
 				found=true;
-				c=clients.get(i);
+				
 			}
 		}
 		return c;
@@ -416,8 +414,12 @@ public class AirCompany implements IAirCompany {
 	}
 
 
-	public boolean addAirport(Airport a){
+	public boolean addAirport(Airport a)throws Exception{
 		boolean correct = false;
+		if(checkAirport(a)){
+			throw new Exception("Aeropueto dublicado. No se puede insertar.");
+		}
+		
 		if(this.airports.add(a)){
 			correct = true;	
 		}

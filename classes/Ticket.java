@@ -20,10 +20,9 @@ public class Ticket{
 	public Ticket(Client client, Seat seat, Flight flight){
 		this.client = client;
 		this.seat = seat;
-		this.id = generatorId();
 		this.flight = flight;
+	    this.id = generatorId();
 		this.dateBuy = new GregorianCalendar();
-	
 	}
 	
 	/**
@@ -32,18 +31,15 @@ public class Ticket{
 	*/	
 	 private String generatorId(){
 	 	StringBuilder code = new StringBuilder();
-	 	code.append(flight.getCode());
-	 	code.append(seat.getRow());
-	 	code.append(seat.getColumn());
-	 	code.append(dateBuy.YEAR);
-	 	code.append(dateBuy.MONTH);
-	 	code.append(dateBuy.DATE);
-	 	code.append(dateBuy.DATE);
-	 	code.append(dateBuy.HOUR);
-	 	code.append(dateBuy.MINUTE);
-
-
-
+	 	code.append(this.flight.getCode());
+	 	code.append(" ");
+	 	code.append(this.seat.getRow());
+	 	code.append(this.seat.getColumn());
+	 	code.append(" ");
+	 	code.append(this.flight.getDateAndTime().YEAR);
+	 	code.append(this.flight.getDateAndTime().MONTH);
+	 	code.append(this.flight.getDateAndTime().DATE);
+	 	
 	 	return code.toString();
 	 }
 	 //getters
@@ -70,7 +66,7 @@ public class Ticket{
 	 		this.seat = seat;
 	 		generatorId();
 	 	}else{
-	 		seat = null;
+	 		this.seat = null;
 	 	}
 	 }
 
@@ -79,7 +75,7 @@ public class Ticket{
 		 	this.flight = f;
 		 	generatorId();
 		 }else{
-		 	f= null;
+		 	this.flight= null;
 		 }	
 	 }
 
@@ -87,7 +83,7 @@ public class Ticket{
 	 	if(c!=null){
 	 		this.client = c;
 	 	}else{
-	 		c=null;
+	 		this.client=null;
 	 	}
 
 	 }
@@ -98,7 +94,7 @@ public class Ticket{
 
 	 @Override
 	 public String toString(){
-	 	return this.id+" "+client.getDni();
+	 	return "id: "+this.id+"comprado a nombre de :"+this.client.getName()+" "+this.client.getSubname();
 	 }
 
 

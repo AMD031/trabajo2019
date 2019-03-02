@@ -27,8 +27,8 @@ public class Person{
 	protected Person(String dni, String name, String subName,
 		             GregorianCalendar birthDate,  String Natinality)throws Exception{
 		this.setDni(dni);
-		this.name = new String(name);
-		this.subName = new String(subName);
+		setName(name);
+		setSubName(subName);
 		this.Natinality = new String(Natinality);
 		this.birthDate = birthDate;
 
@@ -110,13 +110,25 @@ public class Person{
 		}
 	}
 
-	public void setName(String name){
+	public void setName(String name)throws Exception{
+		for(int i =0;i<name.length();i++){
+			if(Character.isDigit(name.charAt(i))){
+				throw new Exception("Los nombre de persona no puede contener numeros.");
+			}
+		}
 		this.name = new String(name);
+	
 	}
 
-	//setter
-	public void subName(String subName){
+
+	public void setSubName(String subName)throws Exception{
+		for(int i =0;i<subName.length();i++){
+		 if(Character.isDigit(subName.charAt(i))){
+				throw new Exception("Los apellidos de persona no puede contener numeros.");		
+		}
+	  }
 		this.subName = new String(subName);
+		
 	}
 
 	public void setBirthDate(int year, int month, int dayOfMonth){

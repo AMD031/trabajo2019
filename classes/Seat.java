@@ -77,8 +77,13 @@ public class Seat{
 
 	@Override
 	public String toString(){
-		return " vip: "+this.vip+" fila: "+this.row+" columna: "
-		+this.column+" reservado: "+this.reserved;
+		String vip = "";
+		String assigned = "";
+		if(this.vip){
+			vip="Y";
+		}else{vip="N";};
+
+		return "vip: "+vip +" "+this.row+""+this.column;
 	}
 
 }

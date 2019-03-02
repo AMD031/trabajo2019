@@ -14,7 +14,7 @@ public interface IAirCompany{
 	public Plane searchPlane(String idPlane);
 	public boolean addFlight(Flight f);
 	public ArrayList<Flight> listFlight();
-	public Flight serachFlight(String destinationAirport
+	public ArrayList<Flight> serachFlight(String destinationAirport
 	, String originAirport);
 	public boolean removeFlight(String code);
 	public boolean buyTicket(Ticket t);

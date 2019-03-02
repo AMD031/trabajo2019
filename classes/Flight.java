@@ -50,8 +50,8 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 			String letters = comp.substring(0,2);
 			StringBuilder tmpcode = new StringBuilder();
 			tmpcode.append(letters);
-			String hour = Integer.toString(dateAndTime.get(Calendar.HOUR));
-			 if(hour.length()<2){
+			String hour = Integer.toString(dateAndTime.get(Calendar.HOUR_OF_DAY));
+			 if(hour.length()<3){
 			 	tmpcode.append("0");
 			 }	 
 			tmpcode.append(hour);
@@ -125,6 +125,7 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 
 
 	 //getter
+
 	 public String getDestinationAirport(){
 	 	return this.destinationAirport.getName();
 	 }
@@ -152,11 +153,23 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 	return this.CrewSeats;
 	 }
 
+	 public ArrayList<Seat>getSeatsFlight(){
+	 	return this.SeatsFlight;
+	 }
+
+	public GregorianCalendar getDateAndTime(){
+		return this.dateAndTime;
+	}
+
+
+
 	 //setters
 
 	  public void setPilots(Pilot[] pilots){
-	 	for(int i =0; i< this.pilotSeats.length;i++){	
-	 		this.setPilot(pilots[i]);
+	  	if(pilots.length>0){
+		 	for(int i =0; i< this.pilotSeats.length;i++){	
+		 		this.setPilot(pilots[i]);
+		 	}
 	 	}
 	 }
 
@@ -224,7 +237,6 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 		 	SeatsFlight = new ArrayList<Seat>();
 		 	int Nvip = plane.getNVip();//numero de filas vip
 		 	boolean vip = false;
-		 	//boolean re = true;
 		 	char CharC = 'A';//letra de la columna
 		 	int Nrow = 0;
 		 	for (int i =0;i<plane.getRows()*plane.getColumns();i++ ) {
@@ -233,7 +245,7 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 				Nrow=1;
 	 				CharC = (char)((int)CharC+1);
 	 			}
-	 		   if(Nrow<Nvip){
+	 		   if(Nrow<=Nvip){
 	 			  vip = true;
 	 		   }
 			   SeatsFlight.add(new Seat(vip,Nrow,CharC));
