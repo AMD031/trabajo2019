@@ -27,9 +27,9 @@ public class Person{
 	protected Person(String dni, String name, String subName,
 		             GregorianCalendar birthDate,  String Natinality)throws Exception{
 		this.setDni(dni);
-		setName(name);
-		setSubName(subName);
-		this.Natinality = new String(Natinality);
+		this.setName(name);
+		this.setSubName(subName);
+		this.setNatinality(Natinality);
 		this.birthDate = birthDate;
 
 	}
@@ -45,7 +45,7 @@ public class Person{
 	* @param String dni: es el dni a comprobar
 	* @return devuelve true si el dni es correcto.
 	*/
-	private boolean checkDni(String dni){
+	public static boolean checkDni(String dni){
 	    boolean valid = false;
 		String patternDni = "\\d{8}[A-HJ-NP-TV-Za-hj-np-tv-z]$";
 		String patternDni2 = "^[X-Z]\\d{7}[A-HJ-NP-TV-Za-hj-np-tv-z]$";
@@ -103,7 +103,7 @@ public class Person{
 
 	*/
 	public void setDni(String dni)throws Exception{
-		if(checkDni(dni)){
+		if(Person.checkDni(dni)){
 			this.dni = new String(dni);
 		}else{
 			throw new Exception("Dni no valido: "+dni);
@@ -136,8 +136,13 @@ public class Person{
 
 	}
 
-	public void setNatinality(String Natinality){
-		this.Natinality = Natinality;
+	public void setNatinality(String Natinality)throws Exception{
+		for(int i =0;i<Natinality.length();i++){
+			if(Character.isDigit(Natinality.charAt(i))){
+				throw new Exception("La nacionalidad no puede contener numeros.");
+			}
+		}
+		this.Natinality = new String(Natinality);
 	}
 
 	//getter
