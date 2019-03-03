@@ -32,14 +32,11 @@ public class Ticket{
 	 private String generatorId(){
 	 	StringBuilder code = new StringBuilder();
 	 	code.append(this.flight.getCode());
-	 	code.append(" ");
 	 	code.append(this.seat.getRow());
 	 	code.append(this.seat.getColumn());
-	 	code.append(" ");
 	 	code.append(this.flight.getDateAndTime().YEAR);
 	 	code.append(this.flight.getDateAndTime().MONTH);
-	 	code.append(this.flight.getDateAndTime().DATE);
-	 	
+	 	code.append(this.flight.getDateAndTime().DATE); 	
 	 	return code.toString();
 	 }
 	 //getters
@@ -57,7 +54,9 @@ public class Ticket{
 
 	 public Flight getFlight(){
 	 	return this.flight;
-	 	
+	 }
+	 public GregorianCalendar getDateBuy(){
+	 	return this.dateBuy;
 	 }
 
 	 //setters
@@ -92,9 +91,13 @@ public class Ticket{
 	 	this.id = id;
 	 }
 
+	 public void setDateBuy(GregorianCalendar dateBuy){
+	 	this.dateBuy = dateBuy;
+	 }
+
 	 @Override
 	 public String toString(){
-	 	return "id: "+this.id+"comprado a nombre de :"+this.client.getName()+" "+this.client.getSubname();
+	 	return "id: "+this.id+" comprado a nombre de: "+this.client.getName()+" "+this.client.getSubname();
 	 }
 
 

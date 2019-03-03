@@ -9,20 +9,20 @@ public class Main{
 
 		try{
 			//idiomas del empleado
-			ArrayList<String>idiomas = new ArrayList<String>();
-			idiomas.add("Ingles");
-			idiomas.add("Portuges");
-			idiomas.add("Español");
-			idiomas.add("Fraces");
+			ArrayList<String>language = new ArrayList<String>();
+			language.add("Ingles");
+			language.add("Portuges");
+			language.add("Español");
+			language.add("Fraces");
 
 			//idiomas de la empresa
-			ArrayList<String>ic = new ArrayList<String>();
-			ic.add("Ingles");
-			ic.add("Frances");
-			ic.add("Portuges");
-			ic.add("Español");
+			ArrayList<String>lc = new ArrayList<String>();
+			lc.add("Ingles");
+			lc.add("Frances");
+			lc.add("Portuges");
+			lc.add("Español");
 
-	 	Employee.setLenguagesCompany(ic);
+	 	Employee.setLenguagesCompany(lc);
 		char code[] = {'I','B','E'};
 		//lista de de objetos con los que parte la compañia
 		ArrayList<Client>clients = new ArrayList<Client>();
@@ -53,18 +53,18 @@ public class Main{
 	
 		//empleados
 			//ceo
-		CEO jefe =new CEO("12654658N","Pedro","Ruiz",new GregorianCalendar(1999,1,1),"Español",idiomas,150000,4000);
+		CEO boss =new CEO("12654658N","Pedro","Ruiz",new GregorianCalendar(1999,1,1),"Español",language,150000,4000);
 			//tripulacion
 	
-		emps.add(new Crew("30568446C","Pedro","Ruiz",new GregorianCalendar(1999,1,1),"Español",idiomas));
-		emps.add( new Crew("12345678Z","Juan","Ruiz",new GregorianCalendar(1972,1,1),"Español",idiomas));
+		emps.add(new Crew("30568446C","Pedro","Ruiz",new GregorianCalendar(1999,1,1),"Español",language));
+		emps.add( new Crew("12345678Z","Juan","Ruiz",new GregorianCalendar(1972,1,1),"Español",language));
 			
 			//pilotos
-		emps.add(new Pilot("87654321X","Maria","Ruiz",new GregorianCalendar(1999,1,1),"Español",idiomas,80));
-		emps.add(new Pilot("30851231C","Juan","Ruiz",new GregorianCalendar(1980,1,1),"Español",idiomas,80));
+		emps.add(new Pilot("87654321X","Maria","Ruiz",new GregorianCalendar(1999,1,1),"Español",language,80));
+		emps.add(new Pilot("30851231C","Juan","Ruiz",new GregorianCalendar(1980,1,1),"Español",language,80));
 
 			//compañia
-		AirCompany iberia = new AirCompany("IBERIA",code,jefe,new GregorianCalendar(1999,1,1),
+		AirCompany iberia = new AirCompany("IBERIA",code,boss,new GregorianCalendar(1999,1,1),
 									  clients,tickets,emps,flights,planes,airports);
 		
 		//Agregacion vuelos y agregacion de empleados
@@ -85,23 +85,29 @@ public class Main{
 		iberia.addFlight(IB1109CDR);
 		iberia.addFlight(IB1400CDR);
 
-		//eliminacion de listas despues de agregarlas a la compañia.
-		jefe = null;
+		//eliminacion de listas y variables despues de agregarlas a la compañia.
+		boss = null;
 		clients.clear(); 
 		emps.clear();  
 		tickets.clear(); 
 		flights.clear();  
 		planes.clear();
 		airports.clear(); 
+		language.clear();
+		lc.clear();
+		  	try{
+				System.out.println("Bienvenido.");
+				System.out.println("Escribe un numero para elegir una opcion.");
+				mainMenu(iberia);
+				System.out.println("Adios, gracias por usar nuestras aerolineas.");
+			}catch(InputMismatchException e){
+				System.out.println("No se puede introducir letras.");
+				mainMenu(iberia);
+			}catch(Exception e){
+			    System.out.println(e);
+			}
 
 
-
-		System.out.println("Bienvenido.");
-		mainMenu(iberia);
-		System.out.println("Adios, gracias por usar nuestras aerolineas.");
-
-		}catch(InputMismatchException e){
-			System.out.println("No se puede introducir letras.");
 		}catch(NullPointerException e){
 			System.out.println("Error: "+e);
 		}catch(Exception e){
@@ -113,84 +119,158 @@ public class Main{
 	static void mainMenu(AirCompany comp){
 	 System.out.println("hoy es: "+ new GregorianCalendar().getTime()+"\n");
 	 Scanner sc = new Scanner(System.in);
-	 int op;
+	 int op=0;
+	 int op2 =1;
+	 int op3 =1;
+	 String dni;
+	 String id;
+	 boolean flightfound = false;
 	 printMainOptions();
 	    do{
+
 	    	op = sc.nextInt();
 	 		switch(op){
-
 	 			case 1:
-	 			
+	 			 do{
 	 				System.out.println("Intruduzca aeropuerto destino, por favor.");
 	 				String o= sc.next();
 	 			 	System.out.println("Intruduzca aeropuerto origen, por favor.");
 	 			    String d= sc.next();
-	 			  
-	 				sc.nextLine();
-	 				for(Flight f:comp.serachFlight(o,d)){
-	 					System.out.println((comp.serachFlight(o,d).indexOf(f)+1)+") "+f);
-	 				}
+	 			    sc.nextLine();
+	 			    do{
+		 				if(comp.searchFlight(o,d).size()>0){
+		 				  for(Flight f:comp.searchFlight(o,d)){
+		 				   System.out.println((comp.searchFlight(o,d).indexOf(f)+1)+") "+f);
+		 				  }
+		 				  flightfound = true;
+			 			}else{
+			 				System.out.println("Vuelo no encontrado.");
+			 			}	
 
-	 				//asiento
-	 				int NFlight = (sc.nextInt()-1);
-	 				System.out.println(NFlight);
+		 				System.out.println("Seleccione el vuelo deseadoo vuelva atr\u00e1s (0).");
+		 				//numero de vuelo
+		 				op2 = sc.nextInt();
 
-	 				Flight sFlight = comp.serachFlight(o,d).get(NFlight);
-	 				ArrayList<Seat>tmpSeats = sFlight.getSeatsFlight();
+	                   if(op2>0 && flightfound){
+	   					
+		 				int NFlight = (op2-1);
+		 			
+		 				Flight sFlight = comp.searchFlight(o,d).get(NFlight);
+		 				ArrayList<Seat>tmpSeats = sFlight.getSeatsFlight();
 
-	 				for(Seat s : tmpSeats){
-	 					if(!s.getReserved()){
-	 					  System.out.printf("%-20s",(tmpSeats.indexOf(s)+1)+") "+s);
-	 					}
-	 				}
-	 				
-	 				int Nseat = (sc.nextInt()-1);
-	 				System.out.print("\nHas selecionado el asiento: ");
-	 				Seat tmpSeat = tmpSeats.get(Nseat);
-	 				System.out.print(tmpSeat);
+		 				// se imprime los asientos
+		 				for(Seat s : tmpSeats){
+		 					if(!s.getReserved()){
+		 					  System.out.printf("%-20s",(tmpSeats.indexOf(s)+1)+") "+s);
+		 					}
+		 				}
+		 				
+		 				System.out.println("Selecione un asiento.");
+		 				//selecion de asiento 
 
+		 				op3 = sc.nextInt();
+		 				if(op3>0){
+		 					 int nSeat = (op3-1); 
+			 				System.out.print("\nHas selecionado el asiento: ");
+			 				Seat tmpSeat = tmpSeats.get(op3);
+			 				System.out.print(tmpSeat);
+			 				//datos de cliente
 
-	 				//datos de cliente
-	 				System.out.println("\nIntroduce tu dni para proceder a la compra.");
-	 				String dni = sc.next();
-	 					
+			 				System.out.println("\nIntroduce tu dni para proceder a la compra.");
+			 				 do{
+			 				 	dni = sc.next();
+			 				 	if(!Person.checkDni(dni)){
+			 				 		System.out.println("Dni no valido. Introducelo otra vez.");
+			 				 	}	
+			 				 }while(!Person.checkDni(dni));
+			 					if(comp.searchClient(dni)!=null){
+				 					Client tmpClient = comp.searchClient(dni);
+				 					Ticket t = new Ticket(tmpClient,tmpSeat,sFlight);
+				 					if(comp.buyTicket(t)){
+				 						System.out.println("Compra realizada con existo.");
+				 						System.out.println(t);
+				 						op3 = 0;
+				 						op2 = 0;
+				 					}	
+			 					}else{
+			 						try{
+			 							//datos para crear usuario
+				 						System.out.println("Su dni no se encuentra registrado.");
+				 						System.out.println("Introduzca su nombre.");
+				 						String name = sc.next();
+				 						System.out.println("Introduzca su apellido.");
+				 						String subName= sc.next();
+				 						System.out.println("Datos de la fecha de nacimento.");
+				 						System.out.println("Introduzca agno.");
+				 						int year = sc.nextInt();
+				 						System.out.println("Introduzca mes.");
+				 						int month = sc.nextInt();
+				 						System.out.println("Introduzca dia.");
+				 						int day = sc.nextInt();
+				 						System.out.println("Introduzca su nacionalidad.");
+				 						String natinality= sc.next();
 
- 					//compra
+				 						GregorianCalendar Birth = new GregorianCalendar(year,month,day);
+				 						Client newClient = new Client(dni,name,subName,Birth,natinality);
+			 						if(comp.addClient(newClient)){
+					 						Ticket t = new Ticket(newClient,tmpSeat,sFlight);
+					 						if(comp.buyTicket(t)){
+						 						System.out.println("Compra realizada con existo.");
+						 						System.out.println(t);
+						 						op3 = 0;
+						 						op2 = 0;
+						 					}
+					 					}
 
- 					if(comp.searchClient(dni)!=null){
-	 					Client tmpClient = comp.searchClient(dni);
-	 					Ticket t = new Ticket(tmpClient,tmpSeat,sFlight);
-	 					if(comp.buyTicket(t)){
-	 						System.out.println("Compra realizada con existo.");
-	 						System.out.println(t);
-	 					}
- 					}
- 			
+					 					System.out.println("Escribe cero para salir o otro numero si desea hacer otra compra.");
+				 						op2 = sc.nextInt();
+					 				}catch(InputMismatchException e){
+					 					System.out.println(e);
+					 				}catch(Exception e){
+					 					System.out.print(e);
+					 				}	
+			 					}
+				 				
+			 			   	}
+		 				 }
+		 				
+	 			  }while(op2!=0);
+ 				}while(op3!=0);
  				
- 				 
-
-
-	 				//fin
 	 				System.out.println("\n");
 	 				printMainOptions();
 	 			break;
 
 	 			case 2:
 	 				System.out.println("Introduce id");
-	 				String qid = sc.next();
+	 				id = sc.next();
 	 				System.out.println("Introduce dni");
-	 				String qdni = sc.next();
-	 				if(comp.searchTicket(qdni,qid)!=null){
-	 					System.out.println("Entra");
+	 				dni = sc.next();
+	 				sc.nextLine();
+
+	 				if(comp.searchTicket(dni,id)!=null){
+	 					System.out.println(comp.searchTicket(dni,id));
 	 				}else{
 	 					System.out.println("Ticket no encontrado");
 	 				}
-
 	 				
 	 				printMainOptions();
 	 			break;
 
 	 			case 3:
+	 				System.out.println("Introduce id");
+	 				id = sc.next();
+	 				System.out.println("Introduce dni");
+	 				dni = sc.next();
+	 				sc.nextLine();
+	 				if(comp.removeTicket(dni,id)){
+	 					System.out.println("El Ticket se ha borrado con existo.");
+	 				}else{
+
+	 					System.out.println("El Ticket no se ha borrado.");
+	 				}
+
+
 	 				
 	 				printMainOptions();
 	 			break;
@@ -275,7 +355,10 @@ public class Main{
 	 			break;
 
 	 			case 9:
-	 				
+	 			    System.out.println("Introduce un codigo de vuelo");
+	 			    String code = sc.next();
+	 			    Flight tmp = comp.searchFlight(code);
+	 			    System.out.println("La rentabiladad del vuelo es: "+tmp.calculateProfitability());
 	 				printMainOptions();
 	 			break;
 	 		}
@@ -295,5 +378,15 @@ public class Main{
 		System.out.println("8 Calcular Salarios total ");
 		System.out.println("9 Calcular la rentabilidad de un vuelo ");
 		System.out.println("0 Salir");
+	}
+
+	static double checkPrice(Seat s, Flight f){
+		double price = 0;
+		if(s.getVip()){
+		  price = f.getPrice()*1.20;
+		}else{
+			price = f.getPrice();
+		}
+		return price;
 	}
 }

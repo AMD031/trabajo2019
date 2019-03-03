@@ -117,7 +117,7 @@ public class AirCompany implements IAirCompany {
 			}
 	}
 
-	public void setTickets(ArrayList<Ticket> tickets){	
+	public void setTickets(ArrayList<Ticket> tickets)throws Exception{	
 		if(tickets.size()>0){
 			for(int i=0; i<tickets.size(); i++){
 			  if(tickets.get(i)!=null){
@@ -183,7 +183,6 @@ public class AirCompany implements IAirCompany {
 
 
 	//metodos de la interfaz
-	@Override
 	public boolean hireEmployee(Employee e)throws Exception{
 		boolean correct= false;
 		for (Employee employee : employees) {
@@ -197,20 +196,37 @@ public class AirCompany implements IAirCompany {
 		return correct;
 	}
 
-	@Override
-	public boolean fireEmployee(String dni, String NEmployee){
-		boolean found = false;
 	
+	public boolean fireEmployee(String dni, String NEmployee){
+		boolean found = false;		
+		for(int i =0; i<this.flights.size();i++){
+			//array crew
+			for(int j =0;j<this.flights.get(i).getCrewSeats().length && !found;j++){
+
+
+			}
+			//array pilotos
+			for(int z =0;z<this.flights.get(i).getPilotSeats().length && !found;z++){
+
+
+			}
+		}
+
+
+
+
+
+
 
 		return found;
 	}
 
-	@Override
+
 	public ArrayList<Employee>listEmployees(){
 		return this.employees;
 	}
 
-	@Override
+
 	public Employee searchEMployee(String name,String dni, int NEmployee){
 		Employee e = null;
 		boolean found = false;
@@ -228,7 +244,7 @@ public class AirCompany implements IAirCompany {
 		return e;
 	}
 
-	@Override
+
 	public double totalSalary(){
 		double totalSalary = 0;	
 		for(Employee e: employees){
@@ -237,41 +253,37 @@ public class AirCompany implements IAirCompany {
 		return totalSalary;
 	}
 
-	@Override
+	
 	public boolean addPlane(Plane p)throws Exception{
 		boolean correct = false;
 		boolean duplicated = false;
 		
 		for (Plane plane : planes) {
 			if(plane.getIDPlane().equals(p.getIDPlane())){
-				duplicated= true;		
+				throw new Exception("Avion con matricula duplicada. No se pude introducir");		
 			}
 		}
-			if(duplicated){	
-				throw new Exception("Avion con matricula duplicada. No se pude introducir");
-			}else{
-				if(this.planes.add(p)){
-					correct = true;
-				}
-
-			}
+			
+		if(this.planes.add(p)){
+			correct = true;
+		}	
 
 		return correct;
 	}
 
-	@Override
+	
 	public ArrayList<Plane> listPlanes(){
 		return this.planes;
 	}
 
-	@Override
+
 	public boolean removePlane(String idPlane){
 		boolean found = false;
 
 		return found;
 	}
 
-	@Override
+
 	public Plane searchPlane(String idPlane){
 		boolean found = false;
 		Plane p =null;
@@ -284,7 +296,7 @@ public class AirCompany implements IAirCompany {
 		return p;
 	}
 
-	@Override
+
 	public boolean addFlight(Flight f){
 		boolean correct = false;
 		if(this.flights.add(f)){
@@ -293,13 +305,13 @@ public class AirCompany implements IAirCompany {
 		return correct;
 	}
 
-	@Override
+	
 	public ArrayList<Flight> listFlight(){
 		return this.flights;
 	}
 
-	@Override
-	public ArrayList<Flight> serachFlight(String destinationAirport
+
+	public ArrayList<Flight> searchFlight(String destinationAirport
 	, String originAirport){
 		ArrayList<Flight>tmp = new ArrayList<Flight>();
 		for(int i = 0;i<this.flights.size();i++){
@@ -311,7 +323,23 @@ public class AirCompany implements IAirCompany {
 		return tmp;
 	}
 
-	@Override
+
+	public Flight searchFlight(String code){
+		 boolean found = false;
+		 Flight tmp = null;
+		for(int i = 0;i<this.flights.size() && !found;i++){
+			if(this.flights.get(i).getCode().equals(code)){
+			     tmp = this.flights.get(i);
+			     found = true;
+			}
+		}
+		return tmp;
+	}
+
+
+
+
+	
 	public boolean removeFlight(String code){
 		boolean found = false;
 	
@@ -320,43 +348,39 @@ public class AirCompany implements IAirCompany {
 		return found;
 	}
 
-	@Override
+
 	public boolean buyTicket(Ticket t){
 		boolean correct = false;
 			if(!t.getSeat().getReserved()){
 			 t.getSeat().setReserved(true);
 			if(t!=null && this.tickets.add(t)){
-				System.out.println("Comprado");
 				correct = true;
 			}
 		}
 		return correct;
 	}
 
-	@Override
 	public boolean removeTicket(String dni, String id ){
 		boolean found = false;
-		searchTicket(dni, id).setClient(null);
-		searchTicket(dni, id).setSeat(null);
-		searchTicket(dni, id).setId("");
-		searchTicket(dni, id).setClient(null);
-		for (int i =0;i<tickets.size();i++) {	
-			if( tickets.get(i).getClient().getDni().equals(dni)&&
-			    tickets.get(i).getId().equals(id)){
-				tickets.remove(i);
-				found=true;
+			for (int i =0;i<this.tickets.size() && !found; i++){
+			if(this.tickets.get(i).getClient().getDni().equals(dni)&&
+			   this.tickets.get(i).getId().equals(id)){
+			   this.tickets.get(i).getSeat().setReserved(false);
+			   this.tickets.remove(i);
+			   found = true;
 			}
 		}
 		return found;
 	}
-	@Override
+
  	public Ticket searchTicket(String dni, String id){
 		Ticket t = null;
 		boolean found = false;
-		for (int i =0;i<tickets.size() && !found; i++ ){
-			if(tickets.get(i).getClient().getDni().equals(dni)&&
-			   tickets.get(i).getId().equals(id)){
+		for (int i =0;i<this.tickets.size() && !found; i++ ){
+			if(this.tickets.get(i).getClient().getDni().equals(dni)&&
+			   this.tickets.get(i).getId().equals(id)){
 			   t = tickets.get(i);
+			   found = true;
 			}
 		}
 		return t;
@@ -366,14 +390,14 @@ public class AirCompany implements IAirCompany {
 		Agrega un cliente a la lista de clientes de la empresa.
 		@author Antonio Martinez Diaz
 	*/
-	@Override
+
 	public boolean addClient(Client c)throws Exception{
-		for (Client client : clients) {
+		boolean correct = false;
+		for (Client client : this.clients) {
 			if( client.getDni().equals(c.getDni()) ){
-			   throw new Exception("Cliente duplicado no se puede introducir");
+			   throw new Exception("Cliente duplicado no se puede agregar el registro.");
 			}
 		}
-		boolean correct = false;
 		if(this.clients.add(c)){
 			correct = true;
 		}
@@ -383,18 +407,18 @@ public class AirCompany implements IAirCompany {
 
 
 
-	@Override
+
 	public ArrayList<Client> listClients(){
 		return this.clients;
 	}
 
-	@Override
+
 	public Client searchClient(String dni){
 		boolean found = false;
 		Client c = null;
-		for(int i = 0; i<clients.size() && !found; i++){
-			if(clients.get(i).getDni().equals(dni)){
-				c = clients.get(i);
+		for(int i = 0; i<this.clients.size() && !found; i++){
+			if(this.clients.get(i).getDni().equals(dni)){
+				c = this.clients.get(i);
 				found=true;
 				
 			}
@@ -402,12 +426,12 @@ public class AirCompany implements IAirCompany {
 		return c;
 	}
 
-	@Override
+
 	public boolean removeClient(String dni){
 		boolean found = false;
-		for(int i = 0; i<clients.size();i++){
-			if(clients.get(i).getDni().equals(dni)){
-				clients.remove(i);
+		for(int i = 0; i<this.clients.size();i++){
+			if(this.clients.get(i).getDni().equals(dni)){
+			   this.clients.remove(i);
 			}
 		}
 		return found;

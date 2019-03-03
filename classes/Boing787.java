@@ -21,7 +21,7 @@ public class Boing787 extends Plane{
 		/*Plane(String idPlane, GregorianCalendar acquisitionDate,int Nvip, 
 		int rows, int columns )*/
 
-		super(idPlane, acquisitionDate,AMOUNTVIP,ROWS,COLUMNS);
+		super(idPlane, acquisitionDate,AMOUNTVIP,ROWS,COLUMNS,CONSUMTIOM);
 		Plane.incrementPlane();
 	}
 

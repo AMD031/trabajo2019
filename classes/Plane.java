@@ -15,16 +15,18 @@ public class Plane{
 	protected int nVip;
 	protected int rows;
 	protected int columns;
+	protected int consumtiom;
 
 
 	protected Plane(String idPlane, GregorianCalendar acquisitionDate, int nVip, 
-		int rows, int columns )throws Exception{
+		int rows, int columns, int consumtiom)throws Exception{
 		
 		setIDPlane(idPlane);
 		this.nVip = nVip;
 		this.acquisitionDate=acquisitionDate;
 		this.rows = rows;
 		this.columns = columns;
+		this.consumtiom =consumtiom;
 	}
 
 	/**
@@ -73,6 +75,10 @@ public class Plane{
 
 	public GregorianCalendar getAcquisitionDate(){
 		return this.acquisitionDate;
+	}
+
+	public int getConsumtiom(){
+	  return this.consumtiom;
 	}
 
 

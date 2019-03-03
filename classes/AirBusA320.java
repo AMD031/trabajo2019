@@ -18,7 +18,7 @@ public class AirBusA320 extends Plane{
 	private static final int AMOUNTVIP=5;
 
 	public AirBusA320(String idPlane, GregorianCalendar acquisitionDate)throws Exception{
-		super(idPlane, acquisitionDate,AMOUNTVIP,ROWS,COLUMNS);
+		super(idPlane, acquisitionDate,AMOUNTVIP,ROWS,COLUMNS,CONSUMTIOM);
 		Plane.incrementPlane();
 	}
 

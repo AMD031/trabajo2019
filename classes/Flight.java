@@ -40,6 +40,25 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 			this.CrewSeats = new Crew[(int)(Math.ceil( (plane.getRows()*plane.getColumns())*0.02))];
 			this.pilotSeats = new Pilot[2];
 }	 
+
+	public double calculateProfitability(){
+		double benefit =0;
+		double expense = this.estimatedDuration*this.plane.getConsumtiom();
+		double profitability=0;
+		for (Seat s :SeatsFlight){
+			if(s.getVip()){
+			   benefit+=this.price*1.20;
+			}else{
+			   benefit+=this.price;
+			}	
+		}
+		profitability = benefit- expense;
+
+	 return profitability;
+
+
+	}
+
 	/**
 		genera un codigo apartir des nombre de la empresa de vuelos,
 		la hora y el acronimo del aeropuerto destino.
@@ -47,11 +66,11 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	*/
 	 private String generateCode(){
 			String comp = aircompany.getName();
-			String letters = comp.substring(0,2);
+			String letters = comp.substring(0,3);
 			StringBuilder tmpcode = new StringBuilder();
 			tmpcode.append(letters);
 			String hour = Integer.toString(dateAndTime.get(Calendar.HOUR_OF_DAY));
-			 if(hour.length()<3){
+			 if(hour.length()<2){
 			 	tmpcode.append("0");
 			 }	 
 			tmpcode.append(hour);
@@ -160,8 +179,6 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	public GregorianCalendar getDateAndTime(){
 		return this.dateAndTime;
 	}
-
-
 
 	 //setters
 
