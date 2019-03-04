@@ -124,6 +124,7 @@ public class Main{
 	 int op3 =1;
 	 String dni;
 	 String id;
+	 String letter="";
 	 boolean flightfound = false;
 	 printMainOptions();
 	    do{
@@ -280,28 +281,41 @@ public class Main{
 	 					for (Flight f: comp.listFlight()){
 	 						System.out.println(f);
 	 					}	
-					System.out.println("\nEscribe un caracter y pulsa una tecla para continuar.");
-					sc.next();
+					System.out.println("\nPulsa intro para continuar.");
+					letter=sc.nextLine();
+					letter=sc.nextLine();
+					if(letter.isEmpty()){
+						System.out.println("");
+					}
 	 				printMainOptions();
 
 	 			break;
 
 	 			case 5:
+	 			    letter=sc.nextLine();
 	 				System.out.println("La lista de empleados son: ");
 	 					for (Employee e: comp.listEmployees()) {
 	 						System.out.println("\nTripulacion: ");
 	 						if(  e instanceof Crew){
 		 						System.out.println(e);
-		 					    System.out.println("\nEscribe un caracter y pulsa una tecla para continuar.");
-		 					    sc.next();
+		 					    System.out.println("\nPulsa intro para continuar.");
+		 					
+								letter=sc.nextLine();
+								if(letter.isEmpty()){
+									System.out.println("");
+								}
 	 					    }
 	 					}
 	 					System.out.println("\nPiloto: ");
 	 					for (Employee e: comp.listEmployees()) {
 	 						if(  e instanceof Pilot){
 		 						System.out.println(e);
-		 					    System.out.println("\nEscribe un caracter y pulsa una tecla para continuar.");
-		 					    sc.next();
+		 					    System.out.println("\nPulsa intro para continuar.");
+		 					 
+								letter=sc.nextLine();
+								if(letter.isEmpty()){
+									System.out.println("");
+								}
 		 					 }
 	 					}
 
@@ -311,22 +325,30 @@ public class Main{
 	 			break;
 
 	 			case 6:
+	 				letter=sc.nextLine();
 	 				System.out.println("La lista de clientes son: ");
-	 					for (Client cli: comp.listClients()) {
+	 					for (Client cli: comp.listClients()) {	
 	 						System.out.println(cli+"\n");
-	 					    System.out.println("\nEscribe un caracter y pulsa una tecla para continuar.");
-	 					    sc.next();
+	 					    System.out.println("\nPulsa intro para continuar.");
+	 					   	letter=sc.nextLine();
+							if(letter.isEmpty()){
+								System.out.println("");
+							}
 
 	 					}
 	 				printMainOptions();
 	 			break;
 
 	 			case 7:
+	 				letter=sc.nextLine();
 	 				System.out.println("La lista de aviones son: ");
 	 					for (Plane p: comp.listPlanes()) {
 	 						System.out.println(p+"\n");
-	 						    System.out.println("\nEscribe un caracter y pulsa una tecla para continuar.");
-	 					    sc.next();
+	 						System.out.println("\nPulsa intro para continuar.");
+	 					   	letter=sc.nextLine();
+							if(letter.isEmpty()){
+								System.out.println("");
+							}
 	 					}
 	 				printMainOptions();
 	 			break;
