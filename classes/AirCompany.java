@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import interfaces.IAirCompany;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.Calendar;
 import classes.*;
 /**
 AirCompany.class
@@ -57,10 +58,6 @@ public class AirCompany implements IAirCompany {
 		this.planes = new ArrayList<Plane>();
 		this.airports = new ArrayList<Airport>();
 		}
-
-
-
-
 
 	public boolean checkAirport(Airport a){
 		boolean found = false;
@@ -176,7 +173,7 @@ public class AirCompany implements IAirCompany {
 	}
 
 	public String getFoundationDateString(){
-		return "YEAR: "+foundationDate.YEAR+" MONTH "+foundationDate.MONTH+" DATE "+foundationDate.DATE;
+		return "A\u00d1o: "+foundationDate.YEAR+" Mes:"+foundationDate.MONTH+" d\u00eda "+foundationDate.DATE;
 	}
 
 
@@ -197,26 +194,36 @@ public class AirCompany implements IAirCompany {
 	}
 
 	
-	public boolean fireEmployee(String dni, String NEmployee){
-		boolean found = false;		
+	public boolean fireEmployee(String dni, int NEmployee){
+		boolean found = false;	
+		dni =dni.toUpperCase();
 		for(int i =0; i<this.flights.size();i++){
 			//array crew
-			for(int j =0;j<this.flights.get(i).getCrewSeats().length && !found;j++){
-
-
+			Crew[] crews = this.flights.get(i).getCrewSeats();
+			for(int j =0;j<crews.length && !found;j++){
+				if(crews[i].getDni().equals(dni)&&
+				   crews[i].getNEmployee()== NEmployee){
+				   crews[i] =null;
+				}
 			}
 			//array pilotos
-			for(int z =0;z<this.flights.get(i).getPilotSeats().length && !found;z++){
-
-
+			Pilot[] pilots = this.flights.get(i).getPilotSeats();
+			for(int z =0;z<pilots.length && !found;z++){
+				if(pilots[i].getDni().equals(dni)&&
+				   pilots[i].getNEmployee()==NEmployee){
+				   pilots[i] =null;
+				}
+			}
+		}
+		for(int i =0;i<this.employees.size();i++){
+			if(employees.get(i).getDni().equals(dni)&&
+			   employees.get(i).getNEmployee()==NEmployee){
+			  	employees.remove(i);
+			  	found =true;
 			}
 		}
 
-
-
-
-
-
+	
 
 		return found;
 	}
@@ -230,8 +237,8 @@ public class AirCompany implements IAirCompany {
 	public Employee searchEMployee(String name,String dni, int NEmployee){
 		Employee e = null;
 		boolean found = false;
+		dni =dni.toUpperCase();
 		for(int i=0; i<employees.size() && !found; i++){
-		
 			if( (employees.get(i).getDni().equals(dni)&&    
 				 employees.get(i).getName().equals(name))||
 				 (employees.get(i).getDni().equals(dni)&&
@@ -256,18 +263,15 @@ public class AirCompany implements IAirCompany {
 	
 	public boolean addPlane(Plane p)throws Exception{
 		boolean correct = false;
-		boolean duplicated = false;
-		
+		boolean duplicated = false;		
 		for (Plane plane : planes) {
 			if(plane.getIDPlane().equals(p.getIDPlane())){
 				throw new Exception("Avion con matricula duplicada. No se pude introducir");		
 			}
-		}
-			
+		}		
 		if(this.planes.add(p)){
 			correct = true;
 		}	
-
 		return correct;
 	}
 
@@ -342,16 +346,25 @@ public class AirCompany implements IAirCompany {
 	
 	public boolean removeFlight(String code){
 		boolean found = false;
-	
-
-
+		for(int i =0;i<this.tickets.size();i++){
+			if(this.tickets.get(i).getFlight().getCode().equals(code)){
+				this.tickets.remove(i);
+			}
+		}
+		for(int i =0;i<this.flights.size();i++){
+			if(this.flights.get(i).getCode().equals(code)){
+				this.flights.remove(i);
+				found=true;
+			}	
+		}
+		
 		return found;
 	}
 
 
 	public boolean buyTicket(Ticket t){
 		boolean correct = false;
-			if(!t.getSeat().getReserved()){
+		  if(!t.getSeat().getReserved()){
 			 t.getSeat().setReserved(true);
 			if(t!=null && this.tickets.add(t)){
 				correct = true;
@@ -362,20 +375,28 @@ public class AirCompany implements IAirCompany {
 
 	public boolean removeTicket(String dni, String id ){
 		boolean found = false;
+		GregorianCalendar today = new GregorianCalendar();
+		today.add(Calendar.DATE,-1);
+		dni = dni.toUpperCase();
+		System.out.println(dni);
 			for (int i =0;i<this.tickets.size() && !found; i++){
-			if(this.tickets.get(i).getClient().getDni().equals(dni)&&
-			   this.tickets.get(i).getId().equals(id)){
-			   this.tickets.get(i).getSeat().setReserved(false);
-			   this.tickets.remove(i);
-			   found = true;
+				if(this.tickets.get(i).getClient().getDni().equals(dni)&&
+				   this.tickets.get(i).getId().equals(id)){
+					 if(today.after(tickets.get(i).getFlight().getDateAndTime())){
+					   this.tickets.get(i).getSeat().setReserved(false);
+					   this.tickets.remove(i);
+					   found = true;
+					 }
+				}
 			}
-		}
+			
 		return found;
 	}
 
  	public Ticket searchTicket(String dni, String id){
 		Ticket t = null;
 		boolean found = false;
+		dni =dni.toUpperCase();
 		for (int i =0;i<this.tickets.size() && !found; i++ ){
 			if(this.tickets.get(i).getClient().getDni().equals(dni)&&
 			   this.tickets.get(i).getId().equals(id)){
@@ -414,6 +435,7 @@ public class AirCompany implements IAirCompany {
 
 
 	public Client searchClient(String dni){
+		dni =dni.toUpperCase();
 		boolean found = false;
 		Client c = null;
 		for(int i = 0; i<this.clients.size() && !found; i++){
@@ -429,6 +451,7 @@ public class AirCompany implements IAirCompany {
 
 	public boolean removeClient(String dni){
 		boolean found = false;
+		dni =dni.toUpperCase();
 		for(int i = 0; i<this.clients.size();i++){
 			if(this.clients.get(i).getDni().equals(dni)){
 			   this.clients.remove(i);
