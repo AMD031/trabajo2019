@@ -12,7 +12,7 @@ public interface IAirCompany{
 	public ArrayList<Plane>listPlanes();
 	public boolean removePlane(String idPlane);
 	public Plane searchPlane(String idPlane);
-	public boolean addFlight(Flight f);
+	public boolean addFlight(Flight f)throws Exception;
 	public ArrayList<Flight> listFlight();
 	public ArrayList<Flight> searchFlight(String destinationAirport
 	, String originAirport);

@@ -75,7 +75,7 @@ public class Main{
 						 new GregorianCalendar(2019,3,20,11,9),80,100);
 
 		Flight  IB1400CDR = new Flight(iberia,iberia.listAirports().get(1),iberia.listAirports().get(0),planes.get(2),
-						 new GregorianCalendar(2019,3,20,14,0),80,100);
+						 new GregorianCalendar(2019,3,4,14,0),80,100);
 			//agregacion de empleados a los buelos
 		IB1009SVQ.setCrew((Crew)iberia.listEmployees().get(0));
 		IB1009SVQ.setPilot((Pilot)iberia.listEmployees().get(2));
@@ -84,6 +84,7 @@ public class Main{
 		iberia.addFlight(IB1009SVQ);
 		iberia.addFlight(IB1109CDR);
 		iberia.addFlight(IB1400CDR);
+		
 
 		//eliminacion de listas y variables despues de agregarlas a la compañia.
 		boss = null;
@@ -95,17 +96,10 @@ public class Main{
 		airports.clear(); 
 		language.clear();
 		lc.clear();
-		  	try{
-				System.out.println("Bienvenido.");
-				System.out.println("Escribe un numero para elegir una opcion.");
-				mainMenu(iberia);
-				System.out.println("Adios, gracias por usar nuestras aerolineas.");
-			}catch(InputMismatchException e){
-				System.out.println("No se puede introducir letras.");
-				mainMenu(iberia);
-			}catch(Exception e){
-			    System.out.println(e);
-			}
+		//lamada al menu
+		System.out.println("Bienvenido.");
+		mainMenu(iberia);
+		
 
 
 		}catch(NullPointerException e){
@@ -122,17 +116,21 @@ public class Main{
 	 int op=0;
 	 int op2 =1;
 	 int op3 =1;
-	 String dni;
-	 String id;
+	 String dni="";
+	 String id="";
 	 String letter="";
 	 boolean flightfound = false;
+	
+	 System.out.println("Escribe un numero para elegir una opcion.");
 	 printMainOptions();
+		try{
 	    do{
 
 	    	op = sc.nextInt();
 	 		switch(op){
 	 			case 1:
 	 			 do{
+		 			
 	 				System.out.println("Intruduzca aeropuerto destino, por favor.");
 	 				String o= sc.next();
 	 			 	System.out.println("Intruduzca aeropuerto origen, por favor.");
@@ -140,17 +138,23 @@ public class Main{
 	 			    sc.nextLine();
 	 			    do{
 		 				if(comp.searchFlight(o,d).size()>0){
+		 				  //se imprime los vuelos	
 		 				  for(Flight f:comp.searchFlight(o,d)){
-		 				   System.out.println((comp.searchFlight(o,d).indexOf(f)+1)+") "+f);
+		 				    System.out.println((comp.searchFlight(o,d).indexOf(f)+1)+") "+f);
 		 				  }
-		 				  flightfound = true;
+		 				  flightfound = true;//flag de vuelo vuelo
 			 			}else{
 			 				System.out.println("Vuelo no encontrado.");
 			 			}	
+			 			  do{
+			 				System.out.println("\n\nSeleccione el vuelo deseado vuelva atr\u00e1s (0).");
+			 				//numero de vuelo
+			 				op2 = sc.nextInt();
+			 				if(op2>comp.searchFlight(o,d).size()){
+			 					System.out.println("Opncion no valida");
 
-		 				System.out.println("Seleccione el vuelo deseadoo vuelva atr\u00e1s (0).");
-		 				//numero de vuelo
-		 				op2 = sc.nextInt();
+			 				}
+		 				  }while(op2>0 && op2>comp.searchFlight(o,d).size());	
 
 	                   if(op2>0 && flightfound){
 	   					
@@ -160,16 +164,36 @@ public class Main{
 		 				ArrayList<Seat>tmpSeats = sFlight.getSeatsFlight();
 
 		 				// se imprime los asientos
+		 				int contLine =0;
+		 				sc.nextLine();
 		 				for(Seat s : tmpSeats){
-		 					if(!s.getReserved()){
-		 					  System.out.printf("%-20s",(tmpSeats.indexOf(s)+1)+") "+s);
-		 					}
-		 				}
-		 				
-		 				System.out.println("Selecione un asiento.");
-		 				//selecion de asiento 
 
+		 					if(!s.getReserved()){
+		 					  System.out.printf("%-25s",(tmpSeats.indexOf(s)+1)+")"+s+" ("+checkPrice(s,sFlight)+")");
+		 					 
+		 					 
+		 					  if(contLine>98){
+		 					  	System.out.println("\n\nPulsa intro para continuar viendo la lista.");
+		 					  		
+		 					  		letter=sc.nextLine();
+									if(letter.isEmpty()){
+										
+									}
+								  contLine=0;
+		 					   }
+		 					   contLine++;
+		 					}
+		 			
+		 				}
+		 				do{
+		 			    System.out.println("\n\nSeleccione el asiento deseado vuelva atr\u00e1s (0).");
+		 				//selecion de asiento 
 		 				op3 = sc.nextInt();
+		 				if(op3>tmpSeats.size()){
+			 				  System.out.println("Opncion no valida");
+			 				}
+		 				}while(op3>0 && op3>tmpSeats.size());	
+
 		 				if(op3>0){
 		 					 int nSeat = (op3-1); 
 			 				System.out.print("\nHas selecionado el asiento: ");
@@ -222,8 +246,7 @@ public class Main{
 						 						op2 = 0;
 						 					}
 					 					}
-
-					 					System.out.println("Escribe cero para salir o otro numero si desea hacer otra compra.");
+					 					System.out.println("Escribe cero para salir.");
 				 						op2 = sc.nextInt();
 					 				}catch(InputMismatchException e){
 					 					System.out.println(e);
@@ -385,7 +408,18 @@ public class Main{
 	 			break;
 	 		}
 
+
+
 	 	}while(op!=0);
+
+	 	System.out.println("Adios, gracias por usar nuestras aerolineas.");
+		}catch(InputMismatchException e){
+			System.out.println("Acci\u00f3n no valida.");
+			mainMenu(comp);
+		}catch(Exception e){
+		    System.out.println(e);
+		}
+	 	
 	}
 
 
@@ -401,6 +435,8 @@ public class Main{
 		System.out.println("9 Calcular la rentabilidad de un vuelo ");
 		System.out.println("0 Salir");
 	}
+
+
 
 	static double checkPrice(Seat s, Flight f){
 		double price = 0;

@@ -153,6 +153,13 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 	return this.originAirport.getName();
 	 }
 
+	 public Airport getObjectDestinationAirport(){
+	 	return this.destinationAirport;
+	 }
+	  public Airport getObjectOriginAirport(){
+	 	return this.originAirport;
+	 }
+
 	 public String getCode(){
 	 	return this.code;
 	 }
