@@ -4,7 +4,7 @@ import classes.*;
 
 public interface IAirCompany{
 	public boolean hireEmployee(Employee e)throws Exception;
-	public boolean fireEmployee(String dni, String NEmployee);
+	public boolean fireEmployee(String dni, int NEmployee);
 	public ArrayList<Employee>listEmployees();
 	public Employee searchEMployee(String name,String dni, int NEmployee);
 	public double totalSalary();

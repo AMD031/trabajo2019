@@ -104,6 +104,7 @@ public class Person{
 	*/
 	public void setDni(String dni)throws Exception{
 		if(Person.checkDni(dni)){
+			dni =dni.toUpperCase();
 			this.dni = new String(dni);
 		}else{
 			throw new Exception("Dni no valido: "+dni);

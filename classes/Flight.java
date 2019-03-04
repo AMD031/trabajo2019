@@ -40,7 +40,6 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 			this.CrewSeats = new Crew[(int)(Math.ceil( (plane.getRows()*plane.getColumns())*0.02))];
 			this.pilotSeats = new Pilot[2];
 }	 
-
 	public double calculateProfitability(){
 		double benefit =0;
 		double expense = this.estimatedDuration*this.plane.getConsumtiom();
@@ -54,7 +53,7 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 				}	
 			}	
 		}
-		profitability = benefit- expense;
+		profitability = benefit/expense;
 
 	 return profitability;
 

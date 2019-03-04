@@ -15,8 +15,6 @@ public class Ticket{
 	private Flight flight;
 	private GregorianCalendar dateBuy; 
 
-
-
 	public Ticket(Client client, Seat seat, Flight flight){
 		this.client = client;
 		this.seat = seat;
