@@ -6,14 +6,18 @@ import java.util.ArrayList;
   * Descripcion: Clase CEO que hereda los metodos de la clase Employee y tiene
   * metodos propios y utiliza el constructor abstracto de la clase padre.
 	* @author: Antonio Adamuz
-	* @version: 0.0.1
+	* @version: 0.0.8
 */
 
 public class CEO extends Employee{
   private double bonus;
   private double salary;
 
-
+/**
+*Cosntructor principal que recibe los parametros.
+* @param salary Esta clase se le indica un salario que es de tipo int.
+* @param bonus  Es un bonus que se le añadira a la funcion del salario total.
+*/
 
   public CEO(String DNI,String Name, String Subname,
 	 GregorianCalendar Birthdate,

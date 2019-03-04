@@ -7,7 +7,7 @@ import java.util.ArrayList;
 	* lo que hace es instaciar los empleados de la empresa utilizando
 	* la clase Person.java
 	* @author: Antonio Adamuz
-	* @version: 0.0.1
+	* @version: 0.0.8
 */
 
 abstract public class Employee extends Person{
@@ -38,10 +38,9 @@ abstract public class Employee extends Person{
 	 //setter
 	 /**
 	 *Setter de lenguajes que recibe un ArrayList de lenguajes
-	 
 	 */
 	 public void setLenguages(ArrayList<String> lenguages){
-		  if(lenguages.size()>0){ 
+		  if(lenguages.size()>0){
 			for(int i = 0; i<lenguages.size();i++){
 				if(!checkLenguages(this.Lenguages,lenguages.get(i))
 					&& checkLenguages(this.LenguagesCompany,lenguages.get(i))){
