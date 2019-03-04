@@ -193,7 +193,6 @@ public class AirCompany implements IAirCompany {
 		return correct;
 	}
 
-	
 	public boolean fireEmployee(String dni, int NEmployee){
 		boolean found = false;	
 		dni =dni.toUpperCase();
@@ -301,8 +300,25 @@ public class AirCompany implements IAirCompany {
 	}
 
 
-	public boolean addFlight(Flight f){
+	public boolean addFlight(Flight f)throws Exception{
 		boolean correct = false;
+		
+
+		if(!checkAirport(f.getObjectDestinationAirport())){
+				throw new Exception("El Aeropuerto"+f+"no existe.");
+		}
+		if(!checkAirport(f.getObjectOriginAirport())){
+				throw new Exception("El Aeropuerto"+f+"no existe.");
+		}
+
+	
+		for(Flight flight :this.flights){
+			if(flight.getCode().equals(f.getCode())){
+			 	throw new Exception("Vuelo duplicado.");
+			}
+		}
+
+
 		if(this.flights.add(f)){
 		  correct = true;
 		}
