@@ -46,10 +46,12 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 		double expense = this.estimatedDuration*this.plane.getConsumtiom();
 		double profitability=0;
 		for (Seat s :SeatsFlight){
-			if(s.getVip()){
-			   benefit+=this.price*1.20;
-			}else{
-			   benefit+=this.price;
+			if(s.getReserved()){
+				if(s.getVip()){
+				   benefit+=this.price*1.20;
+				}else{
+				   benefit+=this.price;
+				}	
 			}	
 		}
 		profitability = benefit- expense;

@@ -10,17 +10,17 @@ public class Main{
 		try{
 			//idiomas del empleado
 			ArrayList<String>language = new ArrayList<String>();
-			language.add("Ingles");
-			language.add("Portuges");
-			language.add("Español");
-			language.add("Fraces");
+			language.add("Ingl\u00e9s");
+			language.add("Portug\u00e9s");
+			language.add("Espa\u00f1ol");
+			language.add("Frac\u00e9s");
 
 			//idiomas de la empresa
 			ArrayList<String>lc = new ArrayList<String>();
-			lc.add("Ingles");
-			lc.add("Frances");
-			lc.add("Portuges");
-			lc.add("Español");
+			lc.add("Ingl\u00e9s");
+			lc.add("Franc\u00e9s");
+			lc.add("Portug\u00e9s");
+			lc.add("Espa\u00f1ol");
 
 	 	Employee.setLenguagesCompany(lc);
 		char code[] = {'I','B','E'};
@@ -39,8 +39,8 @@ public class Main{
 		servicios.add("Tiendas");
 	
 		//Aeropuertos
-		airports.add(new Airport("SVQ","bar","Sevilla","España", servicios));
-		airports.add(new Airport("CDR","vez","Cordoba","España", servicios));
+		airports.add(new Airport("SVQ","bar","Sevilla","Espa\u00f1a", servicios));
+		airports.add(new Airport("CDR","vez","C\u00f3rdoba","Espa\u00f1a", servicios));
 
 		//aviones
 		planes.add(new Boing787("1945ABC",new GregorianCalendar(2000,1,0)));
@@ -48,20 +48,20 @@ public class Main{
 		planes.add(new AirBusA320("1234ABZ", new GregorianCalendar(1995,6,4)));
 
 		//clientes	
-		clients.add(new Client("12654658N","Pedro","Sanchez",new GregorianCalendar(1972,1,1),"Español"));
-		clients.add(new Client("12345678Z","Maria","Perez",new GregorianCalendar(1990,8,5),"Española"));
+		clients.add(new Client("12654658N","Pedro","Sanchez",new GregorianCalendar(1972,1,1),"Espa\u00f1ol"));
+		clients.add(new Client("12345678Z","Maria","Perez",new GregorianCalendar(1990,8,5),"Espa\u00f1ola"));
 	
 		//empleados
 			//ceo
-		CEO boss =new CEO("12654658N","Pedro","Ruiz",new GregorianCalendar(1999,1,1),"Español",language,150000,4000);
+		CEO boss =new CEO("12654658N","Pedro","Ruiz",new GregorianCalendar(1999,1,1),"Espa\u00f1ol",language,150000,4000);
 			//tripulacion
 	
-		emps.add(new Crew("30568446C","Pedro","Ruiz",new GregorianCalendar(1999,1,1),"Español",language));
-		emps.add( new Crew("12345678Z","Juan","Ruiz",new GregorianCalendar(1972,1,1),"Español",language));
+		emps.add(new Crew("30568446C","Pedro","Ruiz",new GregorianCalendar(1999,1,1),"Espa\u00f1ol",language));
+		emps.add( new Crew("12345678Z","Juan","Ruiz",new GregorianCalendar(1972,1,1),"Espa\u00f1ol",language));
 			
 			//pilotos
-		emps.add(new Pilot("87654321X","Maria","Ruiz",new GregorianCalendar(1999,1,1),"Español",language,80));
-		emps.add(new Pilot("30851231C","Juan","Ruiz",new GregorianCalendar(1980,1,1),"Español",language,80));
+		emps.add(new Pilot("87654321X","Maria","Ruiz",new GregorianCalendar(1999,1,1),"Espa\u00f1ol",language,80));
+		emps.add(new Pilot("30851231C","Juan","Ruiz",new GregorianCalendar(1980,1,1),"Espa\u00f1ol",language,80));
 
 			//compañia
 		AirCompany iberia = new AirCompany("IBERIA",code,boss,new GregorianCalendar(1999,1,1),
@@ -172,7 +172,7 @@ public class Main{
 		 				if(op3>0){
 		 					 int nSeat = (op3-1); 
 			 				System.out.print("\nHas selecionado el asiento: ");
-			 				Seat tmpSeat = tmpSeats.get(op3);
+			 				Seat tmpSeat = tmpSeats.get(op3-1);
 			 				System.out.print(tmpSeat);
 			 				//datos de cliente
 
@@ -201,7 +201,7 @@ public class Main{
 				 						System.out.println("Introduzca su apellido.");
 				 						String subName= sc.next();
 				 						System.out.println("Datos de la fecha de nacimento.");
-				 						System.out.println("Introduzca agno.");
+				 						System.out.println("Introduzca a\u00f1o.");
 				 						int year = sc.nextInt();
 				 						System.out.println("Introduzca mes.");
 				 						int month = sc.nextInt();
