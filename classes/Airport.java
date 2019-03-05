@@ -61,6 +61,10 @@ public class Airport{
 		this.country=country;
 	}
 
+	/**
+	*@param services de tipo ArrayList con los servicios que ofrece el aeropuerto
+	*Metodo que introduce valores (servicios) en el ArrayList
+	*/
 	public void setServices(ArrayList<String> services){
 		if(services.size()>0){
 			for(int i=0; i<services.size(); i++){
@@ -81,6 +85,7 @@ public class Airport{
 		}
 		return match;
 	}
+
 	public String toString(){
 		StringBuilder services = new StringBuilder();
 		if(this.services.size()>0){

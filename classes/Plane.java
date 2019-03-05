@@ -31,7 +31,6 @@ public class Plane{
 
 	/**
 		*Metodo que prueba si la cadena idPlane es un patron correcto.
-		@author Samuel Hermosilla Aguilera.
 		@param String idPlane: es la matricula del avion.
 		@return true si, y solo si, la secuencia completa coincide con el patrón.
 	*/
@@ -43,7 +42,7 @@ public class Plane{
 	
 	//Setters
 
-	/**Cambia el valor de la matricula si la matricula del avion es valida*/
+	/**Establece el valor de la matricula si la matricula del avion es valida*/
 	public void setIDPlane(String idPlane)throws Exception{
 		if(checkIDPlane(idPlane)){
 			this.idPlane=new String(idPlane);
