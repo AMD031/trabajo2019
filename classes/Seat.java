@@ -1,11 +1,13 @@
 package classes;
+import java.util.Comparator;
+
 /**
 	*Seat.class
 	*Permite crear objetos de tipo Seat, con dos constructores
 	uno para los asientos vip y otro para los no vip.
 	*@author Samuel Hermosilla Aguilera.
 */
-public class Seat{
+public class Seat implements Comparable<Seat>{
 	private boolean vip;
 	private boolean reserved;
 	private String codeSeat;
@@ -72,7 +74,20 @@ public class Seat{
 		this.column=column;
 	}
 
-
+  	@Override
+	public int compareTo(Seat o){
+		 int result =0;
+		 if(this.vip == true && o.vip==true){
+		 	result =0;
+		 }
+		 if(this.vip== false && o.vip==true){
+		 	result =1;
+		 }
+		 if(this.vip == true && o.vip==false){
+		 	result = -1;
+		 }
+		return result;
+	}
 
 
 	@Override

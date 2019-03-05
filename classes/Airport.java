@@ -68,9 +68,21 @@ public class Airport{
 	public void setServices(ArrayList<String> services){
 		if(services.size()>0){
 			for(int i=0; i<services.size(); i++){
-				this.services.add(services.get(i));
+			  if(!this.checkServices(services.get(i))){	
+					this.services.add(services.get(i));
+				}
 			}
 		}	
+	}
+
+	public boolean checkServices(String service){
+		boolean found = false;
+		for(String s: this.services){
+			if(service.equals(s)){
+				found =true;
+			}
+		}
+		return found;
 	}
 
 	public boolean equals(Object obj){

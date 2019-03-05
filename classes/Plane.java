@@ -80,8 +80,6 @@ public class Plane{
 	  return this.consumtiom;
 	}
 
-
-
 	/**
 	* Metodo que cada vez que se instancia un avion, la variable planeCounter aumenta en 1.
 	*/

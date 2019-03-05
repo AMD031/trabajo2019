@@ -198,9 +198,8 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 	}
 	 }
 
-
-	   public void setPilot(Pilot pilot){
-	   	boolean stop = false;
+	 public void setPilot(Pilot pilot){
+	   boolean stop = false;
 	 	for(int i =0; i<this.pilotSeats.length && !stop;i++){
 	 		if(this.pilotSeats[i]==null){
 	 			this.pilotSeats[i]=pilot;
@@ -217,7 +216,6 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 	for(int i =0; i<this.CrewSeats.length && !stop;i++){
 	 		if(this.CrewSeats[i]==null){
 	 			this.CrewSeats[i]=crew;
-
 	 			this.CrewSeats[i].incrementAssignedFlight();
 	 			stop = true;
 	 		}
@@ -279,7 +277,8 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 }
 	 @Override
 	 public String toString(){
-	 	return "Flight: "+this.code;
+	 	return "Vuelo: "+this.code+" Aeropuerto origen "+this.originAirport.getName()+"("+this.originAirport.getCountry()+")"+
+	 		    " Aeropuerto destino: "+this.destinationAirport.getName()+"("+this.destinationAirport.getCountry()+")";
 	 }
 
 }

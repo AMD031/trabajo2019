@@ -104,7 +104,7 @@ public class Person{
 	*/
 	public void setDni(String dni)throws Exception{
 		if(Person.checkDni(dni)){
-			dni =dni.toUpperCase();
+	
 			this.dni = new String(dni);
 		}else{
 			throw new Exception("Dni no valido: "+dni);
@@ -164,9 +164,9 @@ public class Person{
 	}
 
 	public String getBirthDate(){
-		return "date of brithdate "+" YEAR: "+birthDate.get(Calendar.YEAR)+
-		" MONTH: "+birthDate.get(Calendar.DAY_OF_MONTH)+
-		" DAY: "+birthDate.get(Calendar.DAY_OF_WEEK);
+		return "Fecha nacimiento: "+" a\u00f1o: "+birthDate.get(Calendar.YEAR)+
+		" Mes: "+birthDate.get(Calendar.DAY_OF_MONTH)+
+		" D\u00eda: "+birthDate.get(Calendar.DAY_OF_WEEK);
 	}
 	public GregorianCalendar getBirthDateGregorian(){
 		return this.birthDate;
@@ -174,8 +174,8 @@ public class Person{
 
 	@Override
 	public String toString(){
-		return "Name: "+this.name+"\n Subname: "+this.subName+"\n Dni: "+this.dni+
-		"\n Natinality: "+this.Natinality+"\n Birth date: "+this.getBirthDate();
+		return "Nombre: "+this.name+"\n Apellido: "+this.subName+"\n Dni: "+this.dni+
+		"\n Nacionalidad: "+this.Natinality+"\n Fecha nacimiento: "+this.getBirthDate();
 	}
 
 	@Override

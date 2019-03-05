@@ -236,7 +236,7 @@ public class AirCompany implements IAirCompany {
 	public Employee searchEMployee(String name,String dni, int NEmployee){
 		Employee e = null;
 		boolean found = false;
-		dni =dni.toUpperCase();
+	
 		for(int i=0; i<employees.size() && !found; i++){
 			if( (employees.get(i).getDni().equals(dni)&&    
 				 employees.get(i).getName().equals(name))||
@@ -339,7 +339,7 @@ public class AirCompany implements IAirCompany {
 			   this.flights.get(i).getOriginAirport().equals(originAirport)){
 			     tmp.add(this.flights.get(i));
 			}
-		}
+		}		
 		return tmp;
 	}
 
@@ -381,8 +381,9 @@ public class AirCompany implements IAirCompany {
 	public boolean buyTicket(Ticket t){
 		boolean correct = false;
 		  if(!t.getSeat().getReserved()){
-			 t.getSeat().setReserved(true);
+			t.getSeat().setReserved(true);
 			if(t!=null && this.tickets.add(t)){
+				t.getClient().incrementNbuys();
 				correct = true;
 			}
 		}
@@ -393,16 +394,17 @@ public class AirCompany implements IAirCompany {
 		boolean found = false;
 		GregorianCalendar today = new GregorianCalendar();
 		today.add(Calendar.DATE,-1);
-		dni = dni.toUpperCase();
-		System.out.println(dni);
 			for (int i =0;i<this.tickets.size() && !found; i++){
 				if(this.tickets.get(i).getClient().getDni().equals(dni)&&
 				   this.tickets.get(i).getId().equals(id)){
-					 if(today.after(tickets.get(i).getFlight().getDateAndTime())){
+
+				   	 if( !(today.after(tickets.get(i).getFlight().getDateAndTime())) ){
 					   this.tickets.get(i).getSeat().setReserved(false);
+					   this.tickets.get(i).getClient().incrementNrefund();
 					   this.tickets.remove(i);
 					   found = true;
-					 }
+
+					 }	
 				}
 			}
 			
@@ -412,7 +414,7 @@ public class AirCompany implements IAirCompany {
  	public Ticket searchTicket(String dni, String id){
 		Ticket t = null;
 		boolean found = false;
-		dni =dni.toUpperCase();
+		
 		for (int i =0;i<this.tickets.size() && !found; i++ ){
 			if(this.tickets.get(i).getClient().getDni().equals(dni)&&
 			   this.tickets.get(i).getId().equals(id)){
@@ -451,7 +453,7 @@ public class AirCompany implements IAirCompany {
 
 
 	public Client searchClient(String dni){
-		dni =dni.toUpperCase();
+	
 		boolean found = false;
 		Client c = null;
 		for(int i = 0; i<this.clients.size() && !found; i++){
@@ -467,7 +469,7 @@ public class AirCompany implements IAirCompany {
 
 	public boolean removeClient(String dni){
 		boolean found = false;
-		dni =dni.toUpperCase();
+	
 		for(int i = 0; i<this.clients.size();i++){
 			if(this.clients.get(i).getDni().equals(dni)){
 			   this.clients.remove(i);
