@@ -16,7 +16,6 @@ public class Person{
 	protected String subName;
 	protected String Natinality;
 	protected GregorianCalendar birthDate;
-	protected boolean cangetjob;
 
 	protected final static String DNIDEF = "30151277W";
 	protected final static String NAMEDEF ="";
