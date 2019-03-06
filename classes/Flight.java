@@ -12,7 +12,8 @@ import java.util.Calendar;
   @author Antonio Martinez Diaz
 */
 public class Flight{
-
+private static final String [] months={"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre",
+"Noviembre","Diciembre"};
 private AirCompany aircompany;
 private Airport destinationAirport;
 private Airport originAirport;
@@ -278,7 +279,10 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 @Override
 	 public String toString(){
 	 	return "Vuelo: "+this.code+" Aeropuerto origen "+this.originAirport.getName()+"("+this.originAirport.getCountry()+")"+
-	 		    " Aeropuerto destino: "+this.destinationAirport.getName()+"("+this.destinationAirport.getCountry()+")";
+	 		    " Aeropuerto destino: "+this.destinationAirport.getName()+"("+this.destinationAirport.getCountry()+")"+
+	 		    " Fecha vuelo "+this.dateAndTime.get(Calendar.YEAR)+" "+this.months[this.dateAndTime.get(Calendar.MONTH)]+" "+
+	 		    this.dateAndTime.get(Calendar.DATE);
+	 		   
 	 }
 
 }

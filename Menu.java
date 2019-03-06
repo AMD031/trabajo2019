@@ -10,11 +10,19 @@ import java.util.Collections;
 
 public class Menu{
 	private AirCompany comp;
+	private static Menu menu;
 
-	public Menu(AirCompany comp ){
+	private Menu(AirCompany comp ){
 		this.comp =comp;
-		mainMenu(this.comp);
+		this.mainMenu(this.comp);
 	}	
+
+public static Menu getSingletonInstance(AirCompany comp) {
+        if (Menu.menu == null){
+            Menu.menu = new Menu(comp);
+        }
+        return Menu.menu;
+    }
 	
 	public void mainMenu(AirCompany comp){
 	 System.out.println("hoy es: "+ new GregorianCalendar().getTime()+"\n");
@@ -66,9 +74,6 @@ public class Menu{
 	 			  this.printProfitability(sc);
 	 			break;
 	 		}
-
-
-
 	 	}while(op!=0);
 
 	 	System.out.println("Adios, gracias por usar nuestras aerolineas.");
@@ -89,9 +94,18 @@ public class Menu{
 		 String id="";
 		 String letter="";
 		 boolean flightfound = false;
-	 	do{
-	 			
-			System.out.println("Intruduzca aeropuerto destino, por favor.");
+	 	do{	
+	 		ArrayList<Airport>airports = comp.listAirports();
+	 		System.out.println("Lista de aeropuertos");
+	 		if(airports.size()>0){
+	 			for (Airport a :airports){
+	 				if(a!=null){
+	 					System.out.println(a.getName());
+	 				}
+
+	 			}
+	 		}
+			System.out.println("\nIntruduzca aeropuerto destino, por favor.");
 			String o= sc.next();
 		 	System.out.println("Intruduzca aeropuerto origen, por favor.");
 		    String d= sc.next();
@@ -100,9 +114,9 @@ public class Menu{
 				if(this.comp.searchFlight(o,d).size()>0){
 				  //se imprime los vuelos	
 				  for(Flight f:this.comp.searchFlight(o,d)){
-				    System.out.println((this.comp.searchFlight(o,d).indexOf(f)+1)+") "+f);
+				    System.out.println((this.comp.searchFlight(o,d).indexOf(f)+1)+")"+f);
 				  }
-				  flightfound = true;//flag de vuelo vuelo
+				  flightfound = true;//flag de vuelo vuelo encontrado
 				}else{
 					System.out.println("Vuelo no encontrado.");
 				}	
@@ -116,7 +130,6 @@ public class Menu{
 
 					if(op2>this.comp.searchFlight(o,d).size()){
 						System.out.println("Opncion no valida");
-
 					}
 				  }while(op2>0 && op2>this.comp.searchFlight(o,d).size());	
 
@@ -213,7 +226,7 @@ public class Menu{
 			 						op2 = 0;
 			 					}
 		 					}
-		 					System.out.println("Escribe cero para salir.");
+		 					System.out.println("Escribe cero para salir y pulsa intro.");
 	 						op2 = sc.nextInt();
 		 				}catch(InputMismatchException e){
 		 					System.out.println(e);
@@ -271,7 +284,6 @@ public class Menu{
 		if(this.comp.removeTicket(dni,id)){
 			System.out.println("El Ticket se ha borrado con existo.");
 		}else{
-
 			System.out.println("El Ticket no se ha borrado.");
 		}
 		printMainOptions();
@@ -300,8 +312,9 @@ public class Menu{
 	    	 if(this.comp.listEmployees().size()>0){
  				System.out.println("La lista de empleados son: ");
 				for (Employee e: this.comp.listEmployees()) {
-					System.out.println("\nTripulacion: ");
+					
 					if(  e instanceof Crew){
+						System.out.println("\nTripulacion: ");
 						System.out.println(e);
 					    System.out.println("\nPulsa intro para continuar.");
 					
@@ -311,9 +324,10 @@ public class Menu{
 						}
 				    }
 				}
-				System.out.println("\nPiloto: ");
+			
 				for (Employee e: this.comp.listEmployees()) {
 					if(  e instanceof Pilot){
+						System.out.println("\nPiloto: ");
 						System.out.println(e);
 					    System.out.println("\nPulsa intro para continuar.");
 					 

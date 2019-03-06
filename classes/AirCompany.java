@@ -183,7 +183,7 @@ public class AirCompany implements IAirCompany {
 	public boolean hireEmployee(Employee e)throws Exception{
 		boolean correct= false;
 		for (Employee employee : employees) {
-			if( employee.getDni().equals(e.getDni()) ){
+			if( employee.getDni().equalsIgnoreCase(e.getDni()) ){
 			   throw new Exception("Empleado duplicado no se puede contratar");
 			}
 		}
@@ -200,7 +200,7 @@ public class AirCompany implements IAirCompany {
 			//array crew
 			Crew[] crews = this.flights.get(i).getCrewSeats();
 			for(int j =0;j<crews.length && !found;j++){
-				if(crews[i].getDni().equals(dni)&&
+				if(crews[i].getDni().equalsIgnoreCase(dni)&&
 				   crews[i].getNEmployee()== NEmployee){
 				   crews[i] =null;
 				}
@@ -208,14 +208,14 @@ public class AirCompany implements IAirCompany {
 			//array pilotos
 			Pilot[] pilots = this.flights.get(i).getPilotSeats();
 			for(int z =0;z<pilots.length && !found;z++){
-				if(pilots[i].getDni().equals(dni)&&
+				if(pilots[i].getDni().equalsIgnoreCase(dni)&&
 				   pilots[i].getNEmployee()==NEmployee){
 				   pilots[i] =null;
 				}
 			}
 		}
 		for(int i =0;i<this.employees.size();i++){
-			if(employees.get(i).getDni().equals(dni)&&
+			if(employees.get(i).getDni().equalsIgnoreCase(dni)&&
 			   employees.get(i).getNEmployee()==NEmployee){
 			  	employees.remove(i);
 			  	found =true;
@@ -238,11 +238,11 @@ public class AirCompany implements IAirCompany {
 		boolean found = false;
 	
 		for(int i=0; i<employees.size() && !found; i++){
-			if( (employees.get(i).getDni().equals(dni)&&    
-				 employees.get(i).getName().equals(name))||
-				 (employees.get(i).getDni().equals(dni)&&
+			if( (employees.get(i).getDni().equalsIgnoreCase(dni)&&    
+				 employees.get(i).getName().equalsIgnoreCase(name))||
+				 (employees.get(i).getDni().equalsIgnoreCase(dni)&&
 				 employees.get(i).getNEmployee()==NEmployee)||
-				 employees.get(i).getDni().equals(dni)){
+				 employees.get(i).getDni().equalsIgnoreCase(dni)){
 					e = employees.get(i);
 					found = true;
 				}
@@ -310,15 +310,6 @@ public class AirCompany implements IAirCompany {
 		if(!checkAirport(f.getObjectOriginAirport())){
 				throw new Exception("El Aeropuerto"+f+"no existe.");
 		}
-
-	
-		for(Flight flight :this.flights){
-			if(flight.getCode().equals(f.getCode())){
-			 	throw new Exception("Vuelo duplicado.");
-			}
-		}
-
-
 		if(this.flights.add(f)){
 		  correct = true;
 		}
@@ -335,8 +326,8 @@ public class AirCompany implements IAirCompany {
 	, String originAirport){
 		ArrayList<Flight>tmp = new ArrayList<Flight>();
 		for(int i = 0;i<this.flights.size();i++){
-			if(this.flights.get(i).getDestinationAirport().equals(destinationAirport)&&
-			   this.flights.get(i).getOriginAirport().equals(originAirport)){
+			if(this.flights.get(i).getDestinationAirport().equalsIgnoreCase(destinationAirport)&&
+			   this.flights.get(i).getOriginAirport().equalsIgnoreCase(originAirport)){
 			     tmp.add(this.flights.get(i));
 			}
 		}		
@@ -395,7 +386,7 @@ public class AirCompany implements IAirCompany {
 		GregorianCalendar today = new GregorianCalendar();
 		today.add(Calendar.DATE,-1);
 			for (int i =0;i<this.tickets.size() && !found; i++){
-				if(this.tickets.get(i).getClient().getDni().equals(dni)&&
+				if(this.tickets.get(i).getClient().getDni().equalsIgnoreCase(dni)&&
 				   this.tickets.get(i).getId().equals(id)){
 
 				   	 if( !(today.after(tickets.get(i).getFlight().getDateAndTime())) ){
@@ -416,7 +407,7 @@ public class AirCompany implements IAirCompany {
 		boolean found = false;
 		
 		for (int i =0;i<this.tickets.size() && !found; i++ ){
-			if(this.tickets.get(i).getClient().getDni().equals(dni)&&
+			if(this.tickets.get(i).getClient().getDni().equalsIgnoreCase(dni)&&
 			   this.tickets.get(i).getId().equals(id)){
 			   t = tickets.get(i);
 			   found = true;
@@ -433,7 +424,7 @@ public class AirCompany implements IAirCompany {
 	public boolean addClient(Client c)throws Exception{
 		boolean correct = false;
 		for (Client client : this.clients) {
-			if( client.getDni().equals(c.getDni()) ){
+			if( client.getDni().equalsIgnoreCase(c.getDni()) ){
 			   throw new Exception("Cliente duplicado no se puede agregar el registro.");
 			}
 		}
@@ -457,7 +448,7 @@ public class AirCompany implements IAirCompany {
 		boolean found = false;
 		Client c = null;
 		for(int i = 0; i<this.clients.size() && !found; i++){
-			if(this.clients.get(i).getDni().equals(dni)){
+			if(this.clients.get(i).getDni().equalsIgnoreCase(dni)){
 				c = this.clients.get(i);
 				found=true;
 				
@@ -471,7 +462,7 @@ public class AirCompany implements IAirCompany {
 		boolean found = false;
 	
 		for(int i = 0; i<this.clients.size();i++){
-			if(this.clients.get(i).getDni().equals(dni)){
+			if(this.clients.get(i).getDni().equalsIgnoreCase(dni)){
 			   this.clients.remove(i);
 			}
 		}
