@@ -69,7 +69,7 @@ public class Main{
 		CEO boss =new CEO("12654658N","Pedro","Ruiz",new GregorianCalendar(1999,4,1),"Espa\u00f1ol",language,150000,4000);
 			//tripulacion
 	
-		emps.add(new Crew("30568446C","Pedro","Ruiz",new GregorianCalendar(1990,4,1),"Espa\u00f1ol",language));
+		emps.add(new Crew("30568446C","Pedro","Ruiz",new GregorianCalendar(1990,11,1),"Espa\u00f1ol",language));
 		emps.add(new Crew("12345678Z","Juan","Martinez",new GregorianCalendar(1972,5,1),"Espa\u00f1ol",language));
 		emps.add(new Crew("80213581T","Juan","Perez",new GregorianCalendar(2000,3,1),"Espa\u00f1ol",language));
 		emps.add(new Crew("80215581E","Enrique","Ruiz",new GregorianCalendar(1980,2,1),"Espa\u00f1ol",language));

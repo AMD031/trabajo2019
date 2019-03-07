@@ -1,6 +1,7 @@
 package classes;
 import java.util.GregorianCalendar;
 import java.util.regex.Pattern;
+import java.util.Calendar;
 /**
 	*Plane.class
 	*Permite crear objetos de tipo avion, 
@@ -96,7 +97,8 @@ public class Plane{
 
 
 	public String toString(){
-		return "Avion con matricula: "+this.idPlane+", adquirido en "+this.acquisitionDate.getTime();
+		return "Avion con matricula: "+this.idPlane+", adquirido en "+this.acquisitionDate.get(Calendar.YEAR)+"/"+
+		(this.acquisitionDate.get(Calendar.MONTH)+1)+"/"+this.acquisitionDate.get(Calendar.DAY_OF_MONTH);
 	}
 
 }

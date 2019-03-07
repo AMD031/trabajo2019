@@ -89,7 +89,7 @@ public static Menu getSingletonInstance(AirCompany comp) {
 	 	
 	}
 
-	public void searchFlightSeat(Scanner sc){
+	private void searchFlightSeat(Scanner sc){
 		 int op=0;
 		 int op2 =1;
 		 int op3 =1;
@@ -97,6 +97,8 @@ public static Menu getSingletonInstance(AirCompany comp) {
 		 String id="";
 		 String letter="";
 		 boolean flightfound = false;
+
+	   try{
 	 	do{	
 	 		ArrayList<Airport>airports = comp.listAirports();
 	 		System.out.println("Lista de aeropuertos");
@@ -117,7 +119,7 @@ public static Menu getSingletonInstance(AirCompany comp) {
 				if(this.comp.searchFlight(o,d).size()>0){
 				  //se imprime los vuelos	
 				  for(Flight f:this.comp.searchFlight(o,d)){
-				    System.out.println((this.comp.searchFlight(o,d).indexOf(f)+1)+")"+f);
+				    System.out.println("\n "+(this.comp.searchFlight(o,d).indexOf(f)+1)+")"+f);
 				  }
 				  flightfound = true;//flag de vuelo vuelo encontrado
 				}else{
@@ -127,9 +129,6 @@ public static Menu getSingletonInstance(AirCompany comp) {
 					System.out.println("\n\nSeleccione el vuelo deseado vuelva atr\u00e1s (0).");
 					//numero de vuelo
 					op2 = sc.nextInt();
-					if(op2==0){
-					   op3=0;
-					}
 
 					if(op2>this.comp.searchFlight(o,d).size()){
 						System.out.println("Opncion no valida");
@@ -159,7 +158,7 @@ public static Menu getSingletonInstance(AirCompany comp) {
 					   contLine=1;
 					}
 					if(cont%49==0){
-						System.out.println("Pulsa intro para continuar.");
+						System.out.println("\nPulsa intro para continuar.");
 						letter=sc.nextLine();
 						if(letter.isEmpty()){}
 
@@ -171,85 +170,99 @@ public static Menu getSingletonInstance(AirCompany comp) {
 			    System.out.println("\n\nSeleccione el asiento deseado vuelva atr\u00e1s (0).");
 				//selecion de asiento 
 				op3 = sc.nextInt();
+
 				if(op3>tmpSeats.size()){
 					  System.out.println("Opncion no valida");
 					}
 				}while(op3>0 && op3>tmpSeats.size());	
-
+				
 				if(op3>0){
 					 int nSeat = (op3-1); 
+
 					System.out.print("\nHas selecionado el asiento: ");
 					Seat tmpSeat = tmpSeats.get(op3-1);
-
-					System.out.print(tmpSeat);
+					System.out.println(tmpSeat);
+					 if(tmpSeat.getReserved()) {
+						 System.out.println("Asiento ocupado");
+					 }
+					
 					//datos de cliente
+					 if(!tmpSeat.getReserved()){
+						System.out.println("\nIntroduce tu dni para proceder a la compra.");
+				
+						 do{
+						 	dni = sc.next();
+						 	if(!Person.checkDni(dni)){
+						 		System.out.println("Dni no valido. Introducelo otra vez.");
+						 	}	
+						 }while(!Person.checkDni(dni));
+							if(this.comp.searchClient(dni)!=null){
+		 					Client tmpClient = this.comp.searchClient(dni);
+		 					Ticket t = new Ticket(tmpClient,tmpSeat,sFlight);
+		 					if(this.comp.buyTicket(t)){
+		 						System.out.println("Compra realizada con existo.");
+		 						System.out.println(t);
+		 						op3 = 0;
+		 						op2 = 0;
+		 					}	
+							}else{
+								try{
+								//datos para crear usuario
+		 						System.out.println("Su dni no se encuentra registrado.");
+		 						System.out.println("Introduzca su nombre.");
+		 						String name = sc.next();
+		 						System.out.println("Introduzca su apellido.");
+		 						String subName= sc.next();
+		 						System.out.println("Datos de la fecha de nacimento.");
+		 						System.out.println("Introduzca a\u00f1o.");
+		 						int year = sc.nextInt();
+		 						System.out.println("Introduzca mes.");
+		 						int month = sc.nextInt();
+		 						System.out.println("Introduzca dia.");
+		 						int day = sc.nextInt();
+		 						System.out.println("Introduzca su nacionalidad.");
+		 						String natinality= sc.next();
 
-					System.out.println("\nIntroduce tu dni para proceder a la compra.");
-					 do{
-					 	dni = sc.next();
-					 	if(!Person.checkDni(dni)){
-					 		System.out.println("Dni no valido. Introducelo otra vez.");
-					 	}	
-					 }while(!Person.checkDni(dni));
-						if(this.comp.searchClient(dni)!=null){
-	 					Client tmpClient = this.comp.searchClient(dni);
-	 					Ticket t = new Ticket(tmpClient,tmpSeat,sFlight);
-	 					if(this.comp.buyTicket(t)){
-	 						System.out.println("Compra realizada con existo.");
-	 						System.out.println(t);
-	 						op3 = 0;
-	 						op2 = 0;
-	 					}	
-						}else{
-							try{
-							//datos para crear usuario
-	 						System.out.println("Su dni no se encuentra registrado.");
-	 						System.out.println("Introduzca su nombre.");
-	 						String name = sc.next();
-	 						System.out.println("Introduzca su apellido.");
-	 						String subName= sc.next();
-	 						System.out.println("Datos de la fecha de nacimento.");
-	 						System.out.println("Introduzca a\u00f1o.");
-	 						int year = sc.nextInt();
-	 						System.out.println("Introduzca mes.");
-	 						int month = sc.nextInt();
-	 						System.out.println("Introduzca dia.");
-	 						int day = sc.nextInt();
-	 						System.out.println("Introduzca su nacionalidad.");
-	 						String natinality= sc.next();
-
-	 						GregorianCalendar Birth = new GregorianCalendar(year,month,day);
-	 						Client newClient = new Client(dni,name,subName,Birth,natinality);
-							if(this.comp.addClient(newClient)){
-		 						Ticket t = new Ticket(newClient,tmpSeat,sFlight);
-		 						if(this.comp.buyTicket(t)){
-			 						System.out.println("Compra realizada con existo.");
-			 						System.out.println(t);
-			 						op3 = 0;
-			 						op2 = 0;
+		 						GregorianCalendar Birth = new GregorianCalendar(year,month,day);
+		 						Client newClient = new Client(dni,name,subName,Birth,natinality);
+								if(this.comp.addClient(newClient)){
+			 						Ticket t = new Ticket(newClient,tmpSeat,sFlight);
+			 						if(this.comp.buyTicket(t)){
+				 						System.out.println("Compra realizada con existo.");
+				 						System.out.println(t);
+				 						op3 = 0;
+				 						op2 = 0;
+				 					}
 			 					}
-		 					}
-		 					System.out.println("Escribe cero para salir y pulsa intro.");
-	 						op2 = sc.nextInt();
-		 				}catch(InputMismatchException e){
-		 					System.out.println(e);
-		 				}catch(Exception e){
-		 					System.out.print(e);
-		 				}	
+			 					System.out.println("Escribe cero para salir y pulsa intro.");
+		 						op2 = sc.nextInt();
+			 				}catch(InputMismatchException e){
+			 					System.out.println(e);
+			 				}catch(Exception e){
+			 					System.out.print(e);
+			 				}	
+						   }
+
 						}
 	 				
 				   	}
 				 }
-				
+			
 		  }while(op2!=0);
 		}while(op3!=0);	
+	}catch(InputMismatchException e){
+		System.out.print("Dato introducido no valido");
+	}catch(Exception e){
+		System.out.println("Error "+e);
+	}
+
 		System.out.println("\n");
 		printMainOptions();
 	}
 
 
 
-	public void printMainOptions(){
+	private void printMainOptions(){
 		System.out.println("1 Buscar Vuelo");
 		System.out.println("2 Consultar Billete");
 		System.out.println("3 Eliminar Billete");
@@ -299,7 +312,7 @@ public static Menu getSingletonInstance(AirCompany comp) {
 		if(this.comp.listFlight().size()>0){
 			System.out.println("la lista de vuelos son: ");
 			for (Flight f: this.comp.listFlight()){
-				System.out.println(f);
+				System.out.println("\n"+f);
 			}	
 			System.out.println("\nPulsa intro para continuar.");		
 			letter=sc.nextLine();

@@ -18,7 +18,7 @@ private AirCompany aircompany;
 private Airport destinationAirport;
 private Airport originAirport;
 private GregorianCalendar dateAndTime;
-private double estimatedDuration;
+private int estimatedDuration;
 private Plane plane;
 private String code;
 private ArrayList<Seat> SeatsFlight;
@@ -28,7 +28,7 @@ private double price;
 
 public Flight(AirCompany aircompany, Airport destinationAirport, 
 			  Airport originAirport,Plane plane, GregorianCalendar dateAndTime,
-			  double estimatedDuration, double price)throws Exception{
+			  int estimatedDuration, double price)throws Exception{
 			this.aircompany = aircompany;
 			this.destinationAirport = destinationAirport;
 			this.originAirport = originAirport;
@@ -276,12 +276,31 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 		vip = false;
  		}
 	 }
+	 private String twoDigit(int a){
+	 	StringBuilder d = new StringBuilder();
+	 	String digit = Integer.toString(a);
+	 	if(digit.length()<2){
+			d.append(0);
+	 	}
+	 	d.append(a);
+	 	return d.toString();
+	 }
+
+
 	 @Override
 	 public String toString(){
+	 	GregorianCalendar tmp = new GregorianCalendar(this.dateAndTime.get(Calendar.YEAR),this.dateAndTime.get(Calendar.MONTH),
+	 		this.dateAndTime.get(Calendar.DAY_OF_MONTH),this.dateAndTime.get(Calendar.HOUR_OF_DAY),this.dateAndTime.get(Calendar.MINUTE));
+	  
+	  	tmp.add(Calendar.MINUTE,this.estimatedDuration);
+
 	 	return "Vuelo: "+this.code+" Aeropuerto origen "+this.originAirport.getName()+"("+this.originAirport.getCountry()+")"+
 	 		    " Aeropuerto destino: "+this.destinationAirport.getName()+"("+this.destinationAirport.getCountry()+")"+
-	 		    " Fecha vuelo "+this.dateAndTime.get(Calendar.YEAR)+" "+this.months[this.dateAndTime.get(Calendar.MONTH)]+" "+
-	 		    this.dateAndTime.get(Calendar.DATE);
+	 		    "\n Fecha vuelo: "+this.dateAndTime.get(Calendar.YEAR)+" "+this.months[this.dateAndTime.get(Calendar.MONTH)]+" "+
+	 		    this.dateAndTime.get(Calendar.DAY_OF_MONTH)+" "+this.dateAndTime.get(Calendar.HOUR_OF_DAY)+":"
+	 		    +this.twoDigit(this.dateAndTime.get(Calendar.MINUTE))+".\n"+
+	 		    " LLegada D\u00eda: "+tmp.get(Calendar.DAY_OF_MONTH)+" Hora: "+tmp.get(Calendar.HOUR_OF_DAY)+":"
+	 		    +this.twoDigit(tmp.get(Calendar.MINUTE))+".";
 	 		   
 	 }
 

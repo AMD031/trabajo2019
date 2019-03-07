@@ -23,6 +23,9 @@ public class Person{
 	protected final static String NATINALITYDEF="";
 	protected final static GregorianCalendar BRITHDATEDEF= new GregorianCalendar(1999,2,3);
 
+	private static final String [] months={"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre",
+	"Noviembre","Diciembre"};
+
 	protected Person(String dni, String name, String subName,
 		             GregorianCalendar birthDate,  String Natinality)throws Exception{
 		this.setDni(dni);
@@ -164,8 +167,8 @@ public class Person{
 
 	public String getBirthDate(){
 		return "Fecha nacimiento: "+" a\u00f1o: "+birthDate.get(Calendar.YEAR)+
-		" Mes: "+birthDate.get(Calendar.DAY_OF_MONTH)+
-		" D\u00eda: "+birthDate.get(Calendar.DAY_OF_WEEK);
+		" Mes: "+months[birthDate.get(Calendar.MONTH)]+
+		" D\u00eda: "+birthDate.get(Calendar.DAY_OF_MONTH);
 	}
 	public GregorianCalendar getBirthDateGregorian(){
 		return this.birthDate;

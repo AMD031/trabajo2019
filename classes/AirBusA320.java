@@ -24,7 +24,7 @@ public class AirBusA320 extends Plane{
 
 	@Override
 	public String toString(){
-		return " \n AirBusA320, avion con "+this.AUTONOMY+"\n km de autonomia, capacidad de "+this.CAPACITY+"\n pasajeros"+
+		return super.toString()+" \n AirBusA320, avion con "+this.AUTONOMY+"\n km de autonomia, capacidad de "+this.CAPACITY+"\n pasajeros"+
 		" con un consumo de "+this.CONSUMTIOM+"\n L/min y un precio de "+this.PRICE;
 	}
 
