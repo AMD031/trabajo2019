@@ -73,6 +73,9 @@ public static Menu getSingletonInstance(AirCompany comp) {
 	 			case 10:
 	 			  this.printProfitability(sc);
 	 			break;
+	 			default:
+	 			 this.printMainOptions();
+	 			break;
 	 		}
 	 	}while(op!=0);
 
