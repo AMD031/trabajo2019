@@ -53,7 +53,7 @@ public class CEO extends Employee{
 
    @Override
   	 public String toString(){
-  		 return super.toString()+"\n Total Salary: "+calculateSalary()+"\n Bonus: "
+  		 return super.toString()+"\n Salario Total: "+calculateSalary()+"\n Bonus: "
   		 +this.bonus;
   	 }
 }

@@ -121,7 +121,7 @@ abstract public class Employee extends Person{
 				for(int i=0;i<this.Lenguages.size();i++){
 					LG.append(" "+Lenguages.get(i)+" ");
 				}
-				return super.toString()+"\n Number Employee: "+this.id+"\n Lenguages: "
+				return super.toString()+"\n Numero de empleado: "+this.id+"\n Lenguajes: "
 				+LG.toString();
 			}
 }

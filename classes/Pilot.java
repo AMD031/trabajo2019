@@ -60,8 +60,8 @@ public class Pilot extends Employee{
 
  @Override
 	 public String toString(){
-		 return super.toString()+"\n Total Salary: "+calculateSalary()+"\n Assigned Flight: "
-		 +this.assignedFlight+"\n Fly time: "+this.Flytime+" min";
+		 return super.toString()+"\n Salario Total: "+calculateSalary()+"\n Vuelos Asignados: "
+		 +this.assignedFlight+"\n Tiempo de vuelo: "+this.Flytime+" min";
 	 }
 
 }

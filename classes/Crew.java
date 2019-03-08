@@ -60,7 +60,7 @@ public class Crew extends Employee{
 
 	@Override
  	 public String toString(){
- 		 return super.toString()+"\n Total Salary: "+calculateSalary()+"\n Assigned Flight: "
+ 		 return super.toString()+"\n Salario Total: "+calculateSalary()+"\n Vuelos Asignados: "
  		 +this.assignedFlight;
  	 }
 }
