@@ -300,7 +300,7 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 		    this.dateAndTime.get(Calendar.DAY_OF_MONTH)+" "+this.dateAndTime.get(Calendar.HOUR_OF_DAY)+":"
 	 		    +this.twoDigit(this.dateAndTime.get(Calendar.MINUTE))+".\n"+
 	 		    " LLegada D\u00eda: "+tmp.get(Calendar.DAY_OF_MONTH)+" Hora: "+tmp.get(Calendar.HOUR_OF_DAY)+":"
-	 		    +this.twoDigit(tmp.get(Calendar.MINUTE))+".";
+	 		    +this.twoDigit(tmp.get(Calendar.MINUTE))+"( Asientos libres: " +this.freeSeats() +").";
 	 		   
 	 }
 

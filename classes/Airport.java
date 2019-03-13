@@ -106,7 +106,7 @@ public class Airport{
 			}
 			String Services = services.toString();
 		}	
-		return super.toString()+"\n Acronimo: "+this.acronym+"\n nombre: "+this.name+"\n ciudad: "+this.cityName+
+		return "\n Acronimo: "+this.acronym+"\n nombre: "+this.name+"\n ciudad: "+this.cityName+
 		"\n pais "+this.country+"\n servicios: "+services;
 	}
 

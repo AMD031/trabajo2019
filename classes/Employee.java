@@ -105,7 +105,7 @@ abstract public class Employee extends Person{
 	 }
 
 	 public int getNEmployee(){
-		 return this.NEmployee;
+		 return this.id;
 	 }
 
 	 public ArrayList<String> getLenguagesCompany(){

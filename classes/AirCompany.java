@@ -194,36 +194,51 @@ public class AirCompany implements IAirCompany {
 	}
 
 	public boolean fireEmployee(String dni, int NEmployee){
+
 		boolean found = false;	
-		dni =dni.toUpperCase();
 		for(int i =0; i<this.flights.size();i++){
+			
 			//array crew
 			Crew[] crews = this.flights.get(i).getCrewSeats();
 			for(int j =0;j<crews.length && !found;j++){
-				if(crews[i].getDni().equalsIgnoreCase(dni)&&
-				   crews[i].getNEmployee()== NEmployee){
-				   crews[i] =null;
+			   if(crews[j]!=null){
+				if(crews[j].getDni().equalsIgnoreCase(dni)&&
+				   crews[j].getNEmployee()== NEmployee){
+				   crews[j] =null;
 				}
+			  }
 			}
+
+
 			//array pilotos
+			
 			Pilot[] pilots = this.flights.get(i).getPilotSeats();
 			for(int z =0;z<pilots.length && !found;z++){
-				if(pilots[i].getDni().equalsIgnoreCase(dni)&&
-				   pilots[i].getNEmployee()==NEmployee){
-				   pilots[i] =null;
+			   if(pilots[z]!=null){
+
+			   	 System.out.println(pilots[z].getNEmployee()==NEmployee);
+
+				if(pilots[z].getDni().equalsIgnoreCase(dni)&&
+				   pilots[z].getNEmployee()==NEmployee){
+			
+				   pilots[z] =null;
+			
 				}
+			  }
 			}
-		}
-		for(int i =0;i<this.employees.size();i++){
-			if(employees.get(i).getDni().equalsIgnoreCase(dni)&&
-			   employees.get(i).getNEmployee()==NEmployee){
-			  	employees.remove(i);
+		   
+		for(int x =0;x<this.employees.size();x++){
+		 if(this.employees.get(x)!=null){	
+			if(employees.get(x).getDni().equalsIgnoreCase(dni)&&
+			   employees.get(x).getNEmployee()==NEmployee){
+			  	employees.remove(x);
 			  	found =true;
-			}
+
+		   	}
+		   }
+		 }
+
 		}
-
-	
-
 		return found;
 	}
 
