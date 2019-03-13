@@ -201,6 +201,10 @@ public class Main{
 		airports.clear(); 
 		language.clear();
 		lc.clear();
+
+		//iberia.fireEmployee("98975581A",12); //despide un empleado concreto.
+
+
 		//lamada al menu
 		System.out.println("Bienvenido.");
 		Menu menu = Menu.getSingletonInstance(iberia);

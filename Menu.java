@@ -93,6 +93,8 @@ public static Menu getSingletonInstance(AirCompany comp) {
 		 int op=0;
 		 int op2 =1;
 		 int op3 =1;
+		 String o ="";
+		 String d="";
 		 String dni="";
 		 String id="";
 		 String letter="";
@@ -111,11 +113,14 @@ public static Menu getSingletonInstance(AirCompany comp) {
 	 			}
 	 		}
 			System.out.println("\nIntruduzca aeropuerto destino, por favor.");
-			String o= sc.next();
+			o= sc.next();
 		 	System.out.println("Intruduzca aeropuerto origen, por favor.");
-		    String d= sc.next();
+		    d= sc.next();
 		    sc.nextLine();
+		  
 		    do{
+		    	//op3 = 1;
+		    	flightfound = false;
 				if(this.comp.searchFlight(o,d).size()>0){
 				  //se imprime los vuelos	
 				  for(Flight f:this.comp.searchFlight(o,d)){
@@ -124,7 +129,7 @@ public static Menu getSingletonInstance(AirCompany comp) {
 				  flightfound = true;//flag de vuelo vuelo encontrado
 				}else{
 					System.out.println("Vuelo no encontrado.");
-				}	
+				}
 				  do{
 					System.out.println("\n\nSeleccione el vuelo deseado vuelva atr\u00e1s (0).");
 					//numero de vuelo
@@ -136,7 +141,6 @@ public static Menu getSingletonInstance(AirCompany comp) {
 				  }while(op2>0 && op2>this.comp.searchFlight(o,d).size());	
 
 	       if(op2>0 && flightfound){
-				
 				int NFlight = (op2-1);
 			
 				Flight sFlight = this.comp.searchFlight(o,d).get(NFlight);
@@ -150,7 +154,7 @@ public static Menu getSingletonInstance(AirCompany comp) {
 				for(Seat s : tmpSeats){
 
 					if(!s.getReserved()){
-					  System.out.printf("%-30s",(tmpSeats.indexOf(s)+1)+")"+s+" ("+checkPrice(s,sFlight)+"$"+")  ");
+					  System.out.printf("%-30s",(tmpSeats.indexOf(s)+1)+")"+s+" ("+checkPrice(s,sFlight)+"$"+")");
 				
 					}
 					if(contLine%4==0){
@@ -196,6 +200,7 @@ public static Menu getSingletonInstance(AirCompany comp) {
 						 		System.out.println("Dni no valido. Introducelo otra vez.");
 						 	}	
 						 }while(!Person.checkDni(dni));
+
 							if(this.comp.searchClient(dni)!=null){
 		 					Client tmpClient = this.comp.searchClient(dni);
 		 					Ticket t = new Ticket(tmpClient,tmpSeat,sFlight);
@@ -248,14 +253,13 @@ public static Menu getSingletonInstance(AirCompany comp) {
 				   	}
 				 }
 			
-		  }while(op2!=0);
+			  }while(op2!=0);
 		}while(op3!=0);	
 	}catch(InputMismatchException e){
 		System.out.print("Dato introducido no valido");
 	}catch(Exception e){
 		System.out.println("Error "+e);
 	}
-
 		System.out.println("\n");
 		printMainOptions();
 	}
