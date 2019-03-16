@@ -20,19 +20,31 @@ public class Client extends Person{
 
 	public Client()throws Exception{}
 
+	/**
+	  incrementa en uno la cantidad de compras.
+	*/
 	public void incrementNbuys(){
-		this.nBuys++;
+	   this.nBuys++;
 	}
+
+	/**
+	 incrementa en uno la cantidad de devoluciones
+	*/
 	public void incrementNrefund(){
 		this.nRefund++;
 	}
 
-
+	/**
+	   @return devuleve la cantidad de devoluciones
+	*/
 	public int getrefundTickticket(){
 	   return this.nRefund;
 	}
 
-	public int getnRefund(){
+	/**
+	 @return devuleve la cantidad de compras.
+	*/
+	public int getNbuy(){
 		return this.nBuys;
 	}
 
