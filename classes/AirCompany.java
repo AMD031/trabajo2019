@@ -59,6 +59,12 @@ public class AirCompany implements IAirCompany {
 		this.airports = new ArrayList<Airport>();
 		}
 
+	/**
+	  comprueba si un aeropuesto esta repetido 
+	  @param a aeropuerto a comparar.
+	  @return devuelve true si encuentra 
+	  el aeropuerto false en el caso contrario.
+	*/	
 	public boolean checkAirport(Airport a){
 		boolean found = false;
 		for(int i =0;i<airports.size() && !found;i++){
@@ -73,10 +79,22 @@ public class AirCompany implements IAirCompany {
 
 
 	//setters
+	/**
+		cambia un seo por otro.
+		@param ceo sustituto del seo actual.
+	*/
+
 	public void setCeo(CEO ceo){
+	  if(ceo!=null){	
 		this.ceo = ceo;
+		}
 	}
 
+
+	/**
+	  Establece la iniciales de la compañia
+	  @param charcode array de caracteres de la compñia
+	*/
 	public void setCharcode(char[] charcode){
 		if(charcode.length==3){
 			for (int i =0;i<charcode.length;i++){
@@ -85,10 +103,21 @@ public class AirCompany implements IAirCompany {
 			}
 		}
 
+	/**
+	 esctables o cambia el nombre de la compañia
+	 @param name nombre de la compañia que sera añadido.
+	*/	
+
 	public void setName(String name){
 		this.name = name;
 	}
 
+	/**
+	  cambia o establece el dia de fundacion de la empresa.
+	  @param year año de fundacion
+	  @param month mes de la fundacion
+	  @param dayOfMonth día de la fundacion
+	*/
 	public void setFoundationDate(int year, int month, int dayOfMonth){
 		this.foundationDate.set(year,month,dayOfMonth);
 	}
@@ -168,10 +197,16 @@ public class AirCompany implements IAirCompany {
 		return charcode;
 	}
 
+	/**
+	  @return devuelve objeto de tipo GregorianCalendar que contiene la fecha de fundacion.
+	*/
 	public GregorianCalendar getFoundationDate(){
 		return foundationDate;
 	}
 
+	/**
+		@return devuelve un String con la fecha de fundacion.
+	*/
 	public String getFoundationDateString(){
 		return "A\u00d1o: "+foundationDate.YEAR+" Mes:"+foundationDate.MONTH+" d\u00eda "+foundationDate.DATE;
 	}
@@ -180,6 +215,12 @@ public class AirCompany implements IAirCompany {
 
 
 	//metodos de la interfaz
+
+	/**
+		Método usado para contratar empleados.
+		@param e empleado a contratar.
+		@throws Exception devuelve una mensaje si se introduce un empleado con dni duplicado.
+	*/
 	public boolean hireEmployee(Employee e)throws Exception{
 		boolean correct= false;
 		for (Employee employee : employees) {
@@ -192,6 +233,14 @@ public class AirCompany implements IAirCompany {
 		}
 		return correct;
 	}
+
+
+	/**
+		Método usado para despedir empleados.
+		@param dni dni del empleado a despedir
+		@param NEmployee id el empleado a despedir
+		@return devuelve true si se ha podido despedir en caso contrario false.
+	*/
 
 	public boolean fireEmployee(String dni, int NEmployee){
 
@@ -241,13 +290,21 @@ public class AirCompany implements IAirCompany {
 		}
 		return found;
 	}
-
-
+	/**
+	 @return devuelve un array de empleados contratados.
+	*/
 	public ArrayList<Employee>listEmployees(){
 		return this.employees;
 	}
 
 
+	/**
+	busca un empleado por nombre y dni.
+     @param NEmployee id del empleado a buscar.
+	 @param dni dni del empleado a buscar.
+	 @param name nombre del empleado a buscar.
+	 @return devuelve un objeto de tipo employees.
+	*/
 	public Employee searchEMployee(String name,String dni, int NEmployee){
 		Employee e = null;
 		boolean found = false;
@@ -266,6 +323,9 @@ public class AirCompany implements IAirCompany {
 	}
 
 
+	/**
+	@return devuelve un double con el salario total de todos los empleados.
+	*/
 	public double totalSalary(){
 		double totalSalary = 0;	
 		for(Employee e: employees){
@@ -274,7 +334,12 @@ public class AirCompany implements IAirCompany {
 		return totalSalary;
 	}
 
-	
+
+	/**
+	  método encargado de añadir aviones a la compañia.
+	  @param p avion a añadir a la lista.
+	  @throws Exception en caso de que el avion este duplicado devuelve un mensaje.
+	*/
 	public boolean addPlane(Plane p)throws Exception{
 		boolean correct = false;
 		boolean duplicated = false;		
@@ -289,19 +354,38 @@ public class AirCompany implements IAirCompany {
 		return correct;
 	}
 
-	
+	/**
+		devuelve una ArrayList de aviones.
+	*/
 	public ArrayList<Plane> listPlanes(){
 		return this.planes;
 	}
 
-
+	/**
+		Borra un avion que tenga la misma matricula que la que se la pasa por parametro.
+		@param idPlane matricula avion a borra de la lista
+		@return devuelve true si se ha podido borra el avion de la lista.
+	*/
 	public boolean removePlane(String idPlane){
 		boolean found = false;
-
+		if(idPlane.length()>0){
+			for (int i=0;i<this.planes.size()&& !found;i++ ) {
+					if(this.planes.get(i).getIDPlane().equals(idPlane)){
+					   this.planes.remove(i);
+					   found = true;
+					}	
+				}
+			}		
 		return found;
 	}
 
+    /**
+		devuelve un avion que tenga la misma matricula que la que se la pasa por parametro.
+		@param idPlane matricula del avion a buscar
+		@return devuelve un objeto de tipo avion si lo encuentra y null en caso contrario.
 
+
+    */
 	public Plane searchPlane(String idPlane){
 		boolean found = false;
 		Plane p =null;
@@ -314,29 +398,49 @@ public class AirCompany implements IAirCompany {
 		return p;
 	}
 
+	/**
+	 metedo que se encarga de añadir aviones a la compañia.
+	 @param f objeto de tipo vuelo a añadir al ArryaList de vuelos. 
+	 @return devuelve true si a podido ser añadido y false en caso contrario.
+	 @throws Exception devuelve un mesaje si uno de los aeropuerto no existe.
+	*/
+
 
 	public boolean addFlight(Flight f)throws Exception{
 		boolean correct = false;
 		
+      if(f!=null){
+			if(!checkAirport(f.getObjectDestinationAirport())){
+					throw new Exception("El Aeropuerto"+f+"no existe.");
+			}
+			if(!checkAirport(f.getObjectOriginAirport())){
+					throw new Exception("El Aeropuerto"+f+"no existe.");
+			}
 
-		if(!checkAirport(f.getObjectDestinationAirport())){
-				throw new Exception("El Aeropuerto"+f+"no existe.");
-		}
-		if(!checkAirport(f.getObjectOriginAirport())){
-				throw new Exception("El Aeropuerto"+f+"no existe.");
-		}
-		if(this.flights.add(f)){
-		  correct = true;
-		}
+			if(this.flights.add(f)){
+			  correct = true;
+			}
+	    }
 		return correct;
 	}
 
-	
+
+	/**
+	 devuelve una lista de vuelos 	
+	*/
 	public ArrayList<Flight> listFlight(){
 		return this.flights;
 	}
 
 
+	/**
+		Método que busca un vuelo por destion y orige.
+		@param destinationAirport aropuerto origen
+		@param originAirport aropuerto destino
+		@return devuelve un objeto de tipo Flight si se ha encontrado y null en caso 
+		contrario.
+
+	*/
 	public ArrayList<Flight> searchFlight(String destinationAirport
 	, String originAirport){
 		ArrayList<Flight>tmp = new ArrayList<Flight>();
@@ -349,7 +453,13 @@ public class AirCompany implements IAirCompany {
 		return tmp;
 	}
 
+	/**
 
+	 Método que busca un buelo usado su code.
+	 @param code codigo del vuelo a buscar.
+	 @return devuelve un objeto de tipo Flight si se ha encontrado y null en caso 
+		contrario.
+	*/
 	public Flight searchFlight(String code){
 		 boolean found = false;
 		 Flight tmp = null;
@@ -362,10 +472,12 @@ public class AirCompany implements IAirCompany {
 		return tmp;
 	}
 
+	/**
+		Método que elimina un buelo usado el codigo de vuelo
+		@param code codigo del vuelo a borrar.
+		@return devuelve true si se ha borrado correctamente.
 
-
-
-	
+	*/
 	public boolean removeFlight(String code){
 		boolean found = false;
 		for(int i =0;i<this.tickets.size();i++){
@@ -384,6 +496,11 @@ public class AirCompany implements IAirCompany {
 	}
 
 
+	/**
+		Método que añade ticket al ArrayList de tickets de la compañia.
+		@param t objeto de tipo Ticket a añadir.
+		@return devuelve true si el ticket se ha añasido correctamente.
+	*/
 	public boolean buyTicket(Ticket t){
 		boolean correct = false;
 		  if(!t.getSeat().getReserved()){
@@ -433,7 +550,8 @@ public class AirCompany implements IAirCompany {
 
 	/**
 		Agrega un cliente a la lista de clientes de la empresa.
-		@author Antonio Martinez Diaz
+		@param c cliente a añadir
+		@throws Exception devuelve un mensaje si el el cliente está duplicado.
 	*/
 
 	public boolean addClient(Client c)throws Exception{
@@ -451,13 +569,20 @@ public class AirCompany implements IAirCompany {
 
 
 
-
-
+	/**
+		@return devuleve un ArrayList de Client
+	*/
 	public ArrayList<Client> listClients(){
 		return this.clients;
 	}
 
 
+
+	/**
+	   Busca un cliente usado el dni del mismo.
+	   @param dni dni del cliente a buscar.
+	   @return devuelve un objeto de tipo Client si lo encuentra o null en caso contrario.
+	*/
 	public Client searchClient(String dni){
 	
 		boolean found = false;
@@ -472,10 +597,15 @@ public class AirCompany implements IAirCompany {
 		return c;
 	}
 
+	/**
+	   Elimina un cliente usado el dni del mismo.
+	   @param dni dni del cliente a eliminar.
+	   @return devuelve true si lo borra y false en caso contrario.
+	*/
+
 
 	public boolean removeClient(String dni){
-		boolean found = false;
-	
+		boolean found = false;	
 		for(int i = 0; i<this.clients.size();i++){
 			if(this.clients.get(i).getDni().equalsIgnoreCase(dni)){
 			   this.clients.remove(i);
@@ -485,6 +615,11 @@ public class AirCompany implements IAirCompany {
 	}
 
 
+	/**
+	  @param a objeto de tipo Airpor a añidir al ArrayList de airports 
+	  @return devuel true si se a añadido con existo y false en caso contrario.
+	  @throws Exception devuelve un mesaje si el aeropuerto esta duplicado.
+	*/
 	public boolean addAirport(Airport a)throws Exception{
 		boolean correct = false;
 		if(checkAirport(a)){
@@ -497,6 +632,9 @@ public class AirCompany implements IAirCompany {
 		return correct;
 	}
 
+	/**
+	 @return devuelve un ArrayList de Airport.
+	*/
 	public ArrayList<Airport>listAirports(){
 		return this.airports;
 	}
