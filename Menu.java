@@ -1,5 +1,4 @@
 
-
 import classes.*;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
@@ -7,7 +6,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Collections;
-
+/**
+Clase encargada de generar un menú 
+para gestionar la aerolinea.
+*/
 public class Menu{
 	private AirCompany comp;
 	private static Menu menu;
@@ -23,7 +25,11 @@ public static Menu getSingletonInstance(AirCompany comp) {
         }
         return Menu.menu;
     }
-	
+	/**	
+	Método que permite interatuar con las diferentes opciones del menú principal.
+	@param comp Objeto de tipo AirCompany que se usa para extraer los datos necesarios de la 
+	compañia a lo largo de la gestión del programa.
+	*/
 	public void mainMenu(AirCompany comp){
 	 System.out.println("hoy es: "+ new GregorianCalendar().getTime()+"\n");
 	 Scanner sc = new Scanner(System.in);
@@ -88,7 +94,10 @@ public static Menu getSingletonInstance(AirCompany comp) {
 		}
 	 	
 	}
-
+	/**
+	Método que permite buscar vuelo, listar su asientos y proceder a la compra del billete.
+	@param sc se usa para pedir los diferentes datos que se usaran en la compra del billete.
+	*/
 	private void searchFlightSeat(Scanner sc){
 		 int op=0;
 		 int op2 =1;
@@ -263,9 +272,9 @@ public static Menu getSingletonInstance(AirCompany comp) {
 		System.out.println("\n");
 		printMainOptions();
 	}
-
-
-
+	/**
+	Imprime la lista de opciones del menu principal.	
+	*/
 	private void printMainOptions(){
 		System.out.println("1 Buscar Vuelo");
 		System.out.println("2 Consultar Billete");
@@ -280,7 +289,11 @@ public static Menu getSingletonInstance(AirCompany comp) {
 		System.out.println("0 Salir");
 	}
 
-
+	/**
+		Busca un ticket en el ArrayList tickets de la clase AirCompany que coincida con el dni
+		del cliente y el id del vuelo y si lo encuentra lo imprime
+		@param sc se usa para pedir el dni y el id del vuelo a buscar. 
+	*/
 	private void checkTicketSelected(Scanner sc){
 		System.out.println("Introduce id");
 		String id = sc.next();
@@ -294,7 +307,11 @@ public static Menu getSingletonInstance(AirCompany comp) {
 		}
 		printMainOptions();
 	}
-
+	/**
+	Metodo que borra un ticke que consida con el id del vuelo y el dni del cliente
+	@param sc recibe un objeto de tipo Scanner que se usa para pedir el dni y el id por
+	teclado.
+	*/
 	private void removeTicketSelected(Scanner sc){
 		System.out.println("Introduce id");
 		String id = sc.next();
@@ -308,9 +325,11 @@ public static Menu getSingletonInstance(AirCompany comp) {
 		}
 		printMainOptions();
 	}
-
-
-
+	/**
+	Imprime la lista de vuelos.
+	@param sc recibe un objeto de tipo Scanner que se usa para volver al menú principal
+	una vez finalizada la imprecion pidiendo que pulse intro.
+	*/
 	private void printFlights(Scanner sc){
 		String letter=sc.nextLine();
 		if(this.comp.listFlight().size()>0){
@@ -326,7 +345,11 @@ public static Menu getSingletonInstance(AirCompany comp) {
 		}
 		printMainOptions();
 	}
-
+	/**
+	imprime la lista de empleados de la empresa.
+	@param sc recibe un objeto de tipo Scanner que se usa para volver al menú principal
+	una vez finalizada la imprecion pidiendo que pulse intro.
+	*/
 	private void printEmployee(Scanner sc){
 	    	String letter=sc.nextLine();
 	    	 if(this.comp.listEmployees().size()>0){
@@ -362,6 +385,11 @@ public static Menu getSingletonInstance(AirCompany comp) {
 		}
 
 
+		/**
+		Imprime la lista de clientes de la empresa.	
+		@param sc recibe un objeto de tipo Scanner que se usa para volver al menú principal
+		una vez finalizada la imprecion pidiendo que pulse intro.
+		*/
 		private void printClients(Scanner sc){
 			String letter=sc.nextLine();
 				if(this.comp.listClients().size()>0){
@@ -379,6 +407,11 @@ public static Menu getSingletonInstance(AirCompany comp) {
 		 	printMainOptions();
 		}
 
+		/**
+		Imprime todos los aviones con sus datos.
+		@param sc recibe un objeto de tipo Scanner que se usa para volver al menú principal
+		una vez finalizada la imprecion pidiendo que pulse intro.
+		*/
 		private void printPlanes(Scanner sc){
 			String letter=sc.nextLine();
 			 if(this.comp.listPlanes().size()>0){
@@ -395,6 +428,10 @@ public static Menu getSingletonInstance(AirCompany comp) {
 				printMainOptions();
 		}
 
+		/**
+		@param sc recibe un objeto de tipo Scanner que se usa para volver al menú principal
+		una vez finalizada la imprecion pidiendo que pulse intro.*/
+
 		private void printAiports(Scanner sc){
 			String letter=sc.nextLine();
 			if(this.comp.listAirports().size()>0){
@@ -410,10 +447,10 @@ public static Menu getSingletonInstance(AirCompany comp) {
 		  printMainOptions();	
 		}
 
-
-
-
-
+		/**
+		  Imprime el salario anual de todos los empleados.
+		*/
+		
 	     private void salariesEmployees(){
 	   		 System.out.println("Los salarios totales son: ");
 	 				double totalCrew =0;
@@ -438,8 +475,11 @@ public static Menu getSingletonInstance(AirCompany comp) {
 	 				+(totalPilot+totalCrew+totalCeo)+"\n");
 	 				printMainOptions();
 	   		}
-
-
+	   /**		
+		Imprime la rentabilidad de un vuelo.
+		@param sc recibe un objeto de tipo Scanner que se usa para pedir los datos del vuelo y volver al 
+		menu una vez finalizada la impresión.
+		*/
 	   private void printProfitability(Scanner sc){
 	   	  System.out.println("Introduce un codigo de vuelo");
 		  String code = sc.next();
@@ -451,9 +491,14 @@ public static Menu getSingletonInstance(AirCompany comp) {
 			}
 		  printMainOptions();
 	   }
+	/**
+	  Método auxiliar que calcula precio final de un billete en función de si es vip o no.		
+	 @param s objeto de tipo Seat del que se extra si es vip a partir del
+	 método getVip().
+	 @param f objeto de tipo Flight del que se extrae el precio base
+	 @return devuelve el precio final
 
-
-
+	*/
 	private double checkPrice(Seat s, Flight f){
 		double price = 0;
 		if(s.getVip()){

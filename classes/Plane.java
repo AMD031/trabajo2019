@@ -8,7 +8,6 @@ import java.util.Calendar;
 	 que se utilizaran en los vuelos de una compañia aerea.
 	*@author Samuel Hermosilla Aguilera
 */
-
 public class Plane{
 	protected static int planeCounter=0;
 	protected String idPlane;
@@ -32,7 +31,7 @@ public class Plane{
 
 	/**
 		*Metodo que prueba si la cadena idPlane es un patron correcto.
-		@param String idPlane: es la matricula del avion.
+		@param idPlane String : es la matricula del avion.
 		@return true si, y solo si, la secuencia completa coincide con el patrón.
 	*/
 	private boolean checkIDPlane(String idPlane){
@@ -43,7 +42,10 @@ public class Plane{
 	
 	//Setters
 
-	/**Establece el valor de la matricula si la matricula del avion es valida*/
+	/**Establece el valor de la matricula si la matricula del avion es valida
+	@param idPlane matricula a comprobar.
+	@throws Exception devuelve un mensaje si la matricula es invalida.
+	*/
 	public void setIDPlane(String idPlane)throws Exception{
 		if(checkIDPlane(idPlane)){
 			this.idPlane=new String(idPlane);
@@ -83,6 +85,7 @@ public class Plane{
 
 	/**
 	* Metodo que cada vez que se instancia un avion, la variable planeCounter aumenta en 1.
+	@return aumenta en uno la variable estática planeCounter
 	*/
 	public static int incrementPlane(){
 		return Plane.planeCounter++;
@@ -90,11 +93,11 @@ public class Plane{
 
 	/**
 	* Metodo que cada vez que se elimina un objeto avion, la variable planeCounter decrementa en 1.
+	*@return disminulle en uno la variable estática planeCounter
 	*/
 	public static int decrementPlane(){
 		return Plane.planeCounter--;
 	}
-
 
 	public String toString(){
 		return "Avion con matricula: "+this.idPlane+", adquirido en "+this.acquisitionDate.get(Calendar.YEAR)+"/"+

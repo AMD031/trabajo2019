@@ -21,7 +21,7 @@ public class Person{
 	protected final static String NAMEDEF ="";
 	protected final static String SUBNAMEDEF ="";
 	protected final static String NATINALITYDEF="";
-	protected final static GregorianCalendar BRITHDATEDEF= new GregorianCalendar(1999,2,3);
+	protected final static GregorianCalendar BRITHDATEDEF= new GregorianCalendar(1999,Calendar.MARCH,3);
 
 	private static final String [] months={"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre",
 	"Noviembre","Diciembre"};
@@ -44,7 +44,7 @@ public class Person{
     /**
 	* El metodo comprueba si el formato y letra son validos
 	* @author Antonio Martinez Diaz
-	* @param String dni: es el dni a comprobar
+	* @param dni String : es el dni a comprobar
 	* @return devuelve true si el dni es correcto.
 	*/
 	public static boolean checkDni(String dni){
@@ -113,6 +113,11 @@ public class Person{
 		}
 	}
 
+	/**
+	 Método que comprueba que el nombre no tenga numeros.		
+	 @param name nombre a comprobar.
+	 @throws Exception devuelve un mesaje si el nombre contiene números.
+	*/
 	public void setName(String name)throws Exception{
 		for(int i =0;i<name.length();i++){
 			if(Character.isDigit(name.charAt(i))){
@@ -122,8 +127,12 @@ public class Person{
 		this.name = new String(name);
 	
 	}
-
-
+    
+    /**
+	 Método que comprueba que el apellido no tenga numeros.		
+	 @param subName apellido a comprobar.
+	 @throws Exception devuelve un mesaje si el apellido contiene números.
+	*/
 	public void setSubName(String subName)throws Exception{
 		for(int i =0;i<subName.length();i++){
 		 if(Character.isDigit(subName.charAt(i))){

@@ -35,12 +35,12 @@ public class Main{
 		
 		//servicios de vuelo.
 		ArrayList<String>servicios= new ArrayList<String>();
-		servicios.add("Cafeteria");
+		servicios.add("Cafeter\u00eda");
 		servicios.add("Hotel");
 		servicios.add("Tiendas");
 
 		ArrayList<String>servicios2= new ArrayList<String>();
-		servicios2.add("Cafeteria");
+		servicios2.add("Cafeter\u00eda");
 		servicios2.add("Hotel");
 		servicios2.add("Tiendas");
 		servicios2.add("bar");
@@ -55,37 +55,37 @@ public class Main{
 
 
 		//aviones
-		planes.add(new Boing787("1945ABC",new GregorianCalendar(2000,1,0)));
-		planes.add(new Boing787("1264AZB",new GregorianCalendar(1975,2,12)));
-		planes.add(new AirBusA320("1234ABZ", new GregorianCalendar(1995,6,4)));
-		planes.add(new AirBusA320("9512ABZ", new GregorianCalendar(2015,5,4)));
+		planes.add(new Boing787("1945ABC",new GregorianCalendar(2000,Calendar.FEBRUARY,0)));
+		planes.add(new Boing787("1264AZB",new GregorianCalendar(1975,Calendar.MARCH,12)));
+		planes.add(new AirBusA320("1234ABZ", new GregorianCalendar(1995,Calendar.DECEMBER,4)));
+		planes.add(new AirBusA320("9512ABZ", new GregorianCalendar(2015,Calendar.MAY,4)));
 
 		//clientes	
-		clients.add(new Client("12654658N","Pedro","Sanchez",new GregorianCalendar(1972,6,1),"Espa\u00f1ol"));
-		clients.add(new Client("12345678Z","Maria","Perez",new GregorianCalendar(1990,8,5),"Espa\u00f1ola"));
+		clients.add(new Client("12654658N","Pedro","Sanchez",new GregorianCalendar(1972,Calendar.MARCH,1),"Espa\u00f1ol"));
+		clients.add(new Client("12345678Z","Maria","Perez",new GregorianCalendar(1990,Calendar.NOVEMBER,5),"Espa\u00f1ola"));
 	
 		//empleados
 			//ceo
-		CEO boss =new CEO("12654658N","Pedro","Ruiz",new GregorianCalendar(1999,4,1),"Espa\u00f1ol",language,150000,4000);
+		CEO boss =new CEO("12654658N","Pedro","Ruiz",new GregorianCalendar(1999,Calendar.MAY,1),"Espa\u00f1ol",language,150000,4000);
 			//tripulacion
 	
-		emps.add(new Crew("30568446C","Pedro","Ruiz",new GregorianCalendar(1990,11,1),"Espa\u00f1ol",language));
-		emps.add(new Crew("12345678Z","Juan","Martinez",new GregorianCalendar(1972,5,1),"Espa\u00f1ol",language));
-		emps.add(new Crew("80213581T","Juan","Perez",new GregorianCalendar(2000,3,1),"Espa\u00f1ol",language));
-		emps.add(new Crew("80215581E","Enrique","Ruiz",new GregorianCalendar(1980,2,1),"Espa\u00f1ol",language));
-		emps.add(new Crew("80275581S","Ana","Sanchez",new GregorianCalendar(1972,5,1),"Espa\u00f1ol",language));
-		emps.add(new Crew("10275581D","Susana","Ruiz",new GregorianCalendar(1972,2,1),"Espa\u00f1ol",language));
+		emps.add(new Crew("30568446C","Pedro","Ruiz",new GregorianCalendar(1990,Calendar.DECEMBER,1),"Espa\u00f1ol",language));
+		emps.add(new Crew("12345678Z","Juan","Martinez",new GregorianCalendar(1972,Calendar.APRIL,1),"Espa\u00f1ol",language));
+		emps.add(new Crew("80213581T","Juan","Perez",new GregorianCalendar(2000,Calendar.JANUARY,1),"Espa\u00f1ol",language));
+		emps.add(new Crew("80215581E","Enrique","Ruiz",new GregorianCalendar(1980,Calendar.MARCH,1),"Espa\u00f1ol",language));
+		emps.add(new Crew("80275581S","Ana","Sanchez",new GregorianCalendar(1972,Calendar.JUNE,1),"Espa\u00f1ol",language));
+		emps.add(new Crew("10275581D","Susana","Ruiz",new GregorianCalendar(1972,Calendar.FEBRUARY,1),"Espa\u00f1ol",language));
 			
 			//pilotos
-		emps.add(new Pilot("85275581E","Maria","Ruiz",new GregorianCalendar(1999,2,1),"Espa\u00f1ol",language,2000));
-		emps.add(new Pilot("85775581W","Ana","Malicia",new GregorianCalendar(1985,3,1),"Espa\u00f1ol",language,15));
-		emps.add(new Pilot("45775581S","Pedro","Color",new GregorianCalendar(1989,2,1),"Espa\u00f1ol",language,500));
-		emps.add(new Pilot("48775581X","Carlos","Espinosa",new GregorianCalendar(1995,1,1),"Espa\u00f1ol",language,200));
-		emps.add(new Pilot("48975581W","Maria","Martinez",new GregorianCalendar(1997,1,1),"Espa\u00f1ol",language,110));
-		emps.add(new Pilot("98975581A","Elena","Oscura",new GregorianCalendar(1951,6,1),"Espa\u00f1ol",language,90));
+		emps.add(new Pilot("85275581E","Maria","Ruiz",new GregorianCalendar(1999,Calendar.MARCH,1),"Espa\u00f1ol",language,2000));
+		emps.add(new Pilot("85775581W","Ana","Malicia",new GregorianCalendar(1985,Calendar.APRIL,1),"Espa\u00f1ol",language,15));
+		emps.add(new Pilot("45775581S","Pedro","Color",new GregorianCalendar(1989,Calendar.FEBRUARY,1),"Espa\u00f1ol",language,500));
+		emps.add(new Pilot("48775581X","Carlos","Espinosa",new GregorianCalendar(1995,Calendar.JANUARY,1),"Espa\u00f1ol",language,200));
+		emps.add(new Pilot("48975581W","Maria","Martinez",new GregorianCalendar(1997,Calendar.MARCH,1),"Espa\u00f1ol",language,110));
+		emps.add(new Pilot("98975581A","Elena","Oscura",new GregorianCalendar(1951,Calendar.SEPTEMBER,1),"Espa\u00f1ol",language,90));
 
 			//compañia
-		AirCompany iberia = new AirCompany("IBERIA",code,boss,new GregorianCalendar(1999,1,1),
+		AirCompany iberia = new AirCompany("IBERIA",code,boss,new GregorianCalendar(1999,Calendar.FEBRUARY,1),
 									  clients,tickets,emps,flights,planes,airports);
 		
 		//Agregacion vuelos y agregacion de empleados
@@ -104,7 +104,7 @@ public class Main{
 						 new GregorianCalendar(2019,Calendar.MARCH,5,16,0),80,150);
 		//sev_Mad
 		Flight  IBE1900SVQ = new Flight(iberia,iberia.listAirports().get(0),iberia.listAirports().get(3),planes.get(3),
-		new GregorianCalendar(2019,5,4,19,0),80,150);	
+		new GregorianCalendar(2019,Calendar.JUNE,4,19,0),80,150);	
 
 
 

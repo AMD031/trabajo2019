@@ -41,6 +41,13 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 			this.CrewSeats = new Crew[(int)(Math.ceil( (plane.getRows()*plane.getColumns())*0.02))];
 			this.pilotSeats = new Pilot[2];
 }	 
+
+	/**
+	Método que calcula la rentabilidad.
+	@return devuelve el calculculo de la rentabilidad, en caso de que 
+	sea mayor a uno o igual el vuelo será rentable.
+
+	*/
 	public double calculateProfitability(){
 		double benefit =0;
 		double expense = this.estimatedDuration*this.plane.getConsumtiom();
@@ -57,12 +64,10 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 		profitability = benefit/expense;
 
 	 return profitability;
-
-
 	}
 
 	/**
-		genera un codigo apartir des nombre de la empresa de vuelos,
+		Genera un codigo apartir des nombre de la empresa de vuelos,
 		la hora y el acronimo del aeropuerto destino.
 		@return devuelve un codigo que identifica a un vuelo
 	*/
@@ -109,7 +114,7 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 public boolean removePilot(String dni, int id){
 	 	boolean found = false;
 	 	for (int i =0;i<this.pilotSeats.length && !found;i++) {	
-	 		if(this.pilotSeats[i].getDni().equals(dni) && 
+	 		if(this.pilotSeats[i].getDni().equalsIgnoreCase(dni) && 
 	 		   this.pilotSeats[i].getNEmployee()== id){
 	 		   this.pilotSeats[i].decrementAssignedFlight();	
 	 		   this.pilotSeats[i] = null;
@@ -133,7 +138,7 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	  public boolean removeCrew(String dni, int id){
 	 	boolean found = false;
 	 	for (int i =0;i<this.CrewSeats.length && !found;i++) {	
-	 		if(this.CrewSeats[i].getDni().equals(dni) && 
+	 		if(this.CrewSeats[i].getDni().equalsIgnoreCase(dni) && 
 	 		   this.CrewSeats[i].getNEmployee()== id){
 	 		   this.CrewSeats[i].decrementAssignedFlight();	
 	 		   this.CrewSeats[i] = null;

@@ -18,13 +18,6 @@ abstract public class Employee extends Person{
 	private int id;
 
 
-
-
-/**
-*Conctructor con todos los parametros para crear un empleado y llama a
-*constructores para asignar un numero de empleado, los lenguages y que compruebe
-*si em empleado es mayor de edad.
-*/
 	public Employee (String DNI,String Name, String Subname,
 	 GregorianCalendar Birthdate,
 	 String Nationaly,ArrayList<String> Lenguages)throws Exception{
@@ -38,6 +31,9 @@ abstract public class Employee extends Person{
 	 //setter
 	 /**
 	 *Setter de lenguajes que recibe un ArrayList de lenguajes
+	 *@param lenguages objeto de tipo ArrayList que contiene la lista de idiomas que conoce el 
+	 * empleado.
+	 *
 	 */
 	 public void setLenguages(ArrayList<String> lenguages){
 		  if(lenguages.size()>0){
@@ -52,7 +48,9 @@ abstract public class Employee extends Person{
 
 	 /**
 	 metodo que comprueba si un idioma esta en un ArraList de idomas
-	 @return devuelve true si lo encuentra.
+	 @param l idioma a buscar en la lista.
+	 @param lenguages lista de idiomas en la que se buscara el idioma en particular.
+	 @return devuelve true si  encuentra el idioma en la lista.
 	 */
 	  private static boolean checkLenguages(ArrayList<String>lenguages, String l){
 	 	boolean found = false;
@@ -68,6 +66,9 @@ abstract public class Employee extends Person{
 
 	 /**
 	 *Metodo que comprueba si el empleado es mayor o menor de edad.
+	 @param Birthdate objeto de tipo GregorianCalendar que contiene el  
+	 cupleaños de la persona a comprobar.
+	 @throws Exception devuelve un mensaje si el empleado es menor de 18 años. 
 	 */
 	 public void chekBirthDate(GregorianCalendar Birthdate)throws Exception{
 		 if(!checkAge(Birthdate, 18)){
@@ -78,6 +79,7 @@ abstract public class Employee extends Person{
 	 /**
 	 *Setter que hace contar el numero de empleados y sumar uno a uno cuando se
 	 *crea un empleado.
+	 @return devuelve el id del empleado
 	 */
 	 public static int setNEmployee(){
 		 return Employee.NEmployee++;
@@ -87,6 +89,7 @@ abstract public class Employee extends Person{
 	 /**
 	 *setter que recibe el ArrayList de los lenguajes de la compañia minimos que
 	 *un empleado debe tener.
+	 @param LenguagesCompany ArrayList que contiene la lista de idiomas de la compañia.
 	 */
 	 public static void setLenguagesCompany(ArrayList<String> LenguagesCompany){
 		 if(LenguagesCompany.size()>0){

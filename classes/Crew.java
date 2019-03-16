@@ -13,10 +13,7 @@ public class Crew extends Employee{
 	private final static double plus=1000;
 	private int assignedFlight;
 
-	/**
-	*Cosntrutor que recibe todos los parametros.
-	* @param assignedFlight cantidad de vuelos asignados que tiene la trupulacion.
-	*/
+
 
 	public Crew(String DNI,String Name, String Subname,
 	 GregorianCalendar Birthdate,
@@ -27,8 +24,7 @@ public class Crew extends Employee{
 
 	/**
 	* Funcion que calcula el salario total.
-	* @param Salary recibe el salario fijo que gana en un año para utilizarlo en una funcion.
-	* @param plus recibe un plus fijo que gana por cada vuelo asinado que se le añadira al sueldo total.
+	*@return devuelve  el salario calculado de un tripulate.
 	*/
 
 	public double calculateSalary(){
