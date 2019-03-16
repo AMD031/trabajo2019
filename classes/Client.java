@@ -38,7 +38,7 @@ public class Client extends Person{
 
     @Override
 	public String toString(){
-		return super.toString()+"\n Boletos comprados: "+this.nBuys+"\n Boletos devueltos "+this.nRefund;
+		return super.toString()+"\n Billetes comprados: "+this.nBuys+"\n Boletos devueltos "+this.nRefund;
 	}
 
 
