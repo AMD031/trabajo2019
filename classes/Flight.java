@@ -90,6 +90,10 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
  		 return tmpcode.toString();
 	 }
 
+
+	 /**
+		@return Método que devuelve la cantidad de asientos libres.
+	 */
 	 public int freeSeats(){
 	 	int amount =0;
 	 	for (int i =0;i<this.SeatsFlight.size();i++) {
@@ -196,6 +200,10 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 
 	 //setters
 
+	 /**
+		Añade una lista de pilostos a la clase.
+		@param pilots array de pilos a añadir a la clase Flight.
+	 */	
 	  public void setPilots(Pilot[] pilots){
 	  	if(pilots.length>0){
 		 	for(int i =0; i< this.pilotSeats.length;i++){	
@@ -204,7 +212,13 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 	}
 	 }
 
-	 public void setPilot(Pilot pilot){
+
+	 /**
+		Añade un objeto de tipo pilot a la clase.		
+		@param pilot pilot a añadir al array pilots.
+		@return si se añadido correctamente devuelve true en caso contrario false.
+	 */
+	 public boolean setPilot(Pilot pilot){
 	   boolean stop = false;
 	 	for(int i =0; i<this.pilotSeats.length && !stop;i++){
 	 		if(this.pilotSeats[i]==null){
@@ -215,9 +229,16 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 			stop=true;
 	 		}
 	 	}
+	 	return stop;
 	 }
 
-	 public void setCrew(Crew crew){
+	 	 /**
+	     Añade un objeto de tipo crew a la clase.		
+		@param crew tripulante a añadir al array crews.
+		@return si se añadido correctamente devuelve true en caso contrario false.
+	 */	
+
+	 public boolean setCrew(Crew crew){
 	 	boolean stop = false;
 	 	for(int i =0; i<this.CrewSeats.length && !stop;i++){
 	 		if(this.CrewSeats[i]==null){
@@ -226,7 +247,13 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 			stop = true;
 	 		}
 	 	}
+	 	return stop;
 	 }
+
+	  /**
+		Añade una lista de tripulantes a la clase.
+		@param crews array de tripulantes a añadir a la clase Flight.
+	 */	
 
 	  public void setCrews(Crew[] crews){
 	 	for(int i =0; i<this.CrewSeats.length;i++){
@@ -281,6 +308,13 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 		vip = false;
  		}
 	 }
+
+	 /**
+	 	Comprueba si un número es de dos cifras. Si es de una 
+	 	añade un cero delante del número.
+	 	@param a parametro de tipo int a comprobar.
+		@return devuelve un String con un numero de dos cifras
+	 */
 	 private String twoDigit(int a){
 	 	StringBuilder d = new StringBuilder();
 	 	String digit = Integer.toString(a);
