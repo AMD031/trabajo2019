@@ -34,7 +34,7 @@ public static Menu getSingletonInstance(AirCompany comp) {
 	 System.out.println("hoy es: "+ new GregorianCalendar().getTime()+"\n");
 	 Scanner sc = new Scanner(System.in);
 	 int op=0;
-	 System.out.println("Escribe un numero para elegir una opcion.");
+	 System.out.println("Escribe un n\u00famero para elegir una opci\u00f3n.");
 	 printMainOptions();
 		try{
 	  	  do{
@@ -145,7 +145,7 @@ public static Menu getSingletonInstance(AirCompany comp) {
 					op2 = sc.nextInt();
 
 					if(op2>this.comp.searchFlight(o,d).size()){
-						System.out.println("Opncion no valida");
+						System.out.println("Opnci\u00f3n no valida");
 					}
 				  }while(op2>0 && op2>this.comp.searchFlight(o,d).size());	
 
@@ -357,7 +357,7 @@ public static Menu getSingletonInstance(AirCompany comp) {
 				for (Employee e: this.comp.listEmployees()) {
 					
 					if(  e instanceof Crew){
-						System.out.println("\nTripulacion: ");
+						System.out.println("\nTripulaci\u00f3n: ");
 						System.out.println(e);
 					    System.out.println("\nPulsa intro para continuar.");
 					
