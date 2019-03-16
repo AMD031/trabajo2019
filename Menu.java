@@ -85,7 +85,7 @@ public static Menu getSingletonInstance(AirCompany comp) {
 	 		}
 	 	}while(op!=0);
 
-	 	System.out.println("Adios, gracias por usar nuestras aerolineas.");
+	 	System.out.println("Adi\u00f3s, gracias por usar nuestras aerol\u00edneas.");
 		}catch(InputMismatchException e){
 			System.out.println("Acci\u00f3n no valida.");
 			this.mainMenu(this.comp);
