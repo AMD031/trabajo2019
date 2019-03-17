@@ -55,7 +55,7 @@ public class Main{
 
 
 		//aviones
-		planes.add(new Boing787("1945ABC",new GregorianCalendar(2000,Calendar.FEBRUARY,0)));
+		planes.add(new Boing787("2005ABC",new GregorianCalendar(2000,Calendar.FEBRUARY,0)));
 		planes.add(new Boing787("1264AZB",new GregorianCalendar(1975,Calendar.MARCH,12)));
 		planes.add(new AirBusA320("1234ABZ", new GregorianCalendar(1995,Calendar.DECEMBER,4)));
 		planes.add(new AirBusA320("9512ABZ", new GregorianCalendar(2015,Calendar.MAY,4)));
@@ -185,11 +185,7 @@ public class Main{
 		iberia.addFlight(IBE1400CDR);
 		iberia.addFlight(IBE1600MAD);
 		iberia.addFlight(IBE1900SVQ);
-		
 	
-
-		
-
 
 		//eliminacion de listas y variables despues de agregarlas a la compañia.
 		boss = null;
@@ -203,7 +199,7 @@ public class Main{
 		lc.clear();
 
 		//iberia.fireEmployee("98975581A",12); //despide un empleado concreto.
-		//iberia.removeFlight("IBE1009SVQ"); //borra un buelo concreto IBE1400CDR
+		//iberia.removeFlight("IBE1009SVQ"); //borra un vuelo concreto IBE1400CDR
 		//iberia.removeFlight("IBE1400CDR");
 
 		//lamada al menu
