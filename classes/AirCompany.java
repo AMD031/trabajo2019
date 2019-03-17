@@ -447,7 +447,7 @@ public class AirCompany implements IAirCompany {
 
 	/**
 
-	 Método que busca un buelo usado su code.
+	 Método que busca un vuelo usado su code.
 	 @param code codigo del vuelo a buscar.
 	 @return devuelve un objeto de tipo Flight si se ha encontrado y null en caso 
 		contrario.
@@ -465,7 +465,7 @@ public class AirCompany implements IAirCompany {
 	}
 
 	/**
-		Método que elimina un buelo usado el codigo de vuelo
+		Método que elimina un vuelo usado el codigo de vuelo
 		@param code codigo del vuelo a borrar.
 		@return devuelve true si se ha borrado correctamente.
 	*/
