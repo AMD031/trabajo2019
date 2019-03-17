@@ -199,7 +199,7 @@ public class Main{
 		lc.clear();
 
 		//iberia.fireEmployee("98975581A",12); //despide un empleado concreto.
-		//iberia.removeFlight("IBE1009SVQ"); //borra un vuelo concreto IBE1400CDR
+		//iberia.removeFlight("IBE1009SVQ"); //borra un vuelo concreto 
 		//iberia.removeFlight("IBE1400CDR");
 
 		//lamada al menu
