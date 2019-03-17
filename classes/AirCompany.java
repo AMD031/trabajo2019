@@ -257,21 +257,13 @@ public class AirCompany implements IAirCompany {
 				}
 			  }
 			}
-
-
 			//array pilotos
-			
 			Pilot[] pilots = this.flights.get(i).getPilotSeats();
 			for(int z =0;z<pilots.length && !found;z++){
 			   if(pilots[z]!=null){
-
-			   	 System.out.println(pilots[z].getNEmployee()==NEmployee);
-
 				if(pilots[z].getDni().equalsIgnoreCase(dni)&&
 				   pilots[z].getNEmployee()==NEmployee){
-			
-				   pilots[z] =null;
-			
+				   pilots[z] =null;		
 				}
 			  }
 			}
@@ -476,22 +468,23 @@ public class AirCompany implements IAirCompany {
 		Método que elimina un buelo usado el codigo de vuelo
 		@param code codigo del vuelo a borrar.
 		@return devuelve true si se ha borrado correctamente.
-
 	*/
 	public boolean removeFlight(String code){
 		boolean found = false;
-		for(int i =0;i<this.tickets.size();i++){
+		for(int i =0;i<this.tickets.size();i++){	
 			if(this.tickets.get(i).getFlight().getCode().equals(code)){
+				this.tickets.get(i).getClient().incrementNrefund();
 				this.tickets.remove(i);
 			}
-		}
+		}	
 		for(int i =0;i<this.flights.size();i++){
 			if(this.flights.get(i).getCode().equals(code)){
+				this.flights.get(i).removeCrews();
+				this.flights.get(i).removePilots();
 				this.flights.remove(i);
 				found=true;
 			}	
-		}
-		
+		}		
 		return found;
 	}
 

@@ -91,13 +91,13 @@ public class Main{
 		//Agregacion vuelos y agregacion de empleados
 
 		//cor_sev
-		Flight  IB1009SVQ = new Flight(iberia,iberia.listAirports().get(0),iberia.listAirports().get(1),planes.get(0),
+		Flight  IBE1009SVQ = new Flight(iberia,iberia.listAirports().get(0),iberia.listAirports().get(1),planes.get(0),
 						 new GregorianCalendar(2019,Calendar.MARCH,20,10,9),30,100);
 		//sev_cor
-		Flight  IB1112CDR = new Flight(iberia,iberia.listAirports().get(1),iberia.listAirports().get(0),planes.get(1),
+		Flight  IBE1112CDR = new Flight(iberia,iberia.listAirports().get(1),iberia.listAirports().get(0),planes.get(1),
 						 new GregorianCalendar(2019,Calendar.DECEMBER,20,11,12),30,100);
 		//sev_cor
-		Flight  IB1400CDR = new Flight(iberia,iberia.listAirports().get(1),iberia.listAirports().get(0),planes.get(2),
+		Flight  IBE1400CDR = new Flight(iberia,iberia.listAirports().get(1),iberia.listAirports().get(0),planes.get(2),
 						 new GregorianCalendar(2019,Calendar.MARCH,4,14,0),30,100);
 		//bar_Mad
 		Flight  IBE1600MAD = new Flight(iberia,iberia.listAirports().get(2),iberia.listAirports().get(3),planes.get(2),
@@ -111,43 +111,43 @@ public class Main{
 		//agregacion de empleados a los buelos
 			//cor_sev
 				//tripulacion	
-		IB1009SVQ.setCrew((Crew)iberia.listEmployees().get(0));
-		IB1009SVQ.setCrew((Crew)iberia.listEmployees().get(1));
-		IB1009SVQ.setCrew((Crew)iberia.listEmployees().get(2));
-		IB1009SVQ.setCrew((Crew)iberia.listEmployees().get(3));
-		IB1009SVQ.setCrew((Crew)iberia.listEmployees().get(4));
-		IB1009SVQ.setCrew((Crew)iberia.listEmployees().get(5));
+		IBE1009SVQ.setCrew((Crew)iberia.listEmployees().get(0));
+		IBE1009SVQ.setCrew((Crew)iberia.listEmployees().get(1));
+		IBE1009SVQ.setCrew((Crew)iberia.listEmployees().get(2));
+		IBE1009SVQ.setCrew((Crew)iberia.listEmployees().get(3));
+		IBE1009SVQ.setCrew((Crew)iberia.listEmployees().get(4));
+		IBE1009SVQ.setCrew((Crew)iberia.listEmployees().get(5));
 			//pilotos
-		IB1009SVQ.setPilot((Pilot)iberia.listEmployees().get(6));
-		IB1009SVQ.setPilot((Pilot)iberia.listEmployees().get(7));
+		IBE1009SVQ.setPilot((Pilot)iberia.listEmployees().get(6));
+		IBE1009SVQ.setPilot((Pilot)iberia.listEmployees().get(7));
 		   
 
 		 //sev_cor
 			//tripulacion
-		IB1112CDR.setCrew((Crew)iberia.listEmployees().get(0));
-		IB1112CDR.setCrew((Crew)iberia.listEmployees().get(1));
-		IB1112CDR.setCrew((Crew)iberia.listEmployees().get(2));
-		IB1112CDR.setCrew((Crew)iberia.listEmployees().get(3));
-		IB1112CDR.setCrew((Crew)iberia.listEmployees().get(4));
-		IB1112CDR.setCrew((Crew)iberia.listEmployees().get(5));	
+		IBE1112CDR.setCrew((Crew)iberia.listEmployees().get(0));
+		IBE1112CDR.setCrew((Crew)iberia.listEmployees().get(1));
+		IBE1112CDR.setCrew((Crew)iberia.listEmployees().get(2));
+		IBE1112CDR.setCrew((Crew)iberia.listEmployees().get(3));
+		IBE1112CDR.setCrew((Crew)iberia.listEmployees().get(4));
+		IBE1112CDR.setCrew((Crew)iberia.listEmployees().get(5));	
 
 			//pilotos	
-		IB1112CDR.setPilot((Pilot)iberia.listEmployees().get(8));
-		IB1112CDR.setPilot((Pilot)iberia.listEmployees().get(9));
+		IBE1112CDR.setPilot((Pilot)iberia.listEmployees().get(8));
+		IBE1112CDR.setPilot((Pilot)iberia.listEmployees().get(9));
 
 
 		//sev_cor
 			//tripulacion
-		IB1400CDR.setCrew((Crew)iberia.listEmployees().get(0));
-		IB1400CDR.setCrew((Crew)iberia.listEmployees().get(1));
-		IB1400CDR.setCrew((Crew)iberia.listEmployees().get(2));
-		IB1400CDR.setCrew((Crew)iberia.listEmployees().get(3));
-		IB1400CDR.setCrew((Crew)iberia.listEmployees().get(4));
-		IB1400CDR.setCrew((Crew)iberia.listEmployees().get(5));	
+		IBE1400CDR.setCrew((Crew)iberia.listEmployees().get(0));
+		IBE1400CDR.setCrew((Crew)iberia.listEmployees().get(1));
+		IBE1400CDR.setCrew((Crew)iberia.listEmployees().get(2));
+		IBE1400CDR.setCrew((Crew)iberia.listEmployees().get(3));
+		IBE1400CDR.setCrew((Crew)iberia.listEmployees().get(4));
+		IBE1400CDR.setCrew((Crew)iberia.listEmployees().get(5));	
 
 			//pilotos	
-		IB1400CDR.setPilot((Pilot)iberia.listEmployees().get(10));
-		IB1400CDR.setPilot((Pilot)iberia.listEmployees().get(11));
+		IBE1400CDR.setPilot((Pilot)iberia.listEmployees().get(10));
+		IBE1400CDR.setPilot((Pilot)iberia.listEmployees().get(11));
 
 
 		//bar_Mad
@@ -180,9 +180,9 @@ public class Main{
 
 			
 		// agregando vuelo a la compañia
-		iberia.addFlight(IB1009SVQ);
-		iberia.addFlight(IB1112CDR);
-		iberia.addFlight(IB1400CDR);
+		iberia.addFlight(IBE1009SVQ);
+		iberia.addFlight(IBE1112CDR);
+		iberia.addFlight(IBE1400CDR);
 		iberia.addFlight(IBE1600MAD);
 		iberia.addFlight(IBE1900SVQ);
 		
@@ -203,11 +203,13 @@ public class Main{
 		lc.clear();
 
 		//iberia.fireEmployee("98975581A",12); //despide un empleado concreto.
-
+		//iberia.removeFlight("IBE1009SVQ"); //borra un buelo concreto IBE1400CDR
+		//iberia.removeFlight("IBE1400CDR");
 
 		//lamada al menu
 		System.out.println("Bienvenido.");
 		Menu menu = Menu.getSingletonInstance(iberia);
+
 		}catch(NullPointerException e){
 			System.out.println("Error: "+e);
 		}catch(Exception e){

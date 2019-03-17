@@ -152,6 +152,28 @@ public Flight(AirCompany aircompany, Airport destinationAirport,
 	 	return found;
 	 }
 
+	 	 /**
+		pone todos los tripulantes a null.
+	 */
+	 public void removeCrews(){
+	 	for(Crew c :CrewSeats){
+	 		if(c!=null && c.getAssignedFlight()>0){
+	 		 c.decrementAssignedFlight();	
+	 		 c = null;
+	 		}
+	 	}
+	 }
+	 /**
+		pone todos los pilotos a null.
+	 */
+	 public void removePilots(){
+	 	for(Pilot p :pilotSeats){
+	 		if(p!=null && p.getAssignedFlight()>0){	
+	 		 p.decrementAssignedFlight();	
+	 		 p = null;
+	 		}
+	 	}
+	 }
 
 
 	 //getter
